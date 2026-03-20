@@ -245,8 +245,6 @@
         .credits-link { background: white; color: #FF8C42; padding: 10px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: all 0.3s; }  
         .credits-link:hover { background: #FF8C42; color: white; }  
           
-        @keyframes spin { to { transform: rotate(360deg); } }  
-          
         @media (max-width: 600px) {  
             .container { padding: 30px 20px; }  
             h1 { font-size: 26px; }  
@@ -311,6 +309,12 @@
                     <a href="https://www.instagram.com/scorpubvienne/" target="_blank" class="partner-logo">  
                         <img src="https://i.ibb.co/9m8Dg0fs/434580264-985865803087686-793051233274541739-n.jpg" alt="Scorpub">  
                     </a>  
+                    <a href="https://www.instagram.com/lartisanale_boutique_createurs" target="_blank" class="partner-logo">  
+                        <img src="https://i.ibb.co/1JmfXhqQ/607897525-17976942743954109-4176086413852177532-n.jpg" alt="L'Artisanale">  
+                    </a>  
+                    <a href="https://www.instagram.com/praline.patisserie.vienne/" target="_blank" class="partner-logo">  
+                        <img src="https://i.ibb.co/39ZHHhRr/560541750-17871617859443196-4631725160350304662-n.jpg" alt="Praline">  
+                    </a>  
                     <a href="https://www.facebook.com/laruebosonvienne/?locale=fr_FR" target="_blank" class="partner-logo">  
                         <img src="https://i.ibb.co/bp5JvDR/304929789-536890498240072-5856750964226344598-n.png" alt="La Rue Boson">  
                     </a>  
@@ -319,6 +323,12 @@
                     </a>  
                     <a href="https://www.instagram.com/scorpubvienne/" target="_blank" class="partner-logo">  
                         <img src="https://i.ibb.co/9m8Dg0fs/434580264-985865803087686-793051233274541739-n.jpg" alt="Scorpub">  
+                    </a>  
+                    <a href="https://www.instagram.com/lartisanale_boutique_createurs" target="_blank" class="partner-logo">  
+                        <img src="https://i.ibb.co/1JmfXhqQ/607897525-17976942743954109-4176086413852177532-n.jpg" alt="L'Artisanale">  
+                    </a>  
+                    <a href="https://www.instagram.com/praline.patisserie.vienne/" target="_blank" class="partner-logo">  
+                        <img src="https://i.ibb.co/39ZHHhRr/560541750-17871617859443196-4631725160350304662-n.jpg" alt="Praline">  
                     </a>  
                 </div>  
             </div>  
@@ -438,7 +448,7 @@
                 const response = await fetch(API_URL, { method: 'POST', body: formData });  
                   
                 if (!response.ok) {  
-                    throw new Error('Erreur HTTP: ' + response.status);  
+                    throw new Error('HTTP ' + response.status);  
                 }  
                   
                 const text = await response.text();  
@@ -482,8 +492,8 @@
                 result.className = 'result show win';  
                 document.getElementById('result-icon').textContent = '🎉';  
                 document.getElementById('result-title').textContent = 'FÉLICITATIONS !';  
-                document.getElementById('result-commerce').textContent = '🏪 ' + (data.commerce || 'Commerce partenaire');  
-                document.getElementById('result-lot').textContent = '🎁 ' + (data.nomLot || 'Lot surprise');  
+                document.getElementById('result-commerce').textContent = '🏪 ' + (data.commerce || 'Commerce');  
+                document.getElementById('result-lot').textContent = '🎁 ' + (data.nomLot || 'Lot');  
                 document.getElementById('result-description').textContent = data.description || 'À récupérer en boutique';  
                 document.getElementById('lot-details').style.display = 'block';  
                 creerConfetti();  
@@ -491,7 +501,7 @@
                 result.className = 'result show lose';  
                 document.getElementById('result-icon').textContent = '😢';  
                 document.getElementById('result-title').textContent = 'PAS DE CHANCE !';  
-                document.getElementById('result-message').textContent = (data && data.message) || 'Retentez votre chance demain !';  
+                document.getElementById('result-message').textContent = (data && data.message) || 'Retentez demain !';  
                 document.getElementById('lot-details').style.display = 'none';  
             }  
         }  
@@ -502,8 +512,8 @@
             result.classList.add('show');  
             document.getElementById('result-icon').textContent = '⚠️';  
             document.getElementById('result-title').textContent = 'ERREUR';  
-            document.getElementById('result-message').textContent = 'Erreur technique - Réessayez plus tard';  
-            console.error('Erreur complète:', error);  
+            document.getElementById('result-message').textContent = 'Erreur - Réessayez';  
+            console.error('Erreur:', error);  
         }  
           
         function creerConfetti() {  
