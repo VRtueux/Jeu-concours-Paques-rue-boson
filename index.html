@@ -347,7 +347,7 @@
     </div>
 
     <script>  
-        const API_URL = 'https://script.google.com/macros/s/AKfycbyUUUw7E25-_oWFCrOz2rR7sBzclDFYNcAcepXsIOk4ba6m6Lo94db_PzdIQSQ5d35xZg/exec';  
+        const API_URL = 'https://corsproxy.io/?' + encodeURIComponent('https://script.google.com/macros/s/AKfycbyUUUw7E25-_oWFCrOz2rR7sBzclDFYNcAcepXsIOk4ba6m6Lo94db_PzdIQSQ5d35xZg/exec');  
           
         const SEGMENTS = [  
           { nom: '🐰', couleur: '#FF8C42' },  
@@ -442,7 +442,7 @@
                 formData.append('action', 'participer');  
                 formData.append('cookieId', cookieId);  
                   
-                console.log('📤 Appel API...');  
+                console.log('📤 Appel API via proxy...');  
                   
                 const response = await fetch(API_URL, { method: 'POST', body: formData });  
                   
