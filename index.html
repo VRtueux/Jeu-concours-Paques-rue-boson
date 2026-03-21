@@ -442,8 +442,6 @@
                 formData.append('action', 'participer');  
                 formData.append('cookieId', cookieId);  
                   
-                console.log('📤 Appel API via proxy...');  
-                  
                 const response = await fetch(API_URL, { method: 'POST', body: formData });  
                   
                 if (!response.ok) {  
@@ -451,10 +449,7 @@
                 }  
                   
                 const text = await response.text();  
-                console.log('📄 Réponse:', text);  
-                  
                 const data = JSON.parse(text);  
-                console.log('✅ Data:', data);  
                   
                 if (data.success && data.winner) {  
                     document.getElementById('initial-view').style.display = 'none';  
@@ -465,7 +460,6 @@
                     afficherResultat(data);  
                 }  
             } catch (error) {  
-                console.error('❌ Erreur:', error);  
                 document.getElementById('initial-view').style.display = 'none';  
                 afficherErreur(error);  
             }  
@@ -512,7 +506,6 @@
             document.getElementById('result-icon').textContent = '⚠️';  
             document.getElementById('result-title').textContent = 'ERREUR';  
             document.getElementById('result-message').textContent = 'Erreur - Réessayez';  
-            console.error('Erreur:', error);  
         }  
           
         function creerConfetti() {  
