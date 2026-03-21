@@ -56,14 +56,25 @@
             transition: all 0.3s;
         }
         
+        .badge.derniere-chance {
+            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
+            animation: pulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
         h1 { color: #FF8C42; font-size: 32px; margin-bottom: 10px; font-weight: 700; }
         .subtitle { color: #666; font-size: 16px; margin-bottom: 25px; }
         .intro-text { color: #555; font-size: 15px; margin-bottom: 25px; line-height: 1.6; }
+        .gagnant-info { color: #FF8C42; font-weight: bold; margin-top: 10px; }
         
         .wheel-container {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 320px;
+            height: 320px;
             margin: 30px auto;
         }
         
@@ -89,15 +100,7 @@
             font-weight: bold;
             color: white;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            clip-path: polygon(0 0, 100% 0, 100% 100%);
-        }
-        
-        .segment span {
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 40px;
+            font-size: 50px;
         }
         
         .arrow {
@@ -189,10 +192,10 @@
             font-size: 18px;
             font-weight: bold;
             margin-top: 15px;
-            animation: pulse 1s ease-in-out infinite;
+            animation: pulse-text 1s ease-in-out infinite;
         }
         
-        @keyframes pulse {
+        @keyframes pulse-text {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.6; }
         }
@@ -263,7 +266,7 @@
             .container { padding: 30px 20px; }
             h1 { font-size: 26px; }
             .logo { width: 150px; }
-            .wheel-container { width: 250px; height: 250px; }
+            .wheel-container { width: 280px; height: 280px; }
             .easter-egg-big { font-size: 120px; }
         }
     </style>
@@ -271,16 +274,16 @@
 <body>
     <div class="container">
         <img src="https://i.ibb.co/ynxBRtKH/473765447-1080126973916419-5041563430108422176-n.jpg" alt="La Rue Boson" class="logo">
-        <div class="badge" id="main-badge">🐣 Jeu Concours Pâques 2026</div>
+        <div class="badge" id="badge">🐣 Jeu Concours Pâques 2026</div>
         <h1>Tournez la Roue !</h1>
         <p class="subtitle">La Rue Boson s'anime - Vienne (38)</p>
         
         <div id="initial-view">
             <p class="intro-text">
                 <strong>🎁 Gagnez des lots chez vos commerçants préférés !</strong><br>
-                Du 4 au 19 avril 2026<br>
-                <span style="color: #FF8C42; font-weight: bold;">🏆 1 gagnant par jour</span>
+                Du 4 au 19 avril 2026
             </p>
+            <p class="gagnant-info">🏆 1 gagnant par jour</p>
             
             <div class="wheel-container">
                 <div class="arrow"></div>
@@ -376,7 +379,7 @@
             { nom: '🥚', couleur: '#A4D65E' }
         ];
         
-        const PROBABILITE_GAIN = 0.25; // 25% de chance
+        const PROBABILITE_GAIN = 0.25;
         const MESSAGES_PERDU = [
             '🎯 Vous êtes passé tout près !',
             '🍀 Retentez demain !',
@@ -397,6 +400,10 @@
             return ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'][new Date().getDay()];
         }
         
+        function estApres18h() {
+            return new Date().getHours() >= 18;
+        }
+        
         function sauvegarderGagnant(lot) {
             const dataGagnant = {
                 lot: lot,
@@ -410,11 +417,10 @@
             if (!data) return null;
             
             const gagnant = JSON.parse(data);
-            // Vérifier si c'est encore le même jour
             if (gagnant.date === getDateStr()) {
                 return gagnant.lot;
             }
-            // Si c'est un autre jour, supprimer l'ancien gagnant
+            
             localStorage.removeItem('boson_gagnant');
             return null;
         }
@@ -425,10 +431,6 @@
         
         function marquerJoue() {
             localStorage.setItem('boson_date', getDateStr());
-        }
-        
-        function estApres18h() {
-            return new Date().getHours() >= 18;
         }
         
         async function chargerLots() {
@@ -443,7 +445,6 @@
         window.addEventListener('load', async function() {
             await chargerLots();
             
-            // Vérifier si l'utilisateur a déjà gagné aujourd'hui
             const gagnant = recupererGagnant();
             if (gagnant) {
                 afficherLotSauvegarde(gagnant);
@@ -453,6 +454,12 @@
             creerRoue();
             document.getElementById('btn-tourner').addEventListener('click', tournerRoue);
             creerOeufsPaques();
+            
+            if (estApres18h()) {
+                const badge = document.getElementById('badge');
+                badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';
+                badge.classList.add('derniere-chance');
+            }
         });
         
         function afficherLotSauvegarde(lot) {
@@ -477,8 +484,16 @@
                 const segmentDiv = document.createElement('div');
                 segmentDiv.className = 'segment';
                 segmentDiv.style.background = segment.couleur;
-                segmentDiv.style.transform = `rotate(${index * angleParSegment}deg)`;
-                segmentDiv.innerHTML = `<span>${segment.nom}</span>`;
+                
+                const angle = index * angleParSegment;
+                segmentDiv.style.transform = `rotate(${angle}deg) skewY(-${90 - angleParSegment}deg)`;
+                
+                const content = document.createElement('span');
+                content.textContent = segment.nom;
+                content.style.display = 'block';
+                content.style.transform = `skewY(${90 - angleParSegment}deg) rotate(${angleParSegment / 2}deg)`;
+                
+                segmentDiv.appendChild(content);
                 wheel.appendChild(segmentDiv);
             });
         }
@@ -498,14 +513,14 @@
         
         function tournerRoue() {
             if (jeuEnCours) return;
-            jeuEnCours = true;
             
-            // Changer le badge après 18h
             if (estApres18h()) {
-                const badge = document.getElementById('main-badge');
+                const badge = document.getElementById('badge');
                 badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';
-                badge.style.background = 'linear-gradient(135deg, #E91E63 0%, #C2185B 100%)';
+                badge.classList.add('derniere-chance');
             }
+            
+            jeuEnCours = true;
             
             const btn = document.getElementById('btn-tourner');
             const centerBtn = document.querySelector('.center-circle');
@@ -536,11 +551,9 @@
                 return;
             }
             
-            // ✅ NOUVELLE LOGIQUE : 1 gagnant par jour
             const gagnantExiste = localStorage.getItem('gagnant_jour_' + getDateStr());
             
             if (gagnantExiste) {
-                // Déjà un gagnant aujourd'hui
                 marquerJoue();
                 afficherResultat({ success: false, message: '🎯 Déjà un gagnant aujourd'hui ! Retentez demain !' });
                 return;
@@ -550,7 +563,6 @@
             const lotsDisponibles = lotsData.lots.filter(lot => lot.statut === 'Disponible');
             let lotsDuJour = lotsDisponibles.filter(lot => lot.dateAttribution === dateStr);
             
-            // Si pas de lot pour aujourd'hui, chercher dans les lots non attribués
             if (lotsDuJour.length === 0) {
                 lotsDuJour = lotsDisponibles;
             }
@@ -563,18 +575,16 @@
             
             let gagner = false;
             
-            // CAS 1 : AVANT 18h → tirage aléatoire
             if (!estApres18h()) {
                 gagner = Math.random() < PROBABILITE_GAIN;
             } else {
-                // CAS 2 : APRÈS 18h → GAIN FORCÉ
                 gagner = true;
             }
             
             if (gagner) {
                 const lot = lotsDuJour[Math.floor(Math.random() * lotsDuJour.length)];
                 marquerJoue();
-                localStorage.setItem('gagnant_jour_' + getDateStr(), 'true'); // ✅ MARQUER GAGNANT DU JOUR
+                localStorage.setItem('gagnant_jour_' + getDateStr(), 'true');
                 sauvegarderGagnant(lot);
                 
                 document.getElementById('initial-view').style.display = 'none';
