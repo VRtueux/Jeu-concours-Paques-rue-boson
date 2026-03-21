@@ -346,181 +346,212 @@
         </div>  
     </div>
 
-    <script>  
-        const API_URL = 'https://corsproxy.io/?' + encodeURIComponent('https://script.google.com/macros/s/AKfycbyUUUw7E25-_oWFCrOz2rR7sBzclDFYNcAcepXsIOk4ba6m6Lo94db_PzdIQSQ5d35xZg/exec');  
-          
-        const SEGMENTS = [  
-          { nom: '🐰', couleur: '#FF8C42' },  
-          { nom: '🥚', couleur: '#A4D65E' },  
-          { nom: '🐣', couleur: '#00BCD4' },  
-          { nom: '🌸', couleur: '#E91E63' },  
-          { nom: '🐰', couleur: '#FF8C42' },  
-          { nom: '🥚', couleur: '#A4D65E' }  
-        ];  
-          
-        let resultatEnAttente = null;  
-        let jeuEnCours = false;  
-          
-        function getCookie(name) {  
-            const value = `; ${document.cookie}`;  
-            const parts = value.split(`; ${name}=`);  
-            if (parts.length === 2) return parts.pop().split(';').shift();  
-            return null;  
+ <script>  
+    const SEGMENTS = [  
+      { nom: '🐰', couleur: '#FF8C42' },  
+      { nom: '🥚', couleur: '#A4D65E' },  
+      { nom: '🐣', couleur: '#00BCD4' },  
+      { nom: '🌸', couleur: '#E91E63' },  
+      { nom: '🐰', couleur: '#FF8C42' },  
+      { nom: '🥚', couleur: '#A4D65E' }  
+    ];  
+      
+    let resultatEnAttente = null;  
+    let jeuEnCours = false;  
+    let lotsData = null;  
+      
+    function getCookie(name) {  
+        const value = `; ${document.cookie}`;  
+        const parts = value.split(`; ${name}=`);  
+        if (parts.length === 2) return parts.pop().split(';').shift();  
+        return null;  
+    }  
+      
+    function setCookie(name, value, days) {  
+        const date = new Date();  
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));  
+        document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;  
+    }  
+      
+    function getOrCreateCookieId() {  
+        let cookieId = getCookie('rue_boson_paques');  
+        if (!cookieId) {  
+            cookieId = 'BOSON_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);  
+            setCookie('rue_boson_paques', cookieId, 365);  
         }  
-          
-        function setCookie(name, value, days) {  
-            const date = new Date();  
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));  
-            document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;  
+        return cookieId;  
+    }  
+      
+    async function chargerLots() {  
+        try {  
+            const response = await fetch('lots.json');  
+            lotsData = await response.json();  
+        } catch (error) {  
+            console.error('Erreur chargement lots:', error);  
         }  
+    }  
+      
+    window.addEventListener('load', async function() {  
+        await chargerLots();  
+        creerRoue();  
+        document.getElementById('btn-tourner').addEventListener('click', tournerRoue);  
+        creerOeufsPaques();  
+    });  
+      
+    function creerRoue() {  
+        const wheel = document.getElementById('wheel');  
+        const angleParSegment = 360 / SEGMENTS.length;  
           
-        function getOrCreateCookieId() {  
-            let cookieId = getCookie('rue_boson_paques');  
-            if (!cookieId) {  
-                cookieId = 'BOSON_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);  
-                setCookie('rue_boson_paques', cookieId, 365);  
-            }  
-            return cookieId;  
-        }  
-          
-        window.addEventListener('load', function() {  
-            creerRoue();  
-            document.getElementById('btn-tourner').addEventListener('click', tournerRoue);  
-            creerOeufsPaques();  
+        SEGMENTS.forEach((segment, index) => {  
+            const segmentDiv = document.createElement('div');  
+            segmentDiv.className = 'segment';  
+            segmentDiv.style.background = segment.couleur;  
+            segmentDiv.style.transform = `rotate(${index * angleParSegment}deg) skewY(${90 - angleParSegment}deg)`;  
+            segmentDiv.innerHTML = `<span style="transform: skewY(${angleParSegment - 90}deg) rotate(${angleParSegment / 2}deg); font-size: 40px;">${segment.nom}</span>`;  
+            wheel.appendChild(segmentDiv);  
         });  
+    }  
+      
+    function creerOeufsPaques() {  
+        const eggs = ['🐰', '🥚', '🐣', '🌸', '🌷'];  
+        for (let i = 0; i < 8; i++) {  
+            const egg = document.createElement('div');  
+            egg.className = 'easter-egg';  
+            egg.textContent = eggs[Math.floor(Math.random() * eggs.length)];  
+            egg.style.left = Math.random() * 100 + '%';  
+            egg.style.top = Math.random() * 100 + '%';  
+            egg.style.animationDelay = Math.random() * 2 + 's';  
+            document.body.appendChild(egg);  
+        }  
+    }  
+      
+    function tournerRoue() {  
+        if (jeuEnCours) return;  
+        jeuEnCours = true;  
           
-        function creerRoue() {  
-            const wheel = document.getElementById('wheel');  
-            const angleParSegment = 360 / SEGMENTS.length;  
-              
-            SEGMENTS.forEach((segment, index) => {  
-                const segmentDiv = document.createElement('div');  
-                segmentDiv.className = 'segment';  
-                segmentDiv.style.background = segment.couleur;  
-                segmentDiv.style.transform = `rotate(${index * angleParSegment}deg) skewY(${90 - angleParSegment}deg)`;  
-                segmentDiv.innerHTML = `<span style="transform: skewY(${angleParSegment - 90}deg) rotate(${angleParSegment / 2}deg); font-size: 40px;">${segment.nom}</span>`;  
-                wheel.appendChild(segmentDiv);  
-            });  
+        const btn = document.getElementById('btn-tourner');  
+        const centerBtn = document.querySelector('.center-circle');  
+        btn.disabled = true;  
+        centerBtn.style.pointerEvents = 'none';  
+          
+        const cookieId = getOrCreateCookieId();  
+        const wheel = document.getElementById('wheel');  
+        const rotations = 5;  
+        const angleTotal = (rotations * 360) + Math.random() * 360;  
+        wheel.style.transform = `rotate(${angleTotal}deg)`;  
+          
+        setTimeout(() => {  
+            jouer(cookieId);  
+        }, 4000);  
+    }  
+      
+    function jouer(cookieId) {  
+        const aDejaJoue = localStorage.getItem('boson_a_joue') === 'true';  
+          
+        if (aDejaJoue) {  
+            afficherResultat({ success: false, message: 'Déjà participé' });  
+            return;  
         }  
           
-        function creerOeufsPaques() {  
-            const eggs = ['🐰', '🥚', '🐣', '🌸', '🌷'];  
-            for (let i = 0; i < 8; i++) {  
-                const egg = document.createElement('div');  
-                egg.className = 'easter-egg';  
-                egg.textContent = eggs[Math.floor(Math.random() * eggs.length)];  
-                egg.style.left = Math.random() * 100 + '%';  
-                egg.style.top = Math.random() * 100 + '%';  
-                egg.style.animationDelay = Math.random() * 2 + 's';  
-                document.body.appendChild(egg);  
-            }  
-        }  
+        const lotsDisponibles = lotsData.lots.filter(lot => lot.statut !== 'Attribué');  
           
-        function tournerRoue() {  
-            if (jeuEnCours) return;  
-            jeuEnCours = true;  
-              
-            const btn = document.getElementById('btn-tourner');  
-            const centerBtn = document.querySelector('.center-circle');  
-            btn.disabled = true;  
-            centerBtn.style.pointerEvents = 'none';  
-              
-            const cookieId = getOrCreateCookieId();  
-            const wheel = document.getElementById('wheel');  
-            const rotations = 5;  
-            const angleTotal = (rotations * 360) + Math.random() * 360;  
-            wheel.style.transform = `rotate(${angleTotal}deg)`;  
-              
-            setTimeout(() => {  
-                appelAPI(cookieId);  
-            }, 4000);  
-        }  
-          
-        async function appelAPI(cookieId) {  
-            try {  
-                const formData = new FormData();  
-                formData.append('action', 'participer');  
-                formData.append('cookieId', cookieId);  
+        if (lotsData.config.modeTest === 'OUI') {  
+            if (lotsDisponibles.length > 0) {  
+                const lot = lotsDisponibles[Math.floor(Math.random() * lotsDisponibles.length)];  
+                localStorage.setItem('boson_a_joue', 'true');  
                   
-                const response = await fetch(API_URL, { method: 'POST', body: formData });  
-                  
-                if (!response.ok) {  
-                    throw new Error('HTTP ' + response.status);  
-                }  
-                  
-                const text = await response.text();  
-                const data = JSON.parse(text);  
-                  
-                if (data.success && data.winner) {  
-                    document.getElementById('initial-view').style.display = 'none';  
-                    document.getElementById('egg-container').classList.add('show');  
-                    resultatEnAttente = data;  
-                } else {  
-                    document.getElementById('initial-view').style.display = 'none';  
-                    afficherResultat(data);  
-                }  
-            } catch (error) {  
                 document.getElementById('initial-view').style.display = 'none';  
-                afficherErreur(error);  
-            }  
-        }  
-          
-        function casserOeuf() {  
-            const egg = document.getElementById('easter-egg');  
-            const eggContainer = document.getElementById('egg-container');  
-              
-            egg.classList.add('egg-crack');  
-              
-            setTimeout(() => {  
-                eggContainer.style.display = 'none';  
-                afficherResultat(resultatEnAttente);  
-            }, 600);  
-        }  
-          
-        function afficherResultat(data) {  
-            const result = document.getElementById('result');  
-            result.classList.add('show');  
-              
-            if (data && data.success && data.winner) {  
-                result.className = 'result show win';  
-                document.getElementById('result-icon').textContent = '🎉';  
-                document.getElementById('result-title').textContent = 'FÉLICITATIONS !';  
-                document.getElementById('result-commerce').textContent = '🏪 ' + (data.commerce || 'Commerce');  
-                document.getElementById('result-lot').textContent = '🎁 ' + (data.nomLot || 'Lot');  
-                document.getElementById('result-description').textContent = data.description || 'À récupérer en boutique';  
-                document.getElementById('lot-details').style.display = 'block';  
-                creerConfetti();  
+                document.getElementById('egg-container').classList.add('show');  
+                resultatEnAttente = {  
+                    success: true,  
+                    winner: true,  
+                    commerce: lot.commerce,  
+                    nomLot: lot.nomLot,  
+                    description: lot.description  
+                };  
             } else {  
-                result.className = 'result show lose';  
-                document.getElementById('result-icon').textContent = '😢';  
-                document.getElementById('result-title').textContent = 'PAS DE CHANCE !';  
-                document.getElementById('result-message').textContent = (data && data.message) || 'Retentez demain !';  
-                document.getElementById('lot-details').style.display = 'none';  
+                afficherResultat({ success: false, message: 'Plus de lots disponibles' });  
+            }  
+        } else {  
+            const aujourdhui = new Date();  
+            const dateStr = `${String(aujourdhui.getDate()).padStart(2, '0')}/${String(aujourdhui.getMonth() + 1).padStart(2, '0')}/${aujourdhui.getFullYear()}`;  
+              
+            const lotDuJour = lotsDisponibles.find(lot => lot.dateAttribution === dateStr);  
+              
+            if (lotDuJour) {  
+                localStorage.setItem('boson_a_joue', 'true');  
+                document.getElementById('initial-view').style.display = 'none';  
+                document.getElementById('egg-container').classList.add('show');  
+                resultatEnAttente = {  
+                    success: true,  
+                    winner: true,  
+                    commerce: lotDuJour.commerce,  
+                    nomLot: lotDuJour.nomLot,  
+                    description: lotDuJour.description  
+                };  
+            } else {  
+                localStorage.setItem('boson_a_joue', 'true');  
+                afficherResultat({ success: false, message: 'Pas de chance' });  
             }  
         }  
+    }  
+      
+    function casserOeuf() {  
+        const egg = document.getElementById('easter-egg');  
+        const eggContainer = document.getElementById('egg-container');  
           
-        function afficherErreur(error) {  
-            const result = document.getElementById('result');  
+        egg.classList.add('egg-crack');  
+          
+        setTimeout(() => {  
+            eggContainer.style.display = 'none';  
+            afficherResultat(resultatEnAttente);  
+        }, 600);  
+    }  
+      
+    function afficherResultat(data) {  
+        const result = document.getElementById('result');  
+        result.classList.add('show');  
+          
+        if (data && data.success && data.winner) {  
+            result.className = 'result show win';  
+            document.getElementById('result-icon').textContent = '🎉';  
+            document.getElementById('result-title').textContent = 'FÉLICITATIONS !';  
+            document.getElementById('result-commerce').textContent = '🏪 ' + data.commerce;  
+            document.getElementById('result-lot').textContent = '🎁 ' + data.nomLot;  
+            document.getElementById('result-description').textContent = data.description;  
+            document.getElementById('lot-details').style.display = 'block';  
+            creerConfetti();  
+        } else {  
             result.className = 'result show lose';  
-            result.classList.add('show');  
-            document.getElementById('result-icon').textContent = '⚠️';  
-            document.getElementById('result-title').textContent = 'ERREUR';  
-            document.getElementById('result-message').textContent = 'Erreur - Réessayez';  
+            document.getElementById('result-icon').textContent = '😢';  
+            document.getElementById('result-title').textContent = 'PAS DE CHANCE !';  
+            document.getElementById('result-message').textContent = (data && data.message) || 'Retentez demain !';  
+            document.getElementById('lot-details').style.display = 'none';  
         }  
-          
-        function creerConfetti() {  
-            const colors = ['#FF8C42', '#A4D65E', '#00BCD4', '#E91E63', '#FFD700'];  
-            for (let i = 0; i < 60; i++) {  
-                setTimeout(() => {  
-                    const c = document.createElement('div');  
-                    c.className = 'confetti';  
-                    c.style.left = Math.random() * 100 + '%';  
-                    c.style.background = colors[Math.floor(Math.random() * colors.length)];  
-                    document.body.appendChild(c);  
-                    setTimeout(() => c.remove(), 3000);  
-                }, i * 25);  
-            }  
+    }  
+      
+    function afficherErreur(error) {  
+        const result = document.getElementById('result');  
+        result.className = 'result show lose';  
+        result.classList.add('show');  
+        document.getElementById('result-icon').textContent = '⚠️';  
+        document.getElementById('result-title').textContent = 'ERREUR';  
+        document.getElementById('result-message').textContent = 'Erreur - Réessayez';  
+    }  
+      
+    function creerConfetti() {  
+        const colors = ['#FF8C42', '#A4D65E', '#00BCD4', '#E91E63', '#FFD700'];  
+        for (let i = 0; i < 60; i++) {  
+            setTimeout(() => {  
+                const c = document.createElement('div');  
+                c.className = 'confetti';  
+                c.style.left = Math.random() * 100 + '%';  
+                c.style.background = colors[Math.floor(Math.random() * colors.length)];  
+                document.body.appendChild(c);  
+                setTimeout(() => c.remove(), 3000);  
+            }, i * 25);  
         }  
-    </script>  
+    }  
+</script>   
 </body>  
 </html>  
