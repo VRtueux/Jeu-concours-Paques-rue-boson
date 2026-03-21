@@ -2,7 +2,8 @@
   "config": {  
     "dateDebut": "04/04/2026",  
     "dateFin": "19/04/2026",  
-    "modeTest": "NON"  
+    "modeTest": "NON",  
+    "joursOuverts": ["Mercredi", "Jeudi", "Vendredi", "Samedi"]  
   },  
   "lots": [  
     {  
@@ -10,42 +11,54 @@
       "commerce": "VRtueux",  
       "nomLot": "Pack découverte",  
       "description": "1h de session, accès à tous les équipements et jeux, valable 6 mois",  
-      "valeur": "49€"  
+      "valeur": "49€",  
+      "dateAttribution": "04/04/2026",  
+      "statut": "Disponible"  
     },  
     {  
       "id": "lot2",  
       "commerce": "l'ARTisanale Boutique de Créateurs",  
       "nomLot": "Atelier découverte",  
       "description": "Atelier vitrail tiffany, durée 4h chez Vitrail Ste Colombe",  
-      "valeur": ""  
+      "valeur": "",  
+      "dateAttribution": "05/04/2026",  
+      "statut": "Disponible"  
     },  
     {  
       "id": "lot3",  
       "commerce": "Praline Patisserie",  
       "nomLot": "Bon d'achat",  
       "description": "Valable 6 mois sur l'ensemble de la gamme",  
-      "valeur": "20€"  
+      "valeur": "20€",  
+      "dateAttribution": "09/04/2026",  
+      "statut": "Disponible"  
     },  
     {  
       "id": "lot4",  
       "commerce": "Scorpub",  
       "nomLot": "1L de bière",  
       "description": "Santé",  
-      "valeur": ""  
+      "valeur": "",  
+      "dateAttribution": "11/04/2026",  
+      "statut": "Disponible"  
     },  
     {  
       "id": "lot5",  
       "commerce": "l'ARTisanale Boutique de Créateurs",  
       "nomLot": "Bon d'achat magasin",  
       "description": "Valable 6 mois sur l'ensemble du magasin",  
-      "valeur": ""  
+      "valeur": "",  
+      "dateAttribution": "16/04/2026",  
+      "statut": "Disponible"  
     },  
     {  
       "id": "lot6",  
       "commerce": "Studio sandy",  
       "nomLot": "1 brush femme et 1 coupe homme",  
       "description": "Valable 3 mois",  
-      "valeur": "50€"  
+      "valeur": "50€",  
+      "dateAttribution": "18/04/2026",  
+      "statut": "Disponible"  
     }  
   ]  
 }  
