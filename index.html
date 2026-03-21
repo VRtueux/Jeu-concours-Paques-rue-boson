@@ -89,6 +89,15 @@
             font-weight: bold;
             color: white;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+        }
+        
+        .segment span {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
         }
         
         .arrow {
@@ -270,7 +279,7 @@
             <p class="intro-text">
                 <strong>🎁 Gagnez des lots chez vos commerçants préférés !</strong><br>
                 Du 4 au 19 avril 2026<br>
-                <span style="color: #FF8C42; font-weight: bold; font-size: 16px;">🏆 1 gagnant par jour</span>
+                <span style="color: #FF8C42; font-weight: bold;">🏆 1 gagnant par jour</span>
             </p>
             
             <div class="wheel-container">
@@ -379,23 +388,15 @@
         let jeuEnCours = false;
         let lotsData = null;
         
-        // ✅ Fonction pour obtenir la date au format DD/MM/YYYY
         function getDateStr() {
             const d = new Date();
             return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
         }
         
-        // ✅ Fonction pour obtenir le jour de la semaine
         function getJourSemaine() {
             return ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'][new Date().getDay()];
         }
         
-        // ✅ NOUVEAU : Vérifier si on est après 18h
-        function estApres18h() {
-            return new Date().getHours() >= 18;
-        }
-        
-        // ✅ AMÉLIORATION : Sauvegarder le gagnant avec la date
         function sauvegarderGagnant(lot) {
             const dataGagnant = {
                 lot: lot,
@@ -404,44 +405,32 @@
             localStorage.setItem('boson_gagnant', JSON.stringify(dataGagnant));
         }
         
-        // ✅ AMÉLIORATION : Récupérer le gagnant sauvegardé
         function recupererGagnant() {
             const data = localStorage.getItem('boson_gagnant');
             if (!data) return null;
             
             const gagnant = JSON.parse(data);
-            
-            // Vérifier si c'est toujours le même jour
+            // Vérifier si c'est encore le même jour
             if (gagnant.date === getDateStr()) {
                 return gagnant.lot;
-            } else {
-                // Nouvelle journée, effacer l'ancien gagnant
-                localStorage.removeItem('boson_gagnant');
-                return null;
             }
+            // Si c'est un autre jour, supprimer l'ancien gagnant
+            localStorage.removeItem('boson_gagnant');
+            return null;
         }
         
-        // ✅ Fonction pour vérifier si l'utilisateur a joué aujourd'hui
         function aJoueAujourdhui() {
             return localStorage.getItem('boson_date') === getDateStr();
         }
         
-        // ✅ Fonction pour marquer que l'utilisateur a joué
         function marquerJoue() {
             localStorage.setItem('boson_date', getDateStr());
         }
         
-        // ✅ NOUVEAU : Vérifier s'il y a déjà un gagnant aujourd'hui
-        function dejaGagnantAujourdhui() {
-            return localStorage.getItem('gagnant_jour_' + getDateStr()) === 'true';
+        function estApres18h() {
+            return new Date().getHours() >= 18;
         }
         
-        // ✅ NOUVEAU : Marquer qu'il y a eu un gagnant aujourd'hui
-        function marquerGagnantDuJour() {
-            localStorage.setItem('gagnant_jour_' + getDateStr(), 'true');
-        }
-        
-        // ✅ Charger les lots depuis le fichier JSON
         async function chargerLots() {
             try {
                 const response = await fetch('lots.json');
@@ -451,24 +440,21 @@
             }
         }
         
-        // ✅ AMÉLIORATION : Au chargement, vérifier si l'utilisateur a déjà gagné
         window.addEventListener('load', async function() {
             await chargerLots();
             
-            // ✅ FONCTIONNALITÉ CLÉ : Si l'utilisateur a gagné aujourd'hui, afficher son lot
+            // Vérifier si l'utilisateur a déjà gagné aujourd'hui
             const gagnant = recupererGagnant();
             if (gagnant) {
                 afficherLotSauvegarde(gagnant);
                 return;
             }
             
-            // Sinon, afficher le jeu normal
             creerRoue();
             document.getElementById('btn-tourner').addEventListener('click', tournerRoue);
             creerOeufsPaques();
         });
         
-        // ✅ NOUVEAU : Afficher le lot sauvegardé sans animation
         function afficherLotSauvegarde(lot) {
             document.getElementById('initial-view').style.display = 'none';
             const result = document.getElementById('result');
@@ -483,7 +469,6 @@
             creerConfetti();
         }
         
-        // ✅ Créer la roue
         function creerRoue() {
             const wheel = document.getElementById('wheel');
             const angleParSegment = 360 / SEGMENTS.length;
@@ -492,13 +477,12 @@
                 const segmentDiv = document.createElement('div');
                 segmentDiv.className = 'segment';
                 segmentDiv.style.background = segment.couleur;
-                segmentDiv.style.transform = `rotate(${index * angleParSegment}deg) skewY(${90 - angleParSegment}deg)`;
-                segmentDiv.innerHTML = `<span style="transform: skewY(${angleParSegment - 90}deg) rotate(${angleParSegment / 2}deg); font-size: 40px;">${segment.nom}</span>`;
+                segmentDiv.style.transform = `rotate(${index * angleParSegment}deg)`;
+                segmentDiv.innerHTML = `<span>${segment.nom}</span>`;
                 wheel.appendChild(segmentDiv);
             });
         }
         
-        // ✅ Créer des œufs de Pâques flottants
         function creerOeufsPaques() {
             const eggs = ['🐰', '🥚', '🐣', '🌸', '🌷'];
             for (let i = 0; i < 8; i++) {
@@ -512,18 +496,16 @@
             }
         }
         
-        // ✅ AMÉLIORATION : Tourner la roue avec message après 18h
         function tournerRoue() {
             if (jeuEnCours) return;
+            jeuEnCours = true;
             
-            // ✅ NOUVEAU : Message spécial après 18h
+            // Changer le badge après 18h
             if (estApres18h()) {
                 const badge = document.getElementById('main-badge');
                 badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';
                 badge.style.background = 'linear-gradient(135deg, #E91E63 0%, #C2185B 100%)';
             }
-            
-            jeuEnCours = true;
             
             const btn = document.getElementById('btn-tourner');
             const centerBtn = document.querySelector('.center-circle');
@@ -540,9 +522,7 @@
             }, 4000);
         }
         
-        // ✅ AMÉLIORATION MAJEURE : Logique de jeu avec gagnant unique par jour
         function jouer() {
-            // Vérifier si l'utilisateur a déjà joué aujourd'hui
             if (aJoueAujourdhui()) {
                 afficherResultat({ success: false, message: 'Déjà participé aujourd'hui ! Revenez demain 🌅' });
                 return;
@@ -550,20 +530,19 @@
             
             const jourSemaine = getJourSemaine();
             
-            // Vérifier si le commerce est ouvert aujourd'hui
             if (!lotsData.config.joursOuverts.includes(jourSemaine)) {
                 marquerJoue();
                 afficherResultat({ success: false, message: 'Commerces fermés aujourd'hui ! Revenez un jour d'ouverture 🏪' });
                 return;
             }
             
-            // ✅ NOUVEAU : Vérifier s'il y a déjà un gagnant aujourd'hui
-            const gagnantExiste = dejaGagnantAujourdhui();
+            // ✅ NOUVELLE LOGIQUE : 1 gagnant par jour
+            const gagnantExiste = localStorage.getItem('gagnant_jour_' + getDateStr());
             
             if (gagnantExiste) {
                 // Déjà un gagnant aujourd'hui
                 marquerJoue();
-                afficherResultat({ success: false, message: MESSAGES_PERDU[Math.floor(Math.random() * MESSAGES_PERDU.length)] });
+                afficherResultat({ success: false, message: '🎯 Déjà un gagnant aujourd'hui ! Retentez demain !' });
                 return;
             }
             
@@ -584,9 +563,8 @@
             
             let gagner = false;
             
-            // ✅ LOGIQUE AMÉLIORÉE : Avant 18h = aléatoire, Après 18h = gain forcé
+            // CAS 1 : AVANT 18h → tirage aléatoire
             if (!estApres18h()) {
-                // CAS 1 : AVANT 18h → tirage aléatoire
                 gagner = Math.random() < PROBABILITE_GAIN;
             } else {
                 // CAS 2 : APRÈS 18h → GAIN FORCÉ
@@ -596,7 +574,7 @@
             if (gagner) {
                 const lot = lotsDuJour[Math.floor(Math.random() * lotsDuJour.length)];
                 marquerJoue();
-                marquerGagnantDuJour(); // ✅ MARQUER QU'IL Y A EU UN GAGNANT AUJOURD'HUI
+                localStorage.setItem('gagnant_jour_' + getDateStr(), 'true'); // ✅ MARQUER GAGNANT DU JOUR
                 sauvegarderGagnant(lot);
                 
                 document.getElementById('initial-view').style.display = 'none';
@@ -614,7 +592,6 @@
             }
         }
         
-        // ✅ Casser l'œuf
         function casserOeuf() {
             const egg = document.getElementById('easter-egg');
             const eggContainer = document.getElementById('egg-container');
@@ -627,7 +604,6 @@
             }, 600);
         }
         
-        // ✅ Afficher le résultat
         function afficherResultat(data) {
             const result = document.getElementById('result');
             result.classList.add('show');
@@ -650,7 +626,6 @@
             }
         }
         
-        // ✅ Créer des confettis
         function creerConfetti() {
             const colors = ['#FF8C42', '#A4D65E', '#00BCD4', '#E91E63', '#FFD700'];
             for (let i = 0; i < 60; i++) {
