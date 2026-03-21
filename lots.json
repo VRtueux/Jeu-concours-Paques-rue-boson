@@ -1,0 +1,51 @@
+{  
+  "config": {  
+    "dateDebut": "04/04/2026",  
+    "dateFin": "19/04/2026",  
+    "modeTest": "OUI"  
+  },  
+  "lots": [  
+    {  
+      "id": "lot1",  
+      "commerce": "VRtueux",  
+      "nomLot": "Pack découverte",  
+      "description": "1h de session, accès à tous les équipements et jeux, valable 6 mois",  
+      "valeur": "49€"  
+    },  
+    {  
+      "id": "lot2",  
+      "commerce": "l'ARTisanale Boutique de Créateurs",  
+      "nomLot": "Atelier découverte",  
+      "description": "Atelier vitrail tiffany, durée 4h chez Vitrail Ste Colombe",  
+      "valeur": ""  
+    },  
+    {  
+      "id": "lot3",  
+      "commerce": "Praline Patisserie",  
+      "nomLot": "Bon d'achat",  
+      "description": "Valable 6 mois sur l'ensemble de la gamme",  
+      "valeur": "20€"  
+    },  
+    {  
+      "id": "lot4",  
+      "commerce": "Scorpub",  
+      "nomLot": "1L de bière",  
+      "description": "Santé",  
+      "valeur": ""  
+    },  
+    {  
+      "id": "lot5",  
+      "commerce": "l'ARTisanale Boutique de Créateurs",  
+      "nomLot": "Bon d'achat magasin",  
+      "description": "Valable 6 mois sur l'ensemble du magasin",  
+      "valeur": ""  
+    },  
+    {  
+      "id": "lot6",  
+      "commerce": "Studio sandy",  
+      "nomLot": "1 brush femme et 1 coupe homme",  
+      "description": "Valable 3 mois",  
+      "valeur": "50€"  
+    }  
+  ]  
+}  
