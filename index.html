@@ -100,7 +100,12 @@
             font-weight: bold;
             color: white;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            font-size: 50px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+        }
+        
+        .segment span {
+            font-size: 40px;
+            display: block;
         }
         
         .arrow {
@@ -288,14 +293,14 @@
             <div class="wheel-container">
                 <div class="arrow"></div>
                 <div class="wheel" id="wheel"></div>
-                <div class="center-circle" onclick="tournerRoue()">🐰</div>
+                <div class="center-circle" id="center-btn">🐰</div>
             </div>
             
             <button class="btn" id="btn-tourner">🎡 TOURNER LA ROUE</button>
         </div>
         
         <div class="egg-container" id="egg-container">
-            <div class="easter-egg-big" id="easter-egg" onclick="casserOeuf()">🥚</div>
+            <div class="easter-egg-big" id="easter-egg">🥚</div>
             <div class="egg-message">👆 Cliquez sur l'œuf !</div>
         </div>
         
@@ -452,7 +457,11 @@
             }
             
             creerRoue();
+            
             document.getElementById('btn-tourner').addEventListener('click', tournerRoue);
+            document.getElementById('center-btn').addEventListener('click', tournerRoue);
+            document.getElementById('easter-egg').addEventListener('click', casserOeuf);
+            
             creerOeufsPaques();
             
             if (estApres18h()) {
@@ -490,7 +499,6 @@
                 
                 const content = document.createElement('span');
                 content.textContent = segment.nom;
-                content.style.display = 'block';
                 content.style.transform = `skewY(${90 - angleParSegment}deg) rotate(${angleParSegment / 2}deg)`;
                 
                 segmentDiv.appendChild(content);
@@ -523,7 +531,7 @@
             jeuEnCours = true;
             
             const btn = document.getElementById('btn-tourner');
-            const centerBtn = document.querySelector('.center-circle');
+            const centerBtn = document.getElementById('center-btn');
             btn.disabled = true;
             centerBtn.style.pointerEvents = 'none';
             
@@ -539,7 +547,7 @@
         
         function jouer() {
             if (aJoueAujourdhui()) {
-                afficherResultat({ success: false, message: 'Déjà participé aujourd'hui ! Revenez demain 🌅' });
+                afficherResultat({ success: false, message: 'Déjà participé aujourd\'hui ! Revenez demain 🌅' });
                 return;
             }
             
@@ -547,7 +555,7 @@
             
             if (!lotsData.config.joursOuverts.includes(jourSemaine)) {
                 marquerJoue();
-                afficherResultat({ success: false, message: 'Commerces fermés aujourd'hui ! Revenez un jour d'ouverture 🏪' });
+                afficherResultat({ success: false, message: 'Commerces fermés aujourd\'hui ! Revenez un jour d\'ouverture 🏪' });
                 return;
             }
             
@@ -555,7 +563,7 @@
             
             if (gagnantExiste) {
                 marquerJoue();
-                afficherResultat({ success: false, message: '🎯 Déjà un gagnant aujourd'hui ! Retentez demain !' });
+                afficherResultat({ success: false, message: '🎯 Déjà un gagnant aujourd\'hui ! Retentez demain !' });
                 return;
             }
             
