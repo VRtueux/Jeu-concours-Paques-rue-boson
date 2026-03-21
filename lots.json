@@ -1,77 +1,77 @@
-{
-  "config": {
-    "dateDebut": "04/04/2026",
-    "dateFin": "19/04/2026",
-    "modeTest": "OUI",
-    "joursOuverts": [
-      "Mercredi",
-      "Jeudi",
-      "Vendredi",
-      "Samedi"
-    ],
-    "heureFinGagnant": "18:00",
-    "participationParJour": true
-  },
-  "lots": [
-    {
-      "id": "lot1",
-      "commerce": "VRtueux",
-      "nomLot": "Pack découverte",
-      "description": "1h de session, accès à tous les équipements et jeux, valable 6 mois",
-      "valeur": "49€",
-      "dateAttribution": "04/04/2026",
-      "statut": "Disponible",
-      "gagne": false
-    },
-    {
-      "id": "lot2",
-      "commerce": "L'Artisanale Boutique de Créateurs",
-      "nomLot": "Atelier découverte",
-      "description": "Atelier vitrail tiffany, durée 4h chez Vitrail Ste Colombe",
-      "valeur": "",
-      "dateAttribution": "05/04/2026",
-      "statut": "Disponible",
-      "gagne": false
-    },
-    {
-      "id": "lot3",
-      "commerce": "Praline Pâtisserie",
-      "nomLot": "Bon d'achat",
-      "description": "Valable 6 mois sur l'ensemble de la gamme",
-      "valeur": "20€",
-      "dateAttribution": "09/04/2026",
-      "statut": "Disponible",
-      "gagne": false
-    },
-    {
-      "id": "lot4",
-      "commerce": "Scorpub",
-      "nomLot": "1L de bière",
-      "description": "Santé",
-      "valeur": "",
-      "dateAttribution": "11/04/2026",
-      "statut": "Disponible",
-      "gagne": false
-    },
-    {
-      "id": "lot5",
-      "commerce": "L'Artisanale Boutique de Créateurs",
-      "nomLot": "Bon d'achat magasin",
-      "description": "Valable 6 mois sur l'ensemble du magasin",
-      "valeur": "",
-      "dateAttribution": "16/04/2026",
-      "statut": "Disponible",
-      "gagne": false
-    },
-    {
-      "id": "lot6",
-      "commerce": "Studio Sandy",
-      "nomLot": "1 brush femme et 1 coupe homme",
-      "description": "Valable 3 mois",
-      "valeur": "50€",
-      "dateAttribution": "18/04/2026",
-      "statut": "Disponible",
-      "gagne": false
-    }
-  ]
-}
+{  
+  "config": {  
+    "dateDebut": "04/04/2026",  
+    "dateFin": "19/04/2026",  
+    "modeTest": "OUI",  
+    "joursOuverts": [  
+      "Mercredi",  
+      "Jeudi",  
+      "Vendredi",  
+      "Samedi"  
+    ],  
+    "heureFinGagnant": "18:00",  
+    "participationParJour": true  
+  },  
+  "lots": [  
+    {  
+      "id": "lot1",  
+      "commerce": "VRtueux",  
+      "nomLot": "Pack découverte",  
+      "description": "1h de session, accès à tous les équipements et jeux, valable 6 mois",  
+      "valeur": "49€",  
+      "dateAttribution": "04/04/2026",  
+      "statut": "Disponible",  
+      "gagne": false  
+    },  
+    {  
+      "id": "lot2",  
+      "commerce": "L'Artisanale Boutique de Créateurs",  
+      "nomLot": "Atelier découverte",  
+      "description": "Atelier vitrail tiffany, durée 4h chez Vitrail Ste Colombe",  
+      "valeur": "",  
+      "dateAttribution": "05/04/2026",  
+      "statut": "Disponible",  
+      "gagne": false  
+    },  
+    {  
+      "id": "lot3",  
+      "commerce": "Praline Pâtisserie",  
+      "nomLot": "Bon d'achat",  
+      "description": "Valable 6 mois sur l'ensemble de la gamme",  
+      "valeur": "20€",  
+      "dateAttribution": "09/04/2026",  
+      "statut": "Disponible",  
+      "gagne": false  
+    },  
+    {  
+      "id": "lot4",  
+      "commerce": "Scorpub",  
+      "nomLot": "1L de bière",  
+      "description": "Santé",  
+      "valeur": "",  
+      "dateAttribution": "11/04/2026",  
+      "statut": "Disponible",  
+      "gagne": false  
+    },  
+    {  
+      "id": "lot5",  
+      "commerce": "L'Artisanale Boutique de Créateurs",  
+      "nomLot": "Bon d'achat magasin",  
+      "description": "Valable 6 mois sur l'ensemble du magasin",  
+      "valeur": "",  
+      "dateAttribution": "16/04/2026",  
+      "statut": "Disponible",  
+      "gagne": false  
+    },  
+    {  
+      "id": "lot6",  
+      "commerce": "Studio Sandy",  
+      "nomLot": "1 brush femme et 1 coupe homme",  
+      "description": "Valable 3 mois",  
+      "valeur": "50€",  
+      "dateAttribution": "18/04/2026",  
+      "statut": "Disponible",  
+      "gagne": false  
+    }  
+  ]  
+}  
