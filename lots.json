@@ -3,8 +3,13 @@
     "dateDebut": "04/04/2026",
     "dateFin": "19/04/2026",
     "modeTest": "OUI",
-    "joursOuverts": ["Mercredi", "Jeudi", "Vendredi", "Samedi"],
-    "heureFinGagnant": "18:00", 
+    "joursOuverts": [
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+    ],
+    "heureFinGagnant": "18:00",
     "participationParJour": true
   },
   "lots": [
@@ -20,7 +25,7 @@
     },
     {
       "id": "lot2",
-      "commerce": "l'ARTisanale Boutique de Créateurs",
+      "commerce": "L'Artisanale Boutique de Créateurs",
       "nomLot": "Atelier découverte",
       "description": "Atelier vitrail tiffany, durée 4h chez Vitrail Ste Colombe",
       "valeur": "",
@@ -30,7 +35,7 @@
     },
     {
       "id": "lot3",
-      "commerce": "Praline Patisserie",
+      "commerce": "Praline Pâtisserie",
       "nomLot": "Bon d'achat",
       "description": "Valable 6 mois sur l'ensemble de la gamme",
       "valeur": "20€",
@@ -42,7 +47,7 @@
       "id": "lot4",
       "commerce": "Scorpub",
       "nomLot": "1L de bière",
-      "description": "Santé",
+      "description": "Santé !",
       "valeur": "",
       "dateAttribution": "11/04/2026",
       "statut": "Disponible",
@@ -50,17 +55,17 @@
     },
     {
       "id": "lot5",
-      "commerce": "l'ARTisanale Boutique de Créateurs",
+      "commerce": "L'Artisanale Boutique de Créateurs",
       "nomLot": "Bon d'achat magasin",
       "description": "Valable 6 mois sur l'ensemble du magasin",
-      "valeur": "",
+      "valeur": "30€",
       "dateAttribution": "16/04/2026",
       "statut": "Disponible",
       "gagne": false
     },
     {
       "id": "lot6",
-      "commerce": "Studio sandy",
+      "commerce": "Studio Sandy",
       "nomLot": "1 brush femme et 1 coupe homme",
       "description": "Valable 3 mois",
       "valeur": "50€",
