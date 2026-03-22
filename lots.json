@@ -4,10 +4,12 @@
     "dateFin": "19/04/2026",  
     "modeTest": "OUI",  
     "joursOuverts": [  
+      "Mardi",
       "Mercredi",  
       "Jeudi",  
       "Vendredi",  
-      "Samedi"  
+      "Samedi",  
+      "Dimanche"
     ],  
     "heureFinGagnant": "18:00",  
     "participationParJour": true  
@@ -29,7 +31,7 @@
       "nomLot": "Atelier découverte",  
       "description": "Atelier vitrail tiffany, durée 4h chez Vitrail Ste Colombe",  
       "valeur": "",  
-      "dateAttribution": "05/04/2026",  
+      "dateAttribution": "07/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
     },  
@@ -59,7 +61,7 @@
       "nomLot": "Bon d'achat magasin",  
       "description": "Valable 6 mois sur l'ensemble du magasin",  
       "valeur": "",  
-      "dateAttribution": "16/04/2026",  
+      "dateAttribution": "15/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
     },  
