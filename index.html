@@ -534,284 +534,311 @@
         </div>  
     </div>
 
-    <script>  
-        const SEGMENTS = [  
-            { nom: '🐰', couleur: '#FF8C42' },  
-            { nom: '🥚', couleur: '#A4D65E' },  
-            { nom: '🐣', couleur: '#00BCD4' },  
-            { nom: '🌸', couleur: '#E91E63' },  
-            { nom: '🐰', couleur: '#FF8C42' },  
-            { nom: '🥚', couleur: '#A4D65E' }  
-        ];  
-          
-        const PROBABILITE_GAIN = 0.25;  
-        const MESSAGES_PERDU = [  
-            '🎯 Vous êtes passé tout près !',  
-            '🍀 Retentez demain !',  
-            '💫 La chance tournera demain !',  
-            '🌟 Presque ! Revenez demain !'  
-        ];  
-          
-        let resultatEnAttente = null;  
-        let jeuEnCours = false;  
-        let lotsData = null;  
-          
-        function getDateStr() {  
-            const d = new Date();  
-            return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;  
-        }  
-          
-        function getJourSemaine() {  
-            return ['Dimanche', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'][new Date().getDay()];  
-        }  
-          
-        function estApres18h() {  
-            return new Date().getHours() >= 18;  
-        }  
-          
-        function sauvegarderGagnant(lot) {  
-            const dataGagnant = {  
-                lot: lot,  
-                date: getDateStr()  
+<script>  
+    const SEGMENTS = [  
+        { nom: '🐰', couleur: '#FF8C42' },  
+        { nom: '🥚', couleur: '#A4D65E' },  
+        { nom: '🐣', couleur: '#00BCD4' },  
+        { nom: '🌸', couleur: '#E91E63' },  
+        { nom: '🐰', couleur: '#FF8C42' },  
+        { nom: '🥚', couleur: '#A4D65E' }  
+    ];
+
+    const PROBABILITE_GAIN = 0.25;  
+    const MESSAGES_PERDU = [  
+        '🎯 Vous êtes passé tout près !',  
+        '🍀 Retentez demain !',  
+        '💫 La chance tournera demain !',  
+        '🌟 Presque ! Revenez demain !'  
+    ];
+
+    let resultatEnAttente = null;  
+    let jeuEnCours = false;  
+    let lotsData = null;
+
+    function getDateStr() {  
+        const d = new Date();  
+        return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;  
+    }
+
+    // ✅ FIX CRITIQUE : Lundi était manquant, tout était décalé !  
+    function getJourSemaine() {  
+        return ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'][new Date().getDay()];  
+    }
+
+    function estApres18h() {  
+        return new Date().getHours() >= 18;  
+    }
+
+    function sauvegarderGagnant(lot) {  
+        localStorage.setItem('boson_gagnant', JSON.stringify({ lot: lot, date: getDateStr() }));  
+    }
+
+    function recupererGagnant() {  
+        const data = localStorage.getItem('boson_gagnant');  
+        if (!data) return null;  
+        const gagnant = JSON.parse(data);  
+        if (gagnant.date === getDateStr()) return gagnant.lot;  
+        localStorage.removeItem('boson_gagnant');  
+        return null;  
+    }
+
+    function aJoueAujourdhui() {  
+        return localStorage.getItem('boson_date') === getDateStr();  
+    }
+
+    function marquerJoue() {  
+        localStorage.setItem('boson_date', getDateStr());  
+    }
+
+    // ✅ FIX : resetBoutons pour ne pas bloquer après une erreur  
+    function resetBoutons() {  
+        jeuEnCours = false;  
+        document.getElementById('btn-tourner').disabled = false;  
+        document.getElementById('center-btn').style.pointerEvents = 'auto';  
+    }
+
+    async function chargerLots() {  
+        try {  
+            const response = await fetch('lots.json');  
+            if (!response.ok) throw new Error('HTTP ' + response.status);  
+            lotsData = await response.json();  
+        } catch (error) {  
+            console.warn('Fallback lots:', error);  
+            // ✅ FIX : fallback si lots.json inaccessible (test en local)  
+            lotsData = {  
+                config: {  
+                    dateDebut: '04/04/2026',  
+                    dateFin: '19/04/2026',  
+                    modeTest: 'OUI',  
+                    joursOuverts: ['Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],  
+                    heureFinGagnant: '18:00',  
+                    participationParJour: true  
+                },  
+                lots: [  
+                    { id:'lot1', commerce:'VRtueux', nomLot:'Pack découverte', description:'1h de session VR, valable 6 mois', valeur:'49€', dateAttribution: getDateStr(), statut:'Disponible', gagne:false },  
+                    { id:'lot2', commerce:'Praline Pâtisserie', nomLot:"Bon d'achat", description:'Valable 6 mois sur la gamme', valeur:'20€', dateAttribution: getDateStr(), statut:'Disponible', gagne:false }  
+                ]  
             };  
-            localStorage.setItem('boson_gagnant', JSON.stringify(dataGagnant));  
         }  
-          
-        function recupererGagnant() {  
-            const data = localStorage.getItem('boson_gagnant');  
-            if (!data) return null;  
-              
-            const gagnant = JSON.parse(data);  
-            if (gagnant.date === getDateStr()) {  
-                return gagnant.lot;  
-            }  
-              
-            localStorage.removeItem('boson_gagnant');  
-            return null;  
+    }
+
+    window.addEventListener('load', async function() {  
+        await chargerLots();
+
+        const gagnant = recupererGagnant();  
+        if (gagnant) {  
+            afficherLotSauvegarde(gagnant);  
+            return;  
+        }
+
+        creerRoue();
+
+        document.getElementById('btn-tourner').addEventListener('click', tournerRoue);  
+        document.getElementById('center-btn').addEventListener('click', tournerRoue);  
+        document.getElementById('easter-egg').addEventListener('click', casserOeuf);
+
+        creerOeufsPaques();
+
+        if (estApres18h()) {  
+            const badge = document.getElementById('badge');  
+            badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';  
+            badge.classList.add('derniere-chance');  
         }  
-          
-        function aJoueAujourdhui() {  
-            return localStorage.getItem('boson_date') === getDateStr();  
+    });
+
+    function afficherLotSauvegarde(lot) {  
+        document.getElementById('initial-view').style.display = 'none';  
+        const result = document.getElementById('result');  
+        result.className = 'result show win';  
+        document.getElementById('result-icon').textContent = '🎉';  
+        document.getElementById('result-title').textContent = 'VOUS AVEZ GAGNÉ !';  
+        document.getElementById('result-commerce').textContent = '🏪 ' + lot.commerce;  
+        document.getElementById('result-lot').textContent = '🎁 ' + lot.nomLot;  
+        document.getElementById('result-description').textContent = lot.description;  
+        document.getElementById('lot-details').style.display = 'block';  
+        creerConfetti();  
+    }
+
+    function creerRoue() {  
+        const wheel = document.getElementById('wheel');  
+        wheel.innerHTML = '';  
+        const angleParSegment = 360 / SEGMENTS.length; // 60°
+
+        SEGMENTS.forEach((segment, index) => {  
+            const segmentDiv = document.createElement('div');  
+            segmentDiv.className = 'segment';  
+            segmentDiv.style.background = segment.couleur;
+
+            const angle = index * angleParSegment;  
+            segmentDiv.style.transform = `rotate(${angle}deg) skewY(-${90 - angleParSegment}deg)`;
+
+            const content = document.createElement('span');  
+            content.textContent = segment.nom;  
+            content.style.display = 'block';  
+            content.style.transform = `skewY(${90 - angleParSegment}deg) rotate(${angleParSegment / 2}deg)`;
+
+            segmentDiv.appendChild(content);  
+            wheel.appendChild(segmentDiv);  
+        });  
+    }
+
+    function creerOeufsPaques() {  
+        const eggs = ['🐰','🥚','🐣','🌸','🌷'];  
+        for (let i = 0; i < 10; i++) {  
+            const egg = document.createElement('div');  
+            egg.className = 'easter-egg';  
+            egg.textContent = eggs[Math.floor(Math.random() * eggs.length)];  
+            egg.style.left = Math.random() * 95 + '%';  
+            egg.style.top = Math.random() * 95 + '%';  
+            egg.style.animationDelay = Math.random() * 3 + 's';  
+            document.body.appendChild(egg);  
         }  
-          
-        function marquerJoue() {  
-            localStorage.setItem('boson_date', getDateStr());  
-        }  
-          
-        async function chargerLots() {  
-            try {  
-                const response = await fetch('lots.json');  
-                lotsData = await response.json();  
-            } catch (error) {  
-                console.error('Erreur chargement lots:', error);  
-            }  
-        }  
-          
-        window.addEventListener('load', async function() {  
-            await chargerLots();  
-              
-            const gagnant = recupererGagnant();  
-            if (gagnant) {  
-                afficherLotSauvegarde(gagnant);  
+    }
+
+    function tournerRoue() {  
+        if (jeuEnCours) return;
+
+        if (estApres18h()) {  
+            const badge = document.getElementById('badge');  
+            badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';  
+            badge.classList.add('derniere-chance');  
+        }
+
+        jeuEnCours = true;
+
+        const btn = document.getElementById('btn-tourner');  
+        const centerBtn = document.getElementById('center-btn');  
+        btn.disabled = true;  
+        centerBtn.style.pointerEvents = 'none';
+
+        const wheel = document.getElementById('wheel');  
+        const angleTotal = (5 * 360) + Math.random() * 360;  
+        wheel.style.transform = `rotate(${angleTotal}deg)`;
+
+        setTimeout(jouer, 5000);  
+    }
+
+    function jouer() {  
+        // ✅ Sécurité si lotsData pas chargé  
+        if (!lotsData || !lotsData.lots) {  
+            afficherResultat({ success: false, message: '😢 Erreur chargement des lots.' });  
+            resetBoutons();  
+            return;  
+        }
+
+        if (aJoueAujourdhui()) {  
+            afficherResultat({ success: false, message: "Déjà participé aujourd'hui ! Revenez demain 🌅" });  
+            resetBoutons();  
+            return;  
+        }
+
+        // ✅ Vérif jours ouverts (ignorée en modeTest)  
+        if (lotsData.config.modeTest !== 'OUI') {  
+            const jourSemaine = getJourSemaine();  
+            if (!lotsData.config.joursOuverts.includes(jourSemaine)) {  
+                afficherResultat({ success: false, message: "📅 Revenez un jour d'ouverture !" });  
+                resetBoutons();  
                 return;  
             }  
-              
-            creerRoue();  
-              
-            document.getElementById('btn-tourner').addEventListener('click', tournerRoue);  
-            document.getElementById('center-btn').addEventListener('click', tournerRoue);  
-            document.getElementById('easter-egg').addEventListener('click', casserOeuf);  
-              
-            creerOeufsPaques();  
-              
-            if (estApres18h()) {  
-                const badge = document.getElementById('badge');  
-                badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';  
-                badge.classList.add('derniere-chance');  
+        }
+
+        const dateStr = getDateStr();  
+        const lotsDisponibles = lotsData.lots.filter(lot => lot.statut === 'Disponible' && !lot.gagne);
+
+        if (lotsDisponibles.length === 0) {  
+            marquerJoue();  
+            afficherResultat({ success: false, message: '🎁 Plus de lots disponibles !' });  
+            resetBoutons();  
+            return;  
+        }
+
+        let lotsDuJour = lotsDisponibles.filter(lot => lot.dateAttribution === dateStr);  
+        if (lotsDuJour.length === 0) lotsDuJour = lotsDisponibles;
+
+        let gagner = false;
+
+        if (!estApres18h()) {  
+            gagner = Math.random() < PROBABILITE_GAIN;  
+        } else {  
+            const lotPasDonneAujourdhui = !localStorage.getItem('lot_donne_' + dateStr);  
+            if (lotPasDonneAujourdhui) {  
+                gagner = true;  
+                localStorage.setItem('lot_donne_' + dateStr, 'true');  
+            } else {  
+                gagner = Math.random() < PROBABILITE_GAIN;  
             }  
-        });  
-          
-        function afficherLotSauvegarde(lot) {  
+        }
+
+        if (gagner) {  
+            const lot = lotsDuJour[Math.floor(Math.random() * lotsDuJour.length)];  
+            lot.gagne = true;  
+            marquerJoue();  
+            sauvegarderGagnant(lot);
+
             document.getElementById('initial-view').style.display = 'none';  
-            const result = document.getElementById('result');  
-            result.classList.add('show');  
+            document.getElementById('egg-container').classList.add('show');
+
+            resultatEnAttente = {  
+                success: true,  
+                winner: true,  
+                commerce: lot.commerce,  
+                nomLot: lot.nomLot,  
+                description: lot.description  
+            };  
+        } else {  
+            marquerJoue();  
+            afficherResultat({ success: false, message: MESSAGES_PERDU[Math.floor(Math.random() * MESSAGES_PERDU.length)] });  
+            resetBoutons();  
+        }  
+    }
+
+    function casserOeuf() {  
+        const egg = document.getElementById('easter-egg');  
+        const eggContainer = document.getElementById('egg-container');  
+        egg.classList.add('egg-crack');  
+        setTimeout(() => {  
+            eggContainer.style.display = 'none';  
+            afficherResultat(resultatEnAttente);  
+        }, 800);  
+    }
+
+    function afficherResultat(data) {  
+        const result = document.getElementById('result');
+
+        if (data && data.success && data.winner) {  
             result.className = 'result show win';  
             document.getElementById('result-icon').textContent = '🎉';  
-            document.getElementById('result-title').textContent = 'VOUS AVEZ GAGNÉ !';  
-            document.getElementById('result-commerce').textContent = '🏪 ' + lot.commerce;  
-            document.getElementById('result-lot').textContent = '🎁 ' + lot.nomLot;  
-            document.getElementById('result-description').textContent = lot.description;  
+            document.getElementById('result-title').textContent = 'FÉLICITATIONS !';  
+            document.getElementById('result-commerce').textContent = '🏪 ' + data.commerce;  
+            document.getElementById('result-lot').textContent = '🎁 ' + data.nomLot;  
+            document.getElementById('result-description').textContent = data.description;  
             document.getElementById('lot-details').style.display = 'block';  
             creerConfetti();  
+        } else {  
+            result.className = 'result show lose';  
+            document.getElementById('result-icon').textContent = '😢';  
+            document.getElementById('result-title').textContent = 'PAS DE CHANCE !';  
+            document.getElementById('result-message').textContent = data.message;  
+            document.getElementById('lot-details').style.display = 'none';  
         }  
-          
-        function creerRoue() {  
-            const wheel = document.getElementById('wheel');  
-            const angleParSegment = 360 / SEGMENTS.length;  
-              
-            SEGMENTS.forEach((segment, index) => {  
-                const segmentDiv = document.createElement('div');  
-                segmentDiv.className = 'segment';  
-                segmentDiv.style.background = segment.couleur;  
-                  
-                const angle = index * angleParSegment;  
-                segmentDiv.style.transform = `rotate(${angle}deg) skewY(-${90 - angleParSegment}deg)`;  
-                  
-                const content = document.createElement('span');  
-                content.textContent = segment.nom;  
-                content.style.display = 'block';  
-                content.style.transform = `skewY(${90 - angleParSegment}deg) rotate(${angleParSegment / 2}deg)`;  
-                  
-                segmentDiv.appendChild(content);  
-                wheel.appendChild(segmentDiv);  
-            });  
-        }  
-          
-        function creerOeufsPaques() {  
-            const eggs = ['🐰', '🥚', '🐣', '🌸', '🌷'];  
-            for (let i = 0; i < 10; i++) {  
-                const egg = document.createElement('div');  
-                egg.className = 'easter-egg';  
-                egg.textContent = eggs[Math.floor(Math.random() * eggs.length)];  
-                egg.style.left = Math.random() * 100 + '%';  
-                egg.style.top = Math.random() * 100 + '%';  
-                egg.style.animationDelay = Math.random() * 3 + 's';  
-                document.body.appendChild(egg);  
-            }  
-        }  
-          
-        function tournerRoue() {  
-            if (jeuEnCours) return;  
-              
-            if (estApres18h()) {  
-                const badge = document.getElementById('badge');  
-                badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';  
-                badge.classList.add('derniere-chance');  
-            }  
-              
-            jeuEnCours = true;  
-              
-            const btn = document.getElementById('btn-tourner');  
-            const centerBtn = document.getElementById('center-btn');  
-            btn.disabled = true;  
-            centerBtn.style.pointerEvents = 'none';  
-              
-            const wheel = document.getElementById('wheel');  
-            const rotations = 5;  
-            const angleTotal = (rotations * 360) + Math.random() * 360;  
-            wheel.style.transform = `rotate(${angleTotal}deg)`;  
-              
+    }
+
+    function creerConfetti() {  
+        const colors = ['#FF8C42','#A4D65E','#00BCD4','#E91E63','#FFD700','#9C27B0'];  
+        for (let i = 0; i < 80; i++) {  
             setTimeout(() => {  
-                jouer();  
-            }, 5000);  
+                const c = document.createElement('div');  
+                c.className = 'confetti';  
+                c.style.left = Math.random() * 100 + '%';  
+                c.style.top = '-20px';  
+                c.style.background = colors[Math.floor(Math.random() * colors.length)];  
+                c.style.animationDelay = Math.random() * 0.5 + 's';  
+                document.body.appendChild(c);  
+                setTimeout(() => c.remove(), 4500);  
+            }, i * 30);  
         }  
-          
-        function jouer() {  
-            if (aJoueAujourdhui()) {  
-                afficherResultat({ success: false, message: 'Déjà participé aujourd\'hui ! Revenez demain 🌅' });  
-                return;  
-            }  
-              
-            const jourSemaine = getJourSemaine();  
-              
-            const dateStr = getDateStr();  
-            const lotsDisponibles = lotsData.lots.filter(lot => lot.statut === 'Disponible');  
-            let lotsDuJour = lotsDisponibles.filter(lot => lot.dateAttribution === dateStr);  
-              
-            // Si pas de lot pour aujourd'hui, chercher dans les lots non attribués (report automatique)  
-            if (lotsDuJour.length === 0) {  
-                lotsDuJour = lotsDisponibles;  
-            }  
-              
-            if (lotsDuJour.length === 0) {  
-                marquerJoue();  
-                afficherResultat({ success: false, message: '🎁 Plus de lots disponibles !' });  
-                return;  
-            }  
-              
-            let gagner = false;  
-              
-            if (!estApres18h()) {  
-                gagner = Math.random() < PROBABILITE_GAIN;  
-            } else {  
-                // Après 18h : gain forcé si le lot du jour n'a pas été donné  
-                const lotPasDonneAujourdhui = !localStorage.getItem('lot_donne_' + dateStr);  
-                if (lotPasDonneAujourdhui) {  
-                    gagner = true;  
-                    localStorage.setItem('lot_donne_' + dateStr, 'true');  
-                } else {  
-                    gagner = Math.random() < PROBABILITE_GAIN;  
-                }  
-            }  
-              
-            if (gagner) {  
-                const lot = lotsDuJour[Math.floor(Math.random() * lotsDuJour.length)];  
-                marquerJoue();  
-                sauvegarderGagnant(lot);  
-                  
-                document.getElementById('initial-view').style.display = 'none';  
-                document.getElementById('egg-container').classList.add('show');  
-                resultatEnAttente = {  
-                    success: true,  
-                    winner: true,  
-                    commerce: lot.commerce,  
-                    nomLot: lot.nomLot,  
-                    description: lot.description  
-                };  
-            } else {  
-                marquerJoue();  
-                afficherResultat({ success: false, message: MESSAGES_PERDU[Math.floor(Math.random() * MESSAGES_PERDU.length)] });  
-            }  
-        }  
-          
-        function casserOeuf() {  
-            const egg = document.getElementById('easter-egg');  
-            const eggContainer = document.getElementById('egg-container');  
-              
-            egg.classList.add('egg-crack');  
-              
-            setTimeout(() => {  
-                eggContainer.style.display = 'none';  
-                afficherResultat(resultatEnAttente);  
-            }, 800);  
-        }  
-          
-        function afficherResultat(data) {  
-            const result = document.getElementById('result');  
-            result.classList.add('show');  
-              
-            if (data && data.success && data.winner) {  
-                result.className = 'result show win';  
-                document.getElementById('result-icon').textContent = '🎉';  
-                document.getElementById('result-title').textContent = 'FÉLICITATIONS !';  
-                document.getElementById('result-commerce').textContent = '🏪 ' + data.commerce;  
-                document.getElementById('result-lot').textContent = '🎁 ' + data.nomLot;  
-                document.getElementById('result-description').textContent = data.description;  
-                document.getElementById('lot-details').style.display = 'block';  
-                creerConfetti();  
-            } else {  
-                result.className = 'result show lose';  
-                document.getElementById('result-icon').textContent = '😢';  
-                document.getElementById('result-title').textContent = 'PAS DE CHANCE !';  
-                document.getElementById('result-message').textContent = data.message;  
-                document.getElementById('lot-details').style.display = 'none';  
-            }  
-        }  
-          
-        function creerConfetti() {  
-            const colors = ['#FF8C42', '#A4D65E', '#00BCD4', '#E91E63', '#FFD700', '#9C27B0'];  
-            for (let i = 0; i < 80; i++) {  
-                setTimeout(() => {  
-                    const c = document.createElement('div');  
-                    c.className = 'confetti';  
-                    c.style.left = Math.random() * 100 + '%';  
-                    c.style.background = colors[Math.floor(Math.random() * colors.length)];  
-                    c.style.animationDelay = Math.random() * 0.5 + 's';  
-                    document.body.appendChild(c);  
-                    setTimeout(() => c.remove(), 4000);  
-                }, i * 30);  
-            }  
-        }  
-    </script>  
+    }  
+</script>   
 </body>  
 </html> 
