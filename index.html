@@ -74,27 +74,9 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);  
         }
 
-        .subtitle {  
-            color: #666;  
-            font-size: 17px;  
-            margin-bottom: 25px;  
-            font-weight: 500;  
-        }
-
-        .intro-text {  
-            color: #555;  
-            font-size: 16px;  
-            margin-bottom: 25px;  
-            line-height: 1.6;  
-        }
-
-        .gagnant-info {  
-            color: #FF8C42;  
-            font-weight: bold;  
-            margin-top: 10px;  
-            font-size: 18px;  
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);  
-        }
+        .subtitle { color: #666; font-size: 17px; margin-bottom: 25px; font-weight: 500; }  
+        .intro-text { color: #555; font-size: 16px; margin-bottom: 25px; line-height: 1.6; }  
+        .gagnant-info { color: #FF8C42; font-weight: bold; margin-top: 10px; font-size: 18px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
 
         .wheel-container {  
             position: relative;  
@@ -177,11 +159,7 @@
             transition: all 0.3s;  
         }
 
-        .center-circle:hover {  
-            transform: translate(-50%, -50%) scale(1.1);  
-            box-shadow: 0 0 50px rgba(255,140,66,0.9), 0 8px 30px rgba(0,0,0,0.4);  
-        }
-
+        .center-circle:hover { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 50px rgba(255,140,66,0.9), 0 8px 30px rgba(0,0,0,0.4); }  
         .center-circle:active { transform: translate(-50%, -50%) scale(0.95); }
 
         .btn {  
@@ -376,7 +354,6 @@
         .partner-logo:hover { transform: scale(1.15) translateY(-5px); box-shadow: 0 10px 30px rgba(255,140,66,0.5); }  
         .partner-logo img { width: 100%; height: 100%; object-fit: contain; }
 
-        /* ✅ logo-fallback ICI dans <style>, pas dans <script> */  
         .logo-fallback {  
             font-size: 11px;  
             font-weight: bold;  
@@ -474,93 +451,7 @@
         <div class="partenaires">  
             <div class="partenaires-title">🏪 Nos Commerçants Partenaires</div>  
             <div class="carousel">  
-                <div class="carousel-track">
-
-                    <!-- SÉRIE 1 -->  
-                    <a href="https://www.facebook.com/laruebosonvienne/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/bp5JvDR/304929789-536890498240072-5856750964226344598-n.png" alt="La Rue Boson"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🏘️  
-La Rue Boson</span>'">  
-                    </a>  
-                    <a href="https://vrtueux.fr" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/C5236CJF/Logo-VRtueux.png" alt="VRtueux"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🥽  
-VRtueux</span>'">  
-                    </a>  
-                    <a href="https://www.instagram.com/scorpubvienne/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/9m8Dg0fs/434580264-985865803087686-793051233274541739-n.jpg" alt="Scorpub"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🍺  
-Scorpub</span>'">  
-                    </a>  
-                    <a href="https://www.instagram.com/lartisanale_boutique_createurs" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/1JmfXhqQ/607897525-17976942743954109-4176086413852177532-n.jpg" alt="L'Artisanale"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🎨  
-L\'Artisanale</span>'">  
-                    </a>  
-                    <a href="https://www.instagram.com/praline.patisserie.vienne/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/39ZHHhRr/560541750-17871617859443196-4631725160350304662-n.jpg" alt="Praline"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🍰  
-Praline</span>'">  
-                    </a>  
-                    <a href="https://www.studio-sandy.fr/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/k2pTqkmG/banniere-accueil.avif" alt="Studio Sandy"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>💇  
-Studio Sandy</span>'">  
-                    </a>  
-                    <a href="https://www.larmoire-aux-coquelicots.com/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/SXSgTbd3/t-l-chargement-10.jpg" alt="L'armoire aux coquelicots"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🌸  
-L\'armoire aux coquelicots</span>'">  
-                    </a>  
-                    <a href="https://www.terra-nostra-restaurant-vienne.fr/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/fVMqjMMw/logo-menu.png" alt="Terra Nostra"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🍽️  
-Terra Nostra</span>'">  
-                    </a>
-
-                    <!-- SÉRIE 2 -->  
-                    <a href="https://www.facebook.com/laruebosonvienne/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/bp5JvDR/304929789-536890498240072-5856750964226344598-n.png" alt="La Rue Boson"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🏘️  
-La Rue Boson</span>'">  
-                    </a>  
-                    <a href="https://vrtueux.fr" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/C5236CJF/Logo-VRtueux.png" alt="VRtueux"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🥽  
-VRtueux</span>'">  
-                    </a>  
-                    <a href="https://www.instagram.com/scorpubvienne/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/9m8Dg0fs/434580264-985865803087686-793051233274541739-n.jpg" alt="Scorpub"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🍺  
-Scorpub</span>'">  
-                    </a>  
-                    <a href="https://www.instagram.com/lartisanale_boutique_createurs" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/1JmfXhqQ/607897525-17976942743954109-4176086413852177532-n.jpg" alt="L'Artisanale"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🎨  
-L\'Artisanale</span>'">  
-                    </a>  
-                    <a href="https://www.instagram.com/praline.patisserie.vienne/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/39ZHHhRr/560541750-17871617859443196-4631725160350304662-n.jpg" alt="Praline"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🍰  
-Praline</span>'">  
-                    </a>  
-                    <a href="https://www.studio-sandy.fr/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/k2pTqkmG/banniere-accueil.avif" alt="Studio Sandy"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>💇  
-Studio Sandy</span>'">  
-                    </a>  
-                    <a href="https://www.larmoire-aux-coquelicots.com/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/SXSgTbd3/t-l-chargement-10.jpg" alt="L'armoire aux coquelicots"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🌸  
-L\'armoire aux coquelicots</span>'">  
-                    </a>  
-                    <a href="https://www.terra-nostra-restaurant-vienne.fr/" target="_blank" class="partner-logo">  
-                        <img src="https://i.ibb.co/fVMqjMMw/logo-menu.png" alt="Terra Nostra"  
-                             onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>🍽️  
-Terra Nostra</span>'">  
-                    </a>
-
-                </div>  
+                <div class="carousel-track" id="carousel-track"></div>  
             </div>  
         </div>  
         <!-- ===== FIN CAROUSEL ===== -->
@@ -578,6 +469,43 @@ Terra Nostra</span>'">
     </div>
 
 <script>  
+    // ===== PARTENAIRES =====  
+    const PARTENAIRES = [  
+        { nom: 'La Rue Boson',             url: 'https://www.facebook.com/laruebosonvienne/', img: 'https://i.ibb.co/bp5JvDR/304929789-536890498240072-5856750964226344598-n.png', emoji: '🏘️' },  
+        { nom: 'VRtueux',                  url: 'https://vrtueux.fr', img: 'https://i.ibb.co/C5236CJF/Logo-VRtueux.png', emoji: '🥽' },  
+        { nom: 'Scorpub',                  url: 'https://www.instagram.com/scorpubvienne/', img: 'https://i.ibb.co/9m8Dg0fs/434580264-985865803087686-793051233274541739-n.jpg', emoji: '🍺' },  
+        { nom: "L'Artisanale",             url: 'https://www.instagram.com/lartisanale_boutique_createurs', img: 'https://i.ibb.co/1JmfXhqQ/607897525-17976942743954109-4176086413852177532-n.jpg', emoji: '🎨' },  
+        { nom: 'Praline',                  url: 'https://www.instagram.com/praline.patisserie.vienne/', img: 'https://i.ibb.co/39ZHHhRr/560541750-17871617859443196-4631725160350304662-n.jpg', emoji: '🍰' },  
+        { nom: 'Studio Sandy',             url: 'https://www.studio-sandy.fr/', img: 'https://i.ibb.co/k2pTqkmG/banniere-accueil.avif', emoji: '💇' },  
+        { nom: "L'armoire aux coquelicots",url: 'https://www.larmoire-aux-coquelicots.com/', img: 'https://i.ibb.co/SXSgTbd3/t-l-chargement-10.jpg', emoji: '🌸' },  
+        { nom: 'Terra Nostra',             url: 'https://www.terra-nostra-restaurant-vienne.fr/', img: 'https://i.ibb.co/fVMqjMMw/logo-menu.png', emoji: '🍽️' }  
+    ];
+
+    function creerCarousel() {  
+        const track = document.getElementById('carousel-track');  
+        // 2 séries pour boucle infinie  
+        [0, 1].forEach(() => {  
+            PARTENAIRES.forEach(p => {  
+                const a = document.createElement('a');  
+                a.href = p.url;  
+                a.target = '_blank';  
+                a.className = 'partner-logo';
+
+                const img = document.createElement('img');  
+                img.alt = p.nom;  
+                img.src = p.img;  
+                img.onerror = function() {  
+                    this.parentNode.innerHTML = '<span class="logo-fallback">' + p.emoji + '  
+' + p.nom + '</span>';  
+                };
+
+                a.appendChild(img);  
+                track.appendChild(a);  
+            });  
+        });  
+    }
+
+    // ===== ROUE =====  
     const SEGMENTS = [  
         { nom: '🐰', couleur: '#FF8C42' },  
         { nom: '🥚', couleur: '#A4D65E' },  
@@ -657,6 +585,7 @@ Terra Nostra</span>'">
     }
 
     window.addEventListener('load', async function() {  
+        creerCarousel();  
         await chargerLots();
 
         const gagnant = recupererGagnant();  
