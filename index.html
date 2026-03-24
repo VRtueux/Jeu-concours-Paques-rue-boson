@@ -36,23 +36,13 @@
             border-radius: 30px 30px 0 0;  
         }
 
-        .logo {  
-            width: 220px;  
-            margin: 0 auto 20px;  
-            display: block;  
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));  
-        }
+        .logo { width: 220px; margin: 0 auto 20px; display: block; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
 
         .badge {  
             background: linear-gradient(135deg, #FF8C42 0%, #FFA726 100%);  
-            color: white;  
-            padding: 12px 30px;  
-            border-radius: 30px;  
-            font-size: 15px;  
-            font-weight: bold;  
-            margin-bottom: 20px;  
-            display: inline-block;  
-            transition: all 0.3s;  
+            color: white; padding: 12px 30px; border-radius: 30px;  
+            font-size: 15px; font-weight: bold; margin-bottom: 20px;  
+            display: inline-block; transition: all 0.3s;  
             box-shadow: 0 4px 15px rgba(255,140,66,0.3);  
         }
 
@@ -66,28 +56,19 @@
             50% { transform: scale(1.05); box-shadow: 0 6px 25px rgba(233,30,99,0.6); }  
         }
 
-        h1 {  
-            color: #FF8C42;  
-            font-size: 36px;  
-            margin-bottom: 10px;  
-            font-weight: 700;  
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);  
-        }
-
+        h1 { color: #FF8C42; font-size: 36px; margin-bottom: 10px; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }  
         .subtitle { color: #666; font-size: 17px; margin-bottom: 25px; font-weight: 500; }  
         .intro-text { color: #555; font-size: 16px; margin-bottom: 25px; line-height: 1.6; }  
-        .gagnant-info { color: #FF8C42; font-weight: bold; margin-top: 10px; font-size: 18px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .gagnant-info { color: #FF8C42; font-weight: bold; margin-top: 10px; font-size: 18px; }
 
         .wheel-container {  
             position: relative;  
-            width: 380px;  
-            height: 380px;  
+            width: 380px; height: 380px;  
             margin: 30px auto;  
         }
 
         .wheel {  
-            width: 100%;  
-            height: 100%;  
+            width: 100%; height: 100%;  
             border-radius: 50%;  
             position: relative;  
             overflow: visible;  
@@ -99,33 +80,25 @@
 
         .segment {  
             position: absolute;  
-            width: 50%;  
-            height: 50%;  
+            width: 50%; height: 50%;  
             transform-origin: 100% 100%;  
-            display: flex;  
-            align-items: flex-start;  
-            justify-content: flex-end;  
+            display: flex; align-items: flex-start; justify-content: flex-end;  
             padding: 20px 30px;  
-            font-weight: bold;  
-            color: white;  
+            font-weight: bold; color: white;  
             text-shadow: 0 3px 8px rgba(0,0,0,0.4);  
             font-size: 60px;  
             clip-path: polygon(0 0, 100% 0, 100% 100%);  
-            transition: all 0.3s;  
         }
 
         .segment::before {  
             content: '';  
-            position: absolute;  
-            inset: 0;  
+            position: absolute; inset: 0;  
             background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.1) 100%);  
             clip-path: polygon(0 0, 100% 0, 100% 100%);  
         }
 
         .arrow {  
-            position: absolute;  
-            top: -25px;  
-            left: 50%;  
+            position: absolute; top: -25px; left: 50%;  
             transform: translateX(-50%);  
             width: 0; height: 0;  
             border-left: 25px solid transparent;  
@@ -142,62 +115,41 @@
         }
 
         .center-circle {  
-            position: absolute;  
-            top: 50%; left: 50%;  
+            position: absolute; top: 50%; left: 50%;  
             transform: translate(-50%, -50%);  
             width: 100px; height: 100px;  
             background: linear-gradient(135deg, #FF8C42 0%, #FFA726 100%);  
-            border-radius: 50%;  
-            border: 5px solid white;  
+            border-radius: 50%; border: 5px solid white;  
             box-shadow: 0 0 40px rgba(255,140,66,0.7), 0 5px 20px rgba(0,0,0,0.3);  
-            z-index: 5;  
-            display: flex;  
-            align-items: center;  
-            justify-content: center;  
-            font-size: 45px;  
-            cursor: pointer;  
-            transition: all 0.3s;  
+            z-index: 5; display: flex; align-items: center; justify-content: center;  
+            font-size: 45px; cursor: pointer; transition: all 0.3s;  
         }
 
-        .center-circle:hover { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 50px rgba(255,140,66,0.9), 0 8px 30px rgba(0,0,0,0.4); }  
+        .center-circle:hover { transform: translate(-50%, -50%) scale(1.1); }  
         .center-circle:active { transform: translate(-50%, -50%) scale(0.95); }
 
         .btn {  
             background: linear-gradient(135deg, #FF8C42 0%, #FF6F00 100%);  
-            color: white;  
-            border: none;  
-            padding: 18px 45px;  
-            border-radius: 50px;  
-            font-size: 19px;  
-            font-weight: bold;  
-            cursor: pointer;  
-            width: 100%;  
-            max-width: 380px;  
-            text-transform: uppercase;  
-            box-shadow: 0 10px 30px rgba(255,140,66,0.5);  
-            transition: all 0.3s;  
-            margin: 25px auto;  
-            display: block;  
-            letter-spacing: 1px;  
+            color: white; border: none; padding: 18px 45px;  
+            border-radius: 50px; font-size: 19px; font-weight: bold;  
+            cursor: pointer; width: 100%; max-width: 380px;  
+            text-transform: uppercase; box-shadow: 0 10px 30px rgba(255,140,66,0.5);  
+            transition: all 0.3s; margin: 25px auto; display: block; letter-spacing: 1px;  
         }
 
         .btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,140,66,0.7); }  
         .btn:active:not(:disabled) { transform: translateY(-1px); }  
-        .btn:disabled { background: linear-gradient(135deg, #ccc 0%, #999 100%); cursor: not-allowed; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .btn:disabled { background: linear-gradient(135deg, #ccc 0%, #999 100%); cursor: not-allowed; }
 
         .egg-container { display: none; margin: 30px auto; text-align: center; }  
         .egg-container.show { display: block; }
 
         .easter-egg-big {  
-            font-size: 180px;  
-            animation: shake 0.6s ease-in-out;  
-            cursor: pointer;  
-            display: inline-block;  
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));  
-            transition: all 0.3s;  
-        }
-
-        .easter-egg-big:hover { transform: scale(1.1); filter: drop-shadow(0 15px 30px rgba(0,0,0,0.3)); }
+            font-size: 180px; animation: shake 0.6s ease-in-out;  
+            cursor: pointer; display: inline-block;  
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); transition: all 0.3s;  
+        }  
+        .easter-egg-big:hover { transform: scale(1.1); }
 
         @keyframes shake {  
             0%, 100% { transform: rotate(0deg); }  
@@ -216,10 +168,7 @@
         }
 
         .egg-message {  
-            color: #FF8C42;  
-            font-size: 20px;  
-            font-weight: bold;  
-            margin-top: 20px;  
+            color: #FF8C42; font-size: 20px; font-weight: bold; margin-top: 20px;  
             animation: pulse-text 1.2s ease-in-out infinite;  
         }
 
@@ -238,15 +187,13 @@
 
         .result.win {  
             background: linear-gradient(135deg, #A4D65E 0%, #8BC34A 100%);  
-            color: #fff;  
-            border: 5px solid #FF8C42;  
+            color: #fff; border: 5px solid #FF8C42;  
             box-shadow: 0 10px 40px rgba(164,214,94,0.5);  
         }
 
         .result.lose {  
             background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);  
-            color: white;  
-            box-shadow: 0 10px 40px rgba(233,30,99,0.4);  
+            color: white; box-shadow: 0 10px 40px rgba(233,30,99,0.4);  
         }
 
         .result-icon { font-size: 90px; margin-bottom: 20px; animation: iconPop 0.6s ease-out; }
@@ -264,11 +211,9 @@
         .result-info { background: rgba(255,255,255,0.25); padding: 18px; border-radius: 15px; margin-top: 20px; font-size: 15px; }
 
         .easter-egg {  
-            position: fixed;  
-            font-size: 35px;  
+            position: fixed; font-size: 35px;  
             animation: float 4s ease-in-out infinite;  
             pointer-events: none;  
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));  
         }
 
         @keyframes float {  
@@ -277,58 +222,38 @@
         }
 
         .confetti {  
-            position: fixed;  
-            width: 15px; height: 15px;  
-            animation: fall 4s linear;  
-            border-radius: 50%;  
+            position: fixed; width: 15px; height: 15px;  
+            animation: fall 4s linear; border-radius: 50%;  
         }
 
         @keyframes fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
 
         /* ===== CAROUSEL ===== */  
         .partenaires {  
-            margin: 45px auto 35px;  
-            padding: 30px 25px;  
+            margin: 45px auto 35px; padding: 30px 25px;  
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);  
-            border-radius: 20px;  
-            border: 3px solid #FF8C42;  
+            border-radius: 20px; border: 3px solid #FF8C42;  
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);  
         }
 
         .partenaires-title {  
-            color: #FF8C42;  
-            font-size: 22px;  
-            font-weight: bold;  
-            margin-bottom: 25px;  
-            text-transform: uppercase;  
-            letter-spacing: 1px;  
+            color: #FF8C42; font-size: 22px; font-weight: bold;  
+            margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;  
         }
 
-        .carousel {  
-            position: relative;  
-            overflow: hidden;  
-            height: 120px;  
-            width: 100%;  
-        }
+        .carousel { position: relative; overflow: hidden; height: 120px; width: 100%; }
 
         .carousel::before, .carousel::after {  
-            content: '';  
-            position: absolute;  
-            top: 0; bottom: 0;  
-            width: 60px;  
-            z-index: 2;  
-            pointer-events: none;  
+            content: ''; position: absolute; top: 0; bottom: 0;  
+            width: 60px; z-index: 2; pointer-events: none;  
         }  
         .carousel::before { left: 0; background: linear-gradient(to right, #f0f0f0, transparent); }  
         .carousel::after  { right: 0; background: linear-gradient(to left, #f0f0f0, transparent); }
 
         .carousel-track {  
-            display: flex;  
-            gap: 20px;  
-            width: max-content;  
+            display: flex; gap: 20px; width: max-content;  
             animation: scroll 10s linear infinite;  
-        }
-
+        }  
         .carousel-track:hover { animation-play-state: paused; }
 
         @keyframes scroll {  
@@ -337,61 +262,35 @@
         }
 
         .partner-logo {  
-            flex: 0 0 130px;  
-            height: 110px;  
-            background: white;  
-            border-radius: 18px;  
-            padding: 12px;  
+            flex: 0 0 130px; height: 110px; background: white;  
+            border-radius: 18px; padding: 12px;  
             box-shadow: 0 5px 20px rgba(0,0,0,0.12);  
-            transition: all 0.3s;  
-            cursor: pointer;  
-            display: flex;  
-            align-items: center;  
-            justify-content: center;  
+            transition: all 0.3s; cursor: pointer;  
+            display: flex; align-items: center; justify-content: center;  
             text-decoration: none;  
-        }
-
+        }  
         .partner-logo:hover { transform: scale(1.15) translateY(-5px); box-shadow: 0 10px 30px rgba(255,140,66,0.5); }  
         .partner-logo img { width: 100%; height: 100%; object-fit: contain; }
 
         .logo-fallback {  
-            font-size: 11px;  
-            font-weight: bold;  
-            color: #FF8C42;  
-            text-align: center;  
-            line-height: 1.4;  
-        }  
-        /* ===== FIN CAROUSEL ===== */
-
-        .credits {  
-            margin-top: 45px;  
-            padding: 30px 25px;  
-            background: #2c3e50;  
-            border-radius: 20px;  
-            color: white;  
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);  
+            font-size: 11px; font-weight: bold;  
+            color: #FF8C42; text-align: center; line-height: 1.4;  
         }
 
+        .credits {  
+            margin-top: 45px; padding: 30px 25px;  
+            background: #2c3e50; border-radius: 20px;  
+            color: white; box-shadow: 0 5px 20px rgba(0,0,0,0.2);  
+        }  
         .credits-title { color: #FF8C42; font-weight: bold; margin-bottom: 18px; font-size: 15px; }  
         .credits-content { display: flex; align-items: center; justify-content: center; gap: 18px; }  
         .credits-logo { width: 55px; height: 55px; border-radius: 50%; background: white; padding: 6px; }  
         .credits-link {  
-            background: white;  
-            color: #FF8C42;  
-            padding: 12px 28px;  
-            border-radius: 30px;  
-            text-decoration: none;  
-            font-weight: bold;  
-            transition: all 0.3s;  
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);  
-        }
-
-        .credits-link:hover {  
-            background: #FF8C42;  
-            color: white;  
-            transform: translateY(-2px);  
-            box-shadow: 0 6px 20px rgba(255,140,66,0.5);  
-        }
+            background: white; color: #FF8C42; padding: 12px 28px;  
+            border-radius: 30px; text-decoration: none; font-weight: bold;  
+            transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);  
+        }  
+        .credits-link:hover { background: #FF8C42; color: white; transform: translateY(-2px); }
 
         @media (max-width: 600px) {  
             .container { padding: 30px 20px; }  
@@ -419,14 +318,12 @@
 
                 Du 4 au 19 avril 2026  
             </p>  
-            <p class="gagnant-info">🎯 Tentez votre chance!</p>
-
+            <p class="gagnant-info">🎯 Tentez votre chance!</p>  
             <div class="wheel-container">  
                 <div class="arrow"></div>  
                 <div class="wheel" id="wheel"></div>  
                 <div class="center-circle" id="center-btn">🐰</div>  
-            </div>
-
+            </div>  
             <button class="btn" id="btn-tourner">🎡 TOURNER LA ROUE</button>  
         </div>
 
@@ -447,14 +344,12 @@
             <div class="result-message" id="result-message"></div>  
         </div>
 
-        <!-- ===== CAROUSEL ===== -->  
         <div class="partenaires">  
             <div class="partenaires-title">🏪 Nos Commerçants Partenaires</div>  
             <div class="carousel">  
                 <div class="carousel-track" id="carousel-track"></div>  
             </div>  
-        </div>  
-        <!-- ===== FIN CAROUSEL ===== -->
+        </div>
 
         <div class="credits">  
             <div class="credits-title">💡 Jeu développé par :</div>  
@@ -469,43 +364,7 @@
     </div>
 
 <script>  
-    // ===== PARTENAIRES =====  
-    const PARTENAIRES = [  
-        { nom: 'La Rue Boson',             url: 'https://www.facebook.com/laruebosonvienne/', img: 'https://i.ibb.co/bp5JvDR/304929789-536890498240072-5856750964226344598-n.png', emoji: '🏘️' },  
-        { nom: 'VRtueux',                  url: 'https://vrtueux.fr', img: 'https://i.ibb.co/C5236CJF/Logo-VRtueux.png', emoji: '🥽' },  
-        { nom: 'Scorpub',                  url: 'https://www.instagram.com/scorpubvienne/', img: 'https://i.ibb.co/9m8Dg0fs/434580264-985865803087686-793051233274541739-n.jpg', emoji: '🍺' },  
-        { nom: "L'Artisanale",             url: 'https://www.instagram.com/lartisanale_boutique_createurs', img: 'https://i.ibb.co/1JmfXhqQ/607897525-17976942743954109-4176086413852177532-n.jpg', emoji: '🎨' },  
-        { nom: 'Praline',                  url: 'https://www.instagram.com/praline.patisserie.vienne/', img: 'https://i.ibb.co/39ZHHhRr/560541750-17871617859443196-4631725160350304662-n.jpg', emoji: '🍰' },  
-        { nom: 'Studio Sandy',             url: 'https://www.studio-sandy.fr/', img: 'https://i.ibb.co/k2pTqkmG/banniere-accueil.avif', emoji: '💇' },  
-        { nom: "L'armoire aux coquelicots",url: 'https://www.larmoire-aux-coquelicots.com/', img: 'https://i.ibb.co/SXSgTbd3/t-l-chargement-10.jpg', emoji: '🌸' },  
-        { nom: 'Terra Nostra',             url: 'https://www.terra-nostra-restaurant-vienne.fr/', img: 'https://i.ibb.co/fVMqjMMw/logo-menu.png', emoji: '🍽️' }  
-    ];
-
-    function creerCarousel() {  
-        const track = document.getElementById('carousel-track');  
-        // 2 séries pour boucle infinie  
-        [0, 1].forEach(() => {  
-            PARTENAIRES.forEach(p => {  
-                const a = document.createElement('a');  
-                a.href = p.url;  
-                a.target = '_blank';  
-                a.className = 'partner-logo';
-
-                const img = document.createElement('img');  
-                img.alt = p.nom;  
-                img.src = p.img;  
-                img.onerror = function() {  
-                    this.parentNode.innerHTML = '<span class="logo-fallback">' + p.emoji + '  
-' + p.nom + '</span>';  
-                };
-
-                a.appendChild(img);  
-                track.appendChild(a);  
-            });  
-        });  
-    }
-
-    // ===== ROUE =====  
+    // ===== CONFIG =====  
     const SEGMENTS = [  
         { nom: '🐰', couleur: '#FF8C42' },  
         { nom: '🥚', couleur: '#A4D65E' },  
@@ -513,6 +372,17 @@
         { nom: '🌸', couleur: '#E91E63' },  
         { nom: '🐰', couleur: '#FF8C42' },  
         { nom: '🥚', couleur: '#A4D65E' }  
+    ];
+
+    const PARTENAIRES = [  
+        { nom: 'La Rue Boson',              url: 'https://www.facebook.com/laruebosonvienne/', img: 'https://i.ibb.co/bp5JvDR/304929789-536890498240072-5856750964226344598-n.png', emoji: '🏘️' },  
+        { nom: 'VRtueux',                   url: 'https://vrtueux.fr', img: 'https://i.ibb.co/C5236CJF/Logo-VRtueux.png', emoji: '🥽' },  
+        { nom: 'Scorpub',                   url: 'https://www.instagram.com/scorpubvienne/', img: 'https://i.ibb.co/9m8Dg0fs/434580264-985865803087686-793051233274541739-n.jpg', emoji: '🍺' },  
+        { nom: "L'Artisanale",              url: 'https://www.instagram.com/lartisanale_boutique_createurs', img: 'https://i.ibb.co/1JmfXhqQ/607897525-17976942743954109-4176086413852177532-n.jpg', emoji: '🎨' },  
+        { nom: 'Praline',                   url: 'https://www.instagram.com/praline.patisserie.vienne/', img: 'https://i.ibb.co/39ZHHhRr/560541750-17871617859443196-4631725160350304662-n.jpg', emoji: '🍰' },  
+        { nom: 'Studio Sandy',              url: 'https://www.studio-sandy.fr/', img: 'https://i.ibb.co/k2pTqkmG/banniere-accueil.avif', emoji: '💇' },  
+        { nom: "L'armoire aux coquelicots", url: 'https://www.larmoire-aux-coquelicots.com/', img: 'https://i.ibb.co/SXSgTbd3/t-l-chargement-10.jpg', emoji: '🌸' },  
+        { nom: 'Terra Nostra',              url: 'https://www.terra-nostra-restaurant-vienne.fr/', img: 'https://i.ibb.co/fVMqjMMw/logo-menu.png', emoji: '🍽️' }  
     ];
 
     const PROBABILITE_GAIN = 0.25;  
@@ -527,32 +397,34 @@
     let jeuEnCours = false;  
     let lotsData = null;
 
+    // ===== UTILITAIRES =====  
     function getDateStr() {  
         const d = new Date();  
-        return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;  
+        return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear();  
     }
 
     function getJourSemaine() {  
         return ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'][new Date().getDay()];  
     }
 
-    function estApres18h() { return new Date().getHours() >= 18; }
+    function estApres18h() { return new Date().getHours() >= 18; }  
+    function aJoueAujourdhui() { return localStorage.getItem('boson_date') === getDateStr(); }  
+    function marquerJoue() { localStorage.setItem('boson_date', getDateStr()); }
 
     function sauvegarderGagnant(lot) {  
         localStorage.setItem('boson_gagnant', JSON.stringify({ lot: lot, date: getDateStr() }));  
     }
 
     function recupererGagnant() {  
-        const data = localStorage.getItem('boson_gagnant');  
-        if (!data) return null;  
-        const gagnant = JSON.parse(data);  
-        if (gagnant.date === getDateStr()) return gagnant.lot;  
-        localStorage.removeItem('boson_gagnant');  
+        try {  
+            var data = localStorage.getItem('boson_gagnant');  
+            if (!data) return null;  
+            var g = JSON.parse(data);  
+            if (g.date === getDateStr()) return g.lot;  
+            localStorage.removeItem('boson_gagnant');  
+        } catch(e) {}  
         return null;  
     }
-
-    function aJoueAujourdhui() { return localStorage.getItem('boson_date') === getDateStr(); }  
-    function marquerJoue() { localStorage.setItem('boson_date', getDateStr()); }
 
     function resetBoutons() {  
         jeuEnCours = false;  
@@ -560,55 +432,129 @@
         document.getElementById('center-btn').style.pointerEvents = 'auto';  
     }
 
-    async function chargerLots() {  
-        try {  
-            const response = await fetch('lots.json');  
-            if (!response.ok) throw new Error('HTTP ' + response.status);  
-            lotsData = await response.json();  
-        } catch (error) {  
-            console.warn('Fallback lots:', error);  
-            lotsData = {  
-                config: {  
-                    dateDebut: '04/04/2026',  
-                    dateFin: '19/04/2026',  
-                    modeTest: 'OUI',  
-                    joursOuverts: ['Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],  
-                    heureFinGagnant: '18:00',  
-                    participationParJour: true  
-                },  
-                lots: [  
-                    { id:'lot1', commerce:'VRtueux', nomLot:'Pack découverte', description:'1h de session VR, valable 6 mois', valeur:'49€', dateAttribution: getDateStr(), statut:'Disponible', gagne:false },  
-                    { id:'lot2', commerce:'Praline Pâtisserie', nomLot:"Bon d'achat", description:'Valable 6 mois sur la gamme', valeur:'20€', dateAttribution: getDateStr(), statut:'Disponible', gagne:false }  
-                ]  
-            };  
+    // ===== FALLBACK LOTS =====  
+    function lotsDefaut() {  
+        return {  
+            config: {  
+                dateDebut: '04/04/2026', dateFin: '19/04/2026',  
+                modeTest: 'OUI',  
+                joursOuverts: ['Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],  
+                heureFinGagnant: '18:00', participationParJour: true  
+            },  
+            lots: [  
+                { id:'lot1', commerce:'VRtueux', nomLot:'Pack découverte', description:'1h de session VR, valable 6 mois', valeur:'49€', dateAttribution: getDateStr(), statut:'Disponible', gagne:false },  
+                { id:'lot2', commerce:'Praline Pâtisserie', nomLot:"Bon d'achat", description:'Valable 6 mois sur la gamme', valeur:'20€', dateAttribution: getDateStr(), statut:'Disponible', gagne:false }  
+            ]  
+        };  
+    }
+
+    // ===== CHARGEMENT LOTS (non bloquant) =====  
+    function chargerLots() {  
+        fetch('lots.json')  
+            .then(function(r) {  
+                if (!r.ok) throw new Error('HTTP ' + r.status);  
+                return r.json();  
+            })  
+            .then(function(data) {  
+                lotsData = data;  
+                console.log('✅ lots.json chargé', lotsData);  
+            })  
+            .catch(function(err) {  
+                console.warn('⚠️ Fallback lots:', err);  
+                lotsData = lotsDefaut();  
+            });  
+    }
+
+    // ===== CAROUSEL =====  
+    function creerCarousel() {  
+        var track = document.getElementById('carousel-track');  
+        if (!track) return;  
+        [0,1].forEach(function() {  
+            PARTENAIRES.forEach(function(p) {  
+                var a = document.createElement('a');  
+                a.href = p.url;  
+                a.target = '_blank';  
+                a.className = 'partner-logo';  
+                var img = document.createElement('img');  
+                img.alt = p.nom;  
+                img.src = p.img;  
+                img.onerror = function() {  
+                    a.innerHTML = '<span class="logo-fallback">' + p.emoji + '  
+' + p.nom + '</span>';  
+                };  
+                a.appendChild(img);  
+                track.appendChild(a);  
+            });  
+        });  
+    }
+
+    // ===== ROUE =====  
+    function creerRoue() {  
+        var wheel = document.getElementById('wheel');  
+        if (!wheel) { console.error('❌ #wheel introuvable'); return; }  
+        wheel.innerHTML = '';  
+        var angleParSegment = 360 / SEGMENTS.length;  
+        SEGMENTS.forEach(function(segment, index) {  
+            var div = document.createElement('div');  
+            div.className = 'segment';  
+            div.style.background = segment.couleur;  
+            div.style.transform = 'rotate(' + (index * angleParSegment) + 'deg) skewY(-' + (90 - angleParSegment) + 'deg)';  
+            var span = document.createElement('span');  
+            span.textContent = segment.nom;  
+            span.style.display = 'block';  
+            span.style.transform = 'skewY(' + (90 - angleParSegment) + 'deg) rotate(' + (angleParSegment / 2) + 'deg)';  
+            div.appendChild(span);  
+            wheel.appendChild(div);  
+        });  
+        console.log('✅ Roue créée avec', SEGMENTS.length, 'segments');  
+    }
+
+    // ===== OEUFS DÉCORATIFS =====  
+    function creerOeufsPaques() {  
+        var eggs = ['🐰','🥚','🐣','🌸','🌷'];  
+        for (var i = 0; i < 10; i++) {  
+            var egg = document.createElement('div');  
+            egg.className = 'easter-egg';  
+            egg.textContent = eggs[Math.floor(Math.random() * eggs.length)];  
+            egg.style.left = Math.random() * 95 + '%';  
+            egg.style.top = Math.random() * 95 + '%';  
+            egg.style.animationDelay = Math.random() * 3 + 's';  
+            document.body.appendChild(egg);  
         }  
     }
 
-    window.addEventListener('load', async function() {  
-        creerCarousel();  
-        await chargerLots();
+    // ===== INIT — ROUE EN PREMIER, FETCH EN PARALLÈLE =====  
+    window.addEventListener('load', function() {
 
-        const gagnant = recupererGagnant();  
+        // 🔥 1. Roue et carousel IMMÉDIATEMENT (pas d'await)  
+        creerRoue();  
+        creerCarousel();  
+        creerOeufsPaques();
+
+        // 🔥 2. Fetch lots en parallèle, NON bloquant  
+        chargerLots();
+
+        // 🔥 3. Lot sauvegardé ?  
+        var gagnant = recupererGagnant();  
         if (gagnant) { afficherLotSauvegarde(gagnant); return; }
 
-        creerRoue();
-
+        // 🔥 4. Events  
         document.getElementById('btn-tourner').addEventListener('click', tournerRoue);  
         document.getElementById('center-btn').addEventListener('click', tournerRoue);  
         document.getElementById('easter-egg').addEventListener('click', casserOeuf);
 
-        creerOeufsPaques();
-
+        // 🔥 5. Badge 18h  
         if (estApres18h()) {  
-            const badge = document.getElementById('badge');  
+            var badge = document.getElementById('badge');  
             badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';  
             badge.classList.add('derniere-chance');  
         }  
     });
 
+    // ===== AFFICHER LOT SAUVEGARDÉ =====  
     function afficherLotSauvegarde(lot) {  
         document.getElementById('initial-view').style.display = 'none';  
-        const result = document.getElementById('result');  
+        var result = document.getElementById('result');  
         result.className = 'result show win';  
         document.getElementById('result-icon').textContent = '🎉';  
         document.getElementById('result-title').textContent = 'VOUS AVEZ GAGNÉ !';  
@@ -619,67 +565,27 @@
         creerConfetti();  
     }
 
-    function creerRoue() {  
-        const wheel = document.getElementById('wheel');  
-        wheel.innerHTML = '';  
-        const angleParSegment = 360 / SEGMENTS.length;
-
-        SEGMENTS.forEach((segment, index) => {  
-            const segmentDiv = document.createElement('div');  
-            segmentDiv.className = 'segment';  
-            segmentDiv.style.background = segment.couleur;
-
-            const angle = index * angleParSegment;  
-            segmentDiv.style.transform = `rotate(${angle}deg) skewY(-${90 - angleParSegment}deg)`;
-
-            const content = document.createElement('span');  
-            content.textContent = segment.nom;  
-            content.style.display = 'block';  
-            content.style.transform = `skewY(${90 - angleParSegment}deg) rotate(${angleParSegment / 2}deg)`;
-
-            segmentDiv.appendChild(content);  
-            wheel.appendChild(segmentDiv);  
-        });  
-    }
-
-    function creerOeufsPaques() {  
-        const eggs = ['🐰','🥚','🐣','🌸','🌷'];  
-        for (let i = 0; i < 10; i++) {  
-            const egg = document.createElement('div');  
-            egg.className = 'easter-egg';  
-            egg.textContent = eggs[Math.floor(Math.random() * eggs.length)];  
-            egg.style.left = Math.random() * 95 + '%';  
-            egg.style.top = Math.random() * 95 + '%';  
-            egg.style.animationDelay = Math.random() * 3 + 's';  
-            document.body.appendChild(egg);  
-        }  
-    }
-
+    // ===== TOURNER =====  
     function tournerRoue() {  
-        if (jeuEnCours) return;
-
+        if (jeuEnCours) return;  
         if (estApres18h()) {  
-            const badge = document.getElementById('badge');  
+            var badge = document.getElementById('badge');  
             badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';  
             badge.classList.add('derniere-chance');  
-        }
-
+        }  
         jeuEnCours = true;  
         document.getElementById('btn-tourner').disabled = true;  
-        document.getElementById('center-btn').style.pointerEvents = 'none';
-
-        const wheel = document.getElementById('wheel');  
-        const angleTotal = (5 * 360) + Math.random() * 360;  
-        wheel.style.transform = `rotate(${angleTotal}deg)`;
-
+        document.getElementById('center-btn').style.pointerEvents = 'none';  
+        var wheel = document.getElementById('wheel');  
+        var angleTotal = (5 * 360) + Math.random() * 360;  
+        wheel.style.transform = 'rotate(' + angleTotal + 'deg)';  
         setTimeout(jouer, 5000);  
     }
 
+    // ===== JOUER =====  
     function jouer() {  
-        if (!lotsData || !lotsData.lots) {  
-            afficherResultat({ success: false, message: '😢 Erreur chargement des lots.' });  
-            resetBoutons(); return;  
-        }
+        // Si lots pas encore chargés → fallback  
+        if (!lotsData) { lotsData = lotsDefaut(); }
 
         if (aJoueAujourdhui()) {  
             afficherResultat({ success: false, message: "Déjà participé aujourd'hui ! Revenez demain 🌅" });  
@@ -687,15 +593,15 @@
         }
 
         if (lotsData.config.modeTest !== 'OUI') {  
-            const jourSemaine = getJourSemaine();  
-            if (!lotsData.config.joursOuverts.includes(jourSemaine)) {  
+            var jour = getJourSemaine();  
+            if (lotsData.config.joursOuverts.indexOf(jour) === -1) {  
                 afficherResultat({ success: false, message: "📅 Revenez un jour d'ouverture !" });  
                 resetBoutons(); return;  
             }  
         }
 
-        const dateStr = getDateStr();  
-        const lotsDisponibles = lotsData.lots.filter(lot => lot.statut === 'Disponible' && !lot.gagne);
+        var dateStr = getDateStr();  
+        var lotsDisponibles = lotsData.lots.filter(function(l) { return l.statut === 'Disponible' && !l.gagne; });
 
         if (lotsDisponibles.length === 0) {  
             marquerJoue();  
@@ -703,36 +609,30 @@
             resetBoutons(); return;  
         }
 
-        let lotsDuJour = lotsDisponibles.filter(lot => lot.dateAttribution === dateStr);  
+        var lotsDuJour = lotsDisponibles.filter(function(l) { return l.dateAttribution === dateStr; });  
         if (lotsDuJour.length === 0) lotsDuJour = lotsDisponibles;
 
-        let gagner = false;
-
+        var gagner = false;  
         if (!estApres18h()) {  
             gagner = Math.random() < PROBABILITE_GAIN;  
         } else {  
-            const lotPasDonneAujourdhui = !localStorage.getItem('lot_donne_' + dateStr);  
-            if (lotPasDonneAujourdhui) {  
+            var cle = 'lot_donne_' + dateStr;  
+            if (!localStorage.getItem(cle)) {  
                 gagner = true;  
-                localStorage.setItem('lot_donne_' + dateStr, 'true');  
+                localStorage.setItem(cle, 'true');  
             } else {  
                 gagner = Math.random() < PROBABILITE_GAIN;  
             }  
         }
 
         if (gagner) {  
-            const lot = lotsDuJour[Math.floor(Math.random() * lotsDuJour.length)];  
+            var lot = lotsDuJour[Math.floor(Math.random() * lotsDuJour.length)];  
             lot.gagne = true;  
             marquerJoue();  
             sauvegarderGagnant(lot);  
             document.getElementById('initial-view').style.display = 'none';  
             document.getElementById('egg-container').classList.add('show');  
-            resultatEnAttente = {  
-                success: true, winner: true,  
-                commerce: lot.commerce,  
-                nomLot: lot.nomLot,  
-                description: lot.description  
-            };  
+            resultatEnAttente = { success: true, winner: true, commerce: lot.commerce, nomLot: lot.nomLot, description: lot.description };  
         } else {  
             marquerJoue();  
             afficherResultat({ success: false, message: MESSAGES_PERDU[Math.floor(Math.random() * MESSAGES_PERDU.length)] });  
@@ -740,18 +640,20 @@
         }  
     }
 
+    // ===== CASSER L'OEUF =====  
     function casserOeuf() {  
-        const egg = document.getElementById('easter-egg');  
-        const eggContainer = document.getElementById('egg-container');  
+        var egg = document.getElementById('easter-egg');  
+        var eggContainer = document.getElementById('egg-container');  
         egg.classList.add('egg-crack');  
-        setTimeout(() => {  
+        setTimeout(function() {  
             eggContainer.style.display = 'none';  
             afficherResultat(resultatEnAttente);  
         }, 800);  
     }
 
+    // ===== AFFICHER RÉSULTAT =====  
     function afficherResultat(data) {  
-        const result = document.getElementById('result');  
+        var result = document.getElementById('result');  
         if (data && data.success && data.winner) {  
             result.className = 'result show win';  
             document.getElementById('result-icon').textContent = '🎉';  
@@ -770,19 +672,22 @@
         }  
     }
 
+    // ===== CONFETTIS =====  
     function creerConfetti() {  
-        const colors = ['#FF8C42','#A4D65E','#00BCD4','#E91E63','#FFD700','#9C27B0'];  
-        for (let i = 0; i < 80; i++) {  
-            setTimeout(() => {  
-                const c = document.createElement('div');  
-                c.className = 'confetti';  
-                c.style.left = Math.random() * 100 + '%';  
-                c.style.top = '-20px';  
-                c.style.background = colors[Math.floor(Math.random() * colors.length)];  
-                c.style.animationDelay = Math.random() * 0.5 + 's';  
-                document.body.appendChild(c);  
-                setTimeout(() => c.remove(), 4500);  
-            }, i * 30);  
+        var colors = ['#FF8C42','#A4D65E','#00BCD4','#E91E63','#FFD700','#9C27B0'];  
+        for (var i = 0; i < 80; i++) {  
+            (function(i) {  
+                setTimeout(function() {  
+                    var c = document.createElement('div');  
+                    c.className = 'confetti';  
+                    c.style.left = Math.random() * 100 + '%';  
+                    c.style.top = '-20px';  
+                    c.style.background = colors[Math.floor(Math.random() * colors.length)];  
+                    c.style.animationDelay = Math.random() * 0.5 + 's';  
+                    document.body.appendChild(c);  
+                    setTimeout(function() { c.remove(); }, 4500);  
+                }, i * 30);  
+            })(i);  
         }  
     }  
 </script>  
