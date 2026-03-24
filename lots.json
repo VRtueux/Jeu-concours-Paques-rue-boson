@@ -14,6 +14,7 @@
       "nomLot": "Pack découverte",  
       "description": "1h de session, accès à tous les équipements et jeux, valable 6 mois",  
       "valeur": "49€",  
+      "urlCommerce": "https://vrtueux.fr",  
       "dateAttribution": "04/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
@@ -24,6 +25,7 @@
       "nomLot": "Bon d'achat",  
       "description": "Valable 6 mois sur l'ensemble de la gamme",  
       "valeur": "20€",  
+      "urlCommerce": "https://www.instagram.com/praline.patisserie.vienne/",  
       "dateAttribution": "06/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
@@ -34,6 +36,7 @@
       "nomLot": "Atelier découverte : temps d'un après midi",  
       "description": "Atelier vitrail tiffany, durée 4h chez Vitrail Ste Colombe",  
       "valeur": "60€",  
+      "urlCommerce": "https://www.instagram.com/lartisanale_boutique_createurs",  
       "dateAttribution": "08/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
@@ -44,6 +47,7 @@
       "nomLot": "1L de bière",  
       "description": "Santé !",  
       "valeur": "",  
+      "urlCommerce": "https://www.instagram.com/scorpubvienne/",  
       "dateAttribution": "09/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
@@ -54,6 +58,7 @@
       "nomLot": "1 pose de vernis semi permanent",  
       "description": "1 pose de vernis semi permanent sur ongles naturels",  
       "valeur": "40€",  
+      "urlCommerce": "",  
       "dateAttribution": "11/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
@@ -64,6 +69,7 @@
       "nomLot": "Bon d'achat magasin",  
       "description": "Valable 6 mois sur l'ensemble du magasin",  
       "valeur": "",  
+      "urlCommerce": "https://www.instagram.com/lartisanale_boutique_createurs",  
       "dateAttribution": "13/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
@@ -74,6 +80,7 @@
       "nomLot": "1 brush femme et 1 coupe homme",  
       "description": "Valable 3 mois",  
       "valeur": "60€",  
+      "urlCommerce": "https://www.studio-sandy.fr/",  
       "dateAttribution": "15/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
@@ -84,6 +91,7 @@
       "nomLot": "1 serviette ronde",  
       "description": "1 serviette de plage ronde à choisir dans une sélection proposée, microfibre boulochée, 1,5m de diamètre",  
       "valeur": "38€",  
+      "urlCommerce": "",  
       "dateAttribution": "16/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
@@ -94,6 +102,7 @@
       "nomLot": "Bon d'achat",  
       "description": "Valable 3 mois",  
       "valeur": "50€",  
+      "urlCommerce": "https://www.larmoire-aux-coquelicots.com/",  
       "dateAttribution": "18/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
@@ -104,6 +113,7 @@
       "nomLot": "Vin : Marqués de Cáceres, Crianza 2022, Rioja",  
       "description": "Rouge aux arômes de fruits noirs avec une touche de réglisse et d'épices. Tanins soyeux, belle fraîcheur. 14% vol. / 75cl.",  
       "valeur": "19€",  
+      "urlCommerce": "https://www.terra-nostra-restaurant-vienne.fr/",  
       "dateAttribution": "19/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
