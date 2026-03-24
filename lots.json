@@ -28,9 +28,9 @@
     {  
       "id": "lot2",  
       "commerce": "L'Artisanale Boutique de Créateurs",  
-      "nomLot": "Atelier découverte",  
+      "nomLot": "Atelier découverte : temps d'un après midi",  
       "description": "Atelier vitrail tiffany, durée 4h chez Vitrail Ste Colombe",  
-      "valeur": "",  
+      "valeur": "60€",  
       "dateAttribution": "07/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
@@ -70,10 +70,30 @@
       "commerce": "Studio Sandy",  
       "nomLot": "1 brush femme et 1 coupe homme",  
       "description": "Valable 3 mois",  
+      "valeur": "60€",  
+      "dateAttribution": "18/04/2026",  
+      "statut": "Disponible",  
+      "gagne": false  
+    } 
+        {  
+      "id": "lot7",  
+      "commerce": "L'armoire aux coquelicots",  
+      "nomLot": "Bon d'achat",  
+      "description": "Valable 3 mois",  
       "valeur": "50€",  
       "dateAttribution": "18/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
-    }  
+    } 
+            {  
+      "id": "lot8",  
+      "commerce": "Terra Nostra",  
+      "nomLot": "Vin : Marqués de Cáceres, Crianza 2022, Rioja",  
+      "description": "Rouge aux arômes de fruits noirs avec une touche de réglisse et d'épices. En bouche, c'est souple et rond, avec des tanins soyeux et une belle fraîcheur. Finale longue et fruitée. 14% vol. / 75cl.",  
+      "valeur": "19€",  
+      "dateAttribution": "18/04/2026",  
+      "statut": "Disponible",  
+      "gagne": false  
+    } 
   ]  
 }  
