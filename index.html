@@ -1,561 +1,633 @@
-<!DOCTYPE html>      
-<html lang="fr">      
-<head>      
-    <meta charset="UTF-8">      
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">      
-    <title>Jeu Concours Pâques - Le quartier Boson s'Anime</title>      
-    <style>      
-        * { margin: 0; padding: 0; box-sizing: border-box; }      
-              
-        body {      
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;      
-            background: linear-gradient(135deg, #FF8C42 0%, #A4D65E 50%, #00BCD4 100%);      
-            min-height: 100vh;      
-            padding: 15px;      
-            overflow-y: auto;      
-        }      
-              
-        .container {      
-            background: white;      
-            border-radius: 30px;      
-            box-shadow: 0 25px 70px rgba(0,0,0,0.3);      
-            max-width: 650px;      
-            width: 100%;      
-            margin: 20px auto;      
-            padding: 40px 30px;      
-            text-align: center;      
-            position: relative;      
-        }      
-              
-        .container::before {      
-            content: '';      
-            position: absolute;      
-            top: 0; left: 0; right: 0;      
-            height: 8px;      
-            background: linear-gradient(90deg, #FF8C42 0%, #A4D65E 50%, #00BCD4 100%);      
-            border-radius: 30px 30px 0 0;      
-        }      
-              
-        .logo { width: 220px; margin: 0 auto 20px; display: block; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }      
-              
-        .badge {      
-            background: linear-gradient(135deg, #FF8C42 0%, #FFA726 100%);      
-            color: white; padding: 12px 30px; border-radius: 30px;      
-            font-size: 15px; font-weight: bold; margin-bottom: 20px;      
-            display: inline-block; transition: all 0.3s;      
-            box-shadow: 0 4px 15px rgba(255,140,66,0.3);      
-        }      
-              
-        .badge.derniere-chance {      
-            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);      
-            animation: pulse 1.5s ease-in-out infinite;      
-        }      
-              
-        @keyframes pulse {      
-            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(233,30,99,0.4); }      
-            50% { transform: scale(1.05); box-shadow: 0 6px 25px rgba(233,30,99,0.6); }      
-        }      
-              
-        h1 { color: #FF8C42; font-size: 36px; margin-bottom: 10px; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }      
-        .subtitle { color: #666; font-size: 17px; margin-bottom: 25px; font-weight: 500; }      
-        .intro-text { color: #555; font-size: 16px; margin-bottom: 25px; line-height: 1.6; }      
-        .gagnant-info { color: #FF8C42; font-weight: bold; margin-top: 10px; font-size: 18px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }      
-              
-        .wheel-container { position: relative; width: 380px; height: 380px; margin: 30px auto; }      
-              
-        .wheel {      
-            width: 100%; height: 100%;      
-            border-radius: 50%; position: relative; overflow: visible;      
-            box-shadow: 0 0 50px rgba(255,140,66,0.6), 0 10px 40px rgba(0,0,0,0.2);      
-            border: 6px solid #FF8C42;      
-            transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);      
-            background: white;      
-        }      
-              
-        .segment {      
-            position: absolute; width: 50%; height: 50%;      
-            transform-origin: 100% 100%;      
-            display: flex; align-items: flex-start; justify-content: flex-end;      
-            padding: 20px 30px; font-weight: bold; color: white;      
-            text-shadow: 0 3px 8px rgba(0,0,0,0.4); font-size: 60px;      
-            clip-path: polygon(0 0, 100% 0, 100% 100%); transition: all 0.3s;      
-        }      
-              
-        .segment::before {      
-            content: ''; position: absolute; inset: 0;      
-            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.1) 100%);      
-            clip-path: polygon(0 0, 100% 0, 100% 100%);      
-        }      
-              
-        .arrow {      
-            position: absolute; top: -25px; left: 50%;      
-            transform: translateX(-50%);      
-            width: 0; height: 0;      
-            border-left: 25px solid transparent;      
-            border-right: 25px solid transparent;      
-            border-top: 50px solid #FFD700;      
-            filter: drop-shadow(0 4px 12px rgba(255,215,0,0.8));      
-            z-index: 10; animation: arrow-bounce 1.5s ease-in-out infinite;      
-        }      
-              
-        @keyframes arrow-bounce {      
-            0%, 100% { transform: translateX(-50%) translateY(0); }      
-            50% { transform: translateX(-50%) translateY(-8px); }      
-        }      
-              
-        .center-circle {      
-            position: absolute; top: 50%; left: 50%;      
-            transform: translate(-50%, -50%);      
-            width: 100px; height: 100px;      
-            background: linear-gradient(135deg, #FF8C42 0%, #FFA726 100%);      
-            border-radius: 50%; border: 5px solid white;      
-            box-shadow: 0 0 40px rgba(255,140,66,0.7), 0 5px 20px rgba(0,0,0,0.3);      
-            z-index: 5; display: flex; align-items: center; justify-content: center;      
-            font-size: 45px; cursor: pointer; transition: all 0.3s;      
-        }      
-              
-        .center-circle:hover { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 50px rgba(255,140,66,0.9), 0 8px 30px rgba(0,0,0,0.4); }      
-        .center-circle:active { transform: translate(-50%, -50%) scale(0.95); }      
-              
-        .btn {      
-            background: linear-gradient(135deg, #FF8C42 0%, #FF6F00 100%);      
-            color: white; border: none; padding: 18px 45px;      
-            border-radius: 50px; font-size: 19px; font-weight: bold;      
-            cursor: pointer; width: 100%; max-width: 380px;      
-            text-transform: uppercase; box-shadow: 0 10px 30px rgba(255,140,66,0.5);      
-            transition: all 0.3s; margin: 25px auto; display: block; letter-spacing: 1px;      
-        }      
-              
-        .btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,140,66,0.7); }      
-        .btn:active:not(:disabled) { transform: translateY(-1px); }      
-        .btn:disabled { background: linear-gradient(135deg, #ccc 0%, #999 100%); cursor: not-allowed; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }      
-              
-        .egg-container { display: none; margin: 30px auto; text-align: center; }      
-        .egg-container.show { display: block; }      
-              
-        .easter-egg-big {      
-            font-size: 180px; animation: shake 0.6s ease-in-out;      
-            cursor: pointer; display: inline-block;      
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); transition: all 0.3s;      
-        }      
-        .easter-egg-big:hover { transform: scale(1.1); filter: drop-shadow(0 15px 30px rgba(0,0,0,0.3)); }      
-              
-        @keyframes shake {      
-            0%, 100% { transform: rotate(0deg); }      
-            10%, 30%, 50%, 70%, 90% { transform: rotate(-8deg); }      
-            20%, 40%, 60%, 80% { transform: rotate(8deg); }      
-        }      
-              
-        .egg-crack { animation: crack 0.8s ease-out; }      
-              
-        @keyframes crack {      
-            0% { transform: scale(1) rotate(0deg); }      
-            25% { transform: scale(1.1) rotate(5deg); }      
-            50% { transform: scale(1.3) rotate(-5deg); }      
-            75% { transform: scale(0.8) rotate(90deg); opacity: 0.5; }      
-            100% { transform: scale(0) rotate(180deg); opacity: 0; }      
-        }      
-              
-        .egg-message {      
-            color: #FF8C42; font-size: 20px; font-weight: bold; margin-top: 20px;      
-            animation: pulse-text 1.2s ease-in-out infinite;      
-        }      
-              
-        @keyframes pulse-text {      
-            0%, 100% { opacity: 1; transform: scale(1); }      
-            50% { opacity: 0.7; transform: scale(1.05); }      
-        }      
-              
-        .result { margin: 25px auto 0; padding: 35px 30px; border-radius: 25px; display: none; }      
-        .result.show { display: block; animation: slideIn 0.5s ease-out; }      
-              
-        @keyframes slideIn {      
-            from { opacity: 0; transform: translateY(20px); }      
-            to { opacity: 1; transform: translateY(0); }      
-        }      
-              
-        .result.win {      
-            background: linear-gradient(135deg, #A4D65E 0%, #8BC34A 100%);      
-            color: #fff; border: 5px solid #FF8C42;      
-            box-shadow: 0 10px 40px rgba(164,214,94,0.5);      
-        }      
-              
-        .result.lose {      
-            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);      
-            color: white; box-shadow: 0 10px 40px rgba(233,30,99,0.4);      
-        }      
-              
-        .result-icon { font-size: 90px; margin-bottom: 20px; animation: iconPop 0.6s ease-out; }      
-              
-        @keyframes iconPop {      
-            0% { transform: scale(0); }      
-            50% { transform: scale(1.2); }      
-            100% { transform: scale(1); }      
-        }      
-              
-        .result-title { font-size: 30px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }      
-        .result-commerce { font-size: 22px; font-weight: bold; margin: 20px 0; color: #FF8C42; background: white; padding: 12px; border-radius: 15px; }      
-        .result-lot { font-size: 19px; margin: 12px 0; font-weight: 600; }      
-        .result-description { font-size: 16px; margin: 18px 0; opacity: 0.95; line-height: 1.5; }      
-        .result-valeur { font-size: 15px; font-weight: bold; margin: 8px 0; opacity: 0.95; }      
-        .result-info { background: rgba(255,255,255,0.25); padding: 18px; border-radius: 15px; margin-top: 20px; font-size: 15px; }    
+<!DOCTYPE html>        
+<html lang="fr">        
+<head>        
+    <meta charset="UTF-8">        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+    <title>Jeu Concours Pâques - Le quartier Boson s'Anime</title>        
+    <style>        
+        * { margin: 0; padding: 0; box-sizing: border-box; }        
+                
+        body {        
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;        
+            background: linear-gradient(135deg, #FF8C42 0%, #A4D65E 50%, #00BCD4 100%);        
+            min-height: 100vh;        
+            padding: 15px;        
+            overflow-y: auto;        
+        }        
+                
+        .container {        
+            background: white;        
+            border-radius: 30px;        
+            box-shadow: 0 25px 70px rgba(0,0,0,0.3);        
+            max-width: 650px;        
+            width: 100%;        
+            margin: 20px auto;        
+            padding: 40px 30px;        
+            text-align: center;        
+            position: relative;        
+        }        
+                
+        .container::before {        
+            content: '';        
+            position: absolute;        
+            top: 0; left: 0; right: 0;        
+            height: 8px;        
+            background: linear-gradient(90deg, #FF8C42 0%, #A4D65E 50%, #00BCD4 100%);        
+            border-radius: 30px 30px 0 0;        
+        }        
+                
+        .logo { width: 220px; margin: 0 auto 20px; display: block; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }        
+                
+        .badge {        
+            background: linear-gradient(135deg, #FF8C42 0%, #FFA726 100%);        
+            color: white; padding: 12px 30px; border-radius: 30px;        
+            font-size: 15px; font-weight: bold; margin-bottom: 20px;        
+            display: inline-block; transition: all 0.3s;        
+            box-shadow: 0 4px 15px rgba(255,140,66,0.3);        
+        }        
+                
+        .badge.derniere-chance {        
+            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);        
+            animation: pulse 1.5s ease-in-out infinite;        
+        }        
+                
+        @keyframes pulse {        
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(233,30,99,0.4); }        
+            50% { transform: scale(1.05); box-shadow: 0 6px 25px rgba(233,30,99,0.6); }        
+        }        
+                
+        h1 { color: #FF8C42; font-size: 36px; margin-bottom: 10px; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }        
+        .subtitle { color: #666; font-size: 17px; margin-bottom: 25px; font-weight: 500; }        
+        .intro-text { color: #555; font-size: 16px; margin-bottom: 25px; line-height: 1.6; }        
+        .gagnant-info { color: #FF8C42; font-weight: bold; margin-top: 10px; font-size: 18px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }        
+                
+        .wheel-container { position: relative; width: 380px; height: 380px; margin: 30px auto; }        
+                
+        .wheel {        
+            width: 100%; height: 100%;        
+            border-radius: 50%; position: relative; overflow: visible;        
+            box-shadow: 0 0 50px rgba(255,140,66,0.6), 0 10px 40px rgba(0,0,0,0.2);        
+            border: 6px solid #FF8C42;        
+            transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);        
+            background: white;        
+        }        
+                
+        .segment {        
+            position: absolute; width: 50%; height: 50%;        
+            transform-origin: 100% 100%;        
+            display: flex; align-items: flex-start; justify-content: flex-end;        
+            padding: 20px 30px; font-weight: bold; color: white;        
+            text-shadow: 0 3px 8px rgba(0,0,0,0.4); font-size: 60px;        
+            clip-path: polygon(0 0, 100% 0, 100% 100%); transition: all 0.3s;        
+        }        
+                
+        .segment::before {        
+            content: ''; position: absolute; inset: 0;        
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.1) 100%);        
+            clip-path: polygon(0 0, 100% 0, 100% 100%);        
+        }        
+                
+        .arrow {        
+            position: absolute; top: -25px; left: 50%;        
+            transform: translateX(-50%);        
+            width: 0; height: 0;        
+            border-left: 25px solid transparent;        
+            border-right: 25px solid transparent;        
+            border-top: 50px solid #FFD700;        
+            filter: drop-shadow(0 4px 12px rgba(255,215,0,0.8));        
+            z-index: 10; animation: arrow-bounce 1.5s ease-in-out infinite;        
+        }        
+                
+        @keyframes arrow-bounce {        
+            0%, 100% { transform: translateX(-50%) translateY(0); }        
+            50% { transform: translateX(-50%) translateY(-8px); }        
+        }        
+                
+        .center-circle {        
+            position: absolute; top: 50%; left: 50%;        
+            transform: translate(-50%, -50%);        
+            width: 100px; height: 100px;        
+            background: linear-gradient(135deg, #FF8C42 0%, #FFA726 100%);        
+            border-radius: 50%; border: 5px solid white;        
+            box-shadow: 0 0 40px rgba(255,140,66,0.7), 0 5px 20px rgba(0,0,0,0.3);        
+            z-index: 5; display: flex; align-items: center; justify-content: center;        
+            font-size: 45px; cursor: pointer; transition: all 0.3s;        
+        }        
+                
+        .center-circle:hover { transform: translate(-50%, -50%) scale(1.1); }        
+        .center-circle:active { transform: translate(-50%, -50%) scale(0.95); }        
+                
+        .btn {        
+            background: linear-gradient(135deg, #FF8C42 0%, #FF6F00 100%);        
+            color: white; border: none; padding: 18px 45px;        
+            border-radius: 50px; font-size: 19px; font-weight: bold;        
+            cursor: pointer; width: 100%; max-width: 380px;        
+            text-transform: uppercase; box-shadow: 0 10px 30px rgba(255,140,66,0.5);        
+            transition: all 0.3s; margin: 25px auto; display: block; letter-spacing: 1px;        
+        }        
+                
+        .btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,140,66,0.7); }        
+        .btn:active:not(:disabled) { transform: translateY(-1px); }        
+        .btn:disabled { background: linear-gradient(135deg, #ccc 0%, #999 100%); cursor: not-allowed; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }        
+                
+        .egg-container { display: none; margin: 30px auto; text-align: center; }        
+        .egg-container.show { display: block; }        
+                
+        .easter-egg-big {        
+            font-size: 180px; animation: shake 0.6s ease-in-out;        
+            cursor: pointer; display: inline-block;        
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); transition: all 0.3s;        
+        }        
+        .easter-egg-big:hover { transform: scale(1.1); }        
+                
+        @keyframes shake {        
+            0%, 100% { transform: rotate(0deg); }        
+            10%, 30%, 50%, 70%, 90% { transform: rotate(-8deg); }        
+            20%, 40%, 60%, 80% { transform: rotate(8deg); }        
+        }        
+                
+        .egg-crack { animation: crack 0.8s ease-out; }        
+                
+        @keyframes crack {        
+            0% { transform: scale(1) rotate(0deg); }        
+            25% { transform: scale(1.1) rotate(5deg); }        
+            50% { transform: scale(1.3) rotate(-5deg); }        
+            75% { transform: scale(0.8) rotate(90deg); opacity: 0.5; }        
+            100% { transform: scale(0) rotate(180deg); opacity: 0; }        
+        }        
+                
+        .egg-message {        
+            color: #FF8C42; font-size: 20px; font-weight: bold; margin-top: 20px;        
+            animation: pulse-text 1.2s ease-in-out infinite;        
+        }        
+                
+        @keyframes pulse-text {        
+            0%, 100% { opacity: 1; transform: scale(1); }        
+            50% { opacity: 0.7; transform: scale(1.05); }        
+        }        
+                
+        .result { margin: 25px auto 0; padding: 35px 30px; border-radius: 25px; display: none; }        
+        .result.show { display: block; animation: slideIn 0.5s ease-out; }        
+                
+        @keyframes slideIn {        
+            from { opacity: 0; transform: translateY(20px); }        
+            to { opacity: 1; transform: translateY(0); }        
+        }        
+                
+        .result.win {        
+            background: linear-gradient(135deg, #A4D65E 0%, #8BC34A 100%);        
+            color: #fff; border: 5px solid #FF8C42;        
+            box-shadow: 0 10px 40px rgba(164,214,94,0.5);        
+        }        
+                
+        .result.lose {        
+            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);        
+            color: white; box-shadow: 0 10px 40px rgba(233,30,99,0.4);        
+        }        
+                
+        .result-icon { font-size: 90px; margin-bottom: 20px; animation: iconPop 0.6s ease-out; }        
+                
+        @keyframes iconPop {        
+            0% { transform: scale(0); }        
+            50% { transform: scale(1.2); }        
+            100% { transform: scale(1); }        
+        }        
+                
+        .result-title { font-size: 30px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }        
+        .result-commerce { font-size: 22px; font-weight: bold; margin: 20px 0; color: #FF8C42; background: white; padding: 12px; border-radius: 15px; }        
+        .result-lot { font-size: 19px; margin: 12px 0; font-weight: 600; }        
+        .result-description { font-size: 16px; margin: 18px 0; opacity: 0.95; line-height: 1.5; }        
+        .result-valeur { font-size: 15px; font-weight: bold; margin: 8px 0; opacity: 0.95; }        
+        .result-info { background: rgba(255,255,255,0.25); padding: 18px; border-radius: 15px; margin-top: 20px; font-size: 15px; }
 
-        .btn-commerce {      
-            display: inline-block;      
-            margin-top: 20px;      
-            padding: 14px 30px;      
-            background: white;      
-            color: #FF8C42;      
-            border: 3px solid white;      
-            border-radius: 50px;      
-            font-size: 16px;      
-            font-weight: bold;      
-            text-decoration: none;      
-            transition: all 0.3s;      
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);      
-        }      
-        .btn-commerce:hover {      
-            background: #FF8C42;      
-            color: white;      
-            transform: translateY(-2px);      
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);      
-        }      
-              
-        .easter-egg {      
-            position: fixed; font-size: 35px;      
-            animation: float 4s ease-in-out infinite;      
-            pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));      
-        }      
-              
-        @keyframes float {      
-            0%, 100% { transform: translateY(0) rotate(0deg); }      
-            50% { transform: translateY(-25px) rotate(10deg); }      
-        }      
-              
-        .confetti {      
-            position: fixed; width: 15px; height: 15px;      
-            animation: fall 4s linear; border-radius: 50%;      
-        }      
-              
-        @keyframes fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }      
-              
-        /* ===== CAROUSEL ===== */      
-        .partenaires {      
-            margin: 45px auto 35px; padding: 30px 25px;      
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);      
-            border-radius: 20px; border: 3px solid #FF8C42;      
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);      
-        }      
-              
-        .partenaires-title {      
-            color: #FF8C42; font-size: 22px; font-weight: bold;      
-            margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;      
-        }      
-              
-        .carousel { position: relative; height: 120px; overflow: hidden; }    
+        /* ✅ CODE UNIQUE */  
+        .result-code {  
+            background: white;  
+            color: #FF8C42;  
+            font-size: 20px;  
+            font-weight: bold;  
+            letter-spacing: 3px;  
+            padding: 12px 20px;  
+            border-radius: 15px;  
+            margin: 15px 0;  
+            border: 3px dashed #FF8C42;  
+            font-family: monospace;  
+        }
 
-        .carousel-track {      
-            display: flex; gap: 20px;      
-            animation: scroll 10s linear infinite;      
-            width: max-content;      
-        }    
+        .btn-commerce {        
+            display: inline-block;        
+            margin-top: 15px;        
+            padding: 14px 30px;        
+            background: white;        
+            color: #FF8C42;        
+            border: 3px solid white;        
+            border-radius: 50px;        
+            font-size: 16px;        
+            font-weight: bold;        
+            text-decoration: none;        
+            transition: all 0.3s;        
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);        
+        }        
+        .btn-commerce:hover {        
+            background: #FF8C42; color: white;        
+            transform: translateY(-2px);        
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);        
+        }
 
-        .carousel-track:hover { animation-play-state: paused; }    
+        /* ✅ BOUTON TÉLÉCHARGER BON */  
+        .btn-telecharger {  
+            display: inline-block;  
+            margin-top: 12px;  
+            padding: 14px 30px;  
+            background: linear-gradient(135deg, #FFD700 0%, #FFA726 100%);  
+            color: white;  
+            border: none;  
+            border-radius: 50px;  
+            font-size: 16px;  
+            font-weight: bold;  
+            cursor: pointer;  
+            transition: all 0.3s;  
+            box-shadow: 0 4px 15px rgba(255,215,0,0.4);  
+            width: 100%;  
+            max-width: 320px;  
+        }  
+        .btn-telecharger:hover {  
+            transform: translateY(-2px);  
+            box-shadow: 0 8px 25px rgba(255,215,0,0.6);  
+        }  
+                
+        .easter-egg {        
+            position: fixed; font-size: 35px;        
+            animation: float 4s ease-in-out infinite;        
+            pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));        
+        }        
+                
+        @keyframes float {        
+            0%, 100% { transform: translateY(0) rotate(0deg); }        
+            50% { transform: translateY(-25px) rotate(10deg); }        
+        }        
+                
+        .confetti {        
+            position: fixed; width: 15px; height: 15px;        
+            animation: fall 4s linear; border-radius: 50%;        
+        }        
+                
+        @keyframes fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }        
+                
+        /* ===== CAROUSEL ===== */        
+        .partenaires {        
+            margin: 45px auto 35px; padding: 30px 25px;        
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);        
+            border-radius: 20px; border: 3px solid #FF8C42;        
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);        
+        }        
+                
+        .partenaires-title {        
+            color: #FF8C42; font-size: 22px; font-weight: bold;        
+            margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;        
+        }        
+                
+        .carousel { position: relative; height: 120px; overflow: hidden; }
 
-        @keyframes scroll {      
-            0%   { transform: translateX(0); }      
-            100% { transform: translateX(-50%); }      
-        }      
-              
-        .partner-logo {      
-            flex: 0 0 130px; height: 110px; background: white;      
-            border-radius: 18px; padding: 12px;      
-            box-shadow: 0 5px 20px rgba(0,0,0,0.12);      
-            transition: all 0.3s; cursor: pointer;      
-            display: flex; align-items: center; justify-content: center;      
-            text-decoration: none;      
-        }      
-              
-        .partner-logo:hover { transform: scale(1.15) translateY(-5px); box-shadow: 0 10px 30px rgba(255,140,66,0.5); }      
-        .partner-logo img { width: 100%; height: 100%; object-fit: contain; }    
+        .carousel-track {        
+            display: flex; gap: 20px;        
+            animation: scroll 10s linear infinite;        
+            width: max-content;        
+        }
 
-        .logo-fallback { font-size: 11px; font-weight: bold; color: #FF8C42; text-align: center; line-height: 1.4; }      
-        /* ===== FIN CAROUSEL ===== */      
-              
-        .credits {      
-            margin-top: 45px; padding: 30px 25px;      
-            background: #2c3e50; border-radius: 20px;      
-            color: white; box-shadow: 0 5px 20px rgba(0,0,0,0.2);      
-        }      
-              
-        .credits-title { color: #FF8C42; font-weight: bold; margin-bottom: 18px; font-size: 15px; }      
-        .credits-content { display: flex; align-items: center; justify-content: center; gap: 18px; }      
-        .credits-logo { width: 55px; height: 55px; border-radius: 50%; background: white; padding: 6px; }      
-        .credits-link {      
-            background: white; color: #FF8C42; padding: 12px 28px;      
-            border-radius: 30px; text-decoration: none; font-weight: bold;      
-            transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);      
-        }      
-        .credits-link:hover { background: #FF8C42; color: white; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,140,66,0.5); }      
-              
-        @media (max-width: 600px) {      
-            .container { padding: 30px 20px; }      
-            h1 { font-size: 28px; }      
-            .logo { width: 180px; }      
-            .wheel-container { width: 300px; height: 300px; }      
-            .segment { font-size: 45px; padding: 15px 20px; }      
-            .center-circle { width: 80px; height: 80px; font-size: 35px; }      
-            .easter-egg-big { font-size: 140px; }      
-            .btn { font-size: 17px; padding: 16px 35px; }      
-        }      
-    </style>      
-</head>      
-<body>      
-    <div class="container">      
-        <img src="https://i.ibb.co/ynxBRtKH/473765447-1080126973916419-5041563430108422176-n.jpg" alt="La Rue Boson" class="logo">      
-        <div class="badge" id="badge">🐣 Jeu Concours Pâques 2026</div>      
-        <h1>Tournez la Roue !</h1>      
-        <p class="subtitle">La Rue Boson s'anime - Vienne (38)</p>      
-              
-        <div id="initial-view">      
-            <p class="intro-text">      
+        .carousel-track:hover { animation-play-state: paused; }
+
+        @keyframes scroll {        
+            0%   { transform: translateX(0); }        
+            100% { transform: translateX(-50%); }        
+        }        
+                
+        .partner-logo {        
+            flex: 0 0 130px; height: 110px; background: white;        
+            border-radius: 18px; padding: 12px;        
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);        
+            transition: all 0.3s; cursor: pointer;        
+            display: flex; align-items: center; justify-content: center;        
+            text-decoration: none;        
+        }        
+                
+        .partner-logo:hover { transform: scale(1.15) translateY(-5px); box-shadow: 0 10px 30px rgba(255,140,66,0.5); }        
+        .partner-logo img { width: 100%; height: 100%; object-fit: contain; }
+
+        .logo-fallback { font-size: 11px; font-weight: bold; color: #FF8C42; text-align: center; line-height: 1.4; }        
+        /* ===== FIN CAROUSEL ===== */        
+                
+        .credits {        
+            margin-top: 45px; padding: 30px 25px;        
+            background: #2c3e50; border-radius: 20px;        
+            color: white; box-shadow: 0 5px 20px rgba(0,0,0,0.2);        
+        }        
+                
+        .credits-title { color: #FF8C42; font-weight: bold; margin-bottom: 18px; font-size: 15px; }        
+        .credits-content { display: flex; align-items: center; justify-content: center; gap: 18px; }        
+        .credits-logo { width: 55px; height: 55px; border-radius: 50%; background: white; padding: 6px; }        
+        .credits-link {        
+            background: white; color: #FF8C42; padding: 12px 28px;        
+            border-radius: 30px; text-decoration: none; font-weight: bold;        
+            transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);        
+        }        
+        .credits-link:hover { background: #FF8C42; color: white; transform: translateY(-2px); }        
+                
+        @media (max-width: 600px) {        
+            .container { padding: 30px 20px; }        
+            h1 { font-size: 28px; }        
+            .logo { width: 180px; }        
+            .wheel-container { width: 300px; height: 300px; }        
+            .segment { font-size: 45px; padding: 15px 20px; }        
+            .center-circle { width: 80px; height: 80px; font-size: 35px; }        
+            .easter-egg-big { font-size: 140px; }        
+            .btn { font-size: 17px; padding: 16px 35px; }        
+        }        
+    </style>        
+</head>        
+<body>        
+    <div class="container">        
+        <img src="https://i.ibb.co/ynxBRtKH/473765447-1080126973916419-5041563430108422176-n.jpg" alt="La Rue Boson" class="logo">        
+        <div class="badge" id="badge">🐣 Jeu Concours Pâques 2026</div>        
+        <h1>Tournez la Roue !</h1>        
+        <p class="subtitle">La Rue Boson s'anime - Vienne (38)</p>        
+                
+        <div id="initial-view">        
+            <p class="intro-text">        
                 <strong>🎁 Gagnez des lots chez vos commerçants préférés !</strong>
 
-      
-                Du 4 au 19 avril 2026      
-            </p>      
-            <p class="gagnant-info">🎯 Tentez votre chance!</p>      
-                  
-            <div class="wheel-container">      
-                <div class="arrow"></div>      
-                <div class="wheel" id="wheel"></div>      
-                <div class="center-circle" id="center-btn">🐰</div>      
-            </div>      
-                  
-            <button class="btn" id="btn-tourner">🎡 TOURNER LA ROUE</button>      
-        </div>      
-              
-        <div class="egg-container" id="egg-container">      
-            <div class="easter-egg-big" id="easter-egg">🥚</div>      
-            <div class="egg-message">👆 Cliquez sur l'œuf !</div>      
-        </div>      
-              
-        <div class="result" id="result">      
-            <div class="result-icon" id="result-icon"></div>      
-            <div class="result-title" id="result-title"></div>      
-            <div id="lot-details" style="display: none;">      
-                <div class="result-commerce" id="result-commerce"></div>      
-                <div class="result-lot" id="result-lot"></div>      
-                <div class="result-description" id="result-description"></div>      
-                <div class="result-valeur" id="result-valeur"></div>      
-                <div class="result-info">      
-                    📍 Rendez-vous chez le commerçant pour récupérer votre lot !      
-                </div>      
-                <a id="btn-commerce" href="#" target="_blank" class="btn-commerce" style="display:none;">      
-                    🌐 Visiter le site du commerçant      
-                </a>      
-            </div>      
-            <div class="result-message" id="result-message"></div>      
-        </div>      
-              
-        <!-- ===== CAROUSEL ===== -->      
-        <div class="partenaires">      
-            <div class="partenaires-title">🏪 Nos Commerçants Partenaires</div>      
-            <div class="carousel">      
-                <div class="carousel-track">      
-                    <!-- SÉRIE 1 -->      
-                    <a href="https://www.facebook.com/laruebosonvienne/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/bp5JvDR/304929789-536890498240072-5856750964226344598-n.png" alt="La Rue Boson">      
-                    </a>      
-                    <a href="https://vrtueux.fr" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/C5236CJF/Logo-VRtueux.png" alt="VRtueux">      
-                    </a>      
-                    <a href="https://www.instagram.com/scorpubvienne/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/9m8Dg0fs/434580264-985865803087686-793051233274541739-n.jpg" alt="Scorpub">      
-                    </a>      
-                    <a href="https://www.instagram.com/lartisanale_boutique_createurs" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/1JmfXhqQ/607897525-17976942743954109-4176086413852177532-n.jpg" alt="L'Artisanale">      
-                    </a>      
-                    <a href="https://www.instagram.com/praline.patisserie.vienne/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/39ZHHhRr/560541750-17871617859443196-4631725160350304662-n.jpg" alt="Praline">      
-                    </a>      
-                    <a href="https://www.studio-sandy.fr/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/RkSLRf0j/Whats-App-Image-2026-03-24-at-16-34-55-2.jpg" alt="Studio Sandy">      
-                    </a>      
-                    <a href="https://www.larmoire-aux-coquelicots.com/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/SXSgTbd3/t-l-chargement-10.jpg" alt="L'armoire aux coquelicots">      
-                    </a>      
-                    <a href="https://www.terra-nostra-restaurant-vienne.fr/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/fVMqjMMw/logo-menu.png" alt="Terra Nostra">      
-                    </a>  
-                    <a href="https://www.linstantbytam.com/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/yFPpKs7J/Whats-App-Image-2026-03-24-at-16-34-55.jpg" alt="L'instant By Tam">      
-                    </a>  
-                    <a href="https://www.boutique-lescoupines.com/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=2546767081653530944" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/k2Ykvwkv/Whats-App-Image-2026-03-24-at-16-34-55-1.jpg" alt="Les Coupines">      
-                    </a>  
+        
+                Du 4 au 19 avril 2026        
+            </p>        
+            <p class="gagnant-info">🎯 Tentez votre chance!</p>        
                     
-                    <!-- SÉRIE 2 identique -->      
-                    <a href="https://www.facebook.com/laruebosonvienne/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/bp5JvDR/304929789-536890498240072-5856750964226344598-n.png" alt="La Rue Boson">      
-                    </a>      
-                    <a href="https://vrtueux.fr" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/C5236CJF/Logo-VRtueux.png" alt="VRtueux">      
-                    </a>      
-                    <a href="https://www.instagram.com/scorpubvienne/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/9m8Dg0fs/434580264-985865803087686-793051233274541739-n.jpg" alt="Scorpub">      
-                    </a>      
-                    <a href="https://www.instagram.com/lartisanale_boutique_createurs" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/1JmfXhqQ/607897525-17976942743954109-4176086413852177532-n.jpg" alt="L'Artisanale">      
-                    </a>      
-                    <a href="https://www.instagram.com/praline.patisserie.vienne/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/39ZHHhRr/560541750-17871617859443196-4631725160350304662-n.jpg" alt="Praline">      
-                    </a>      
-                    <a href="https://www.studio-sandy.fr/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/RkSLRf0j/Whats-App-Image-2026-03-24-at-16-34-55-2.jpg" alt="Studio Sandy">      
-                    </a>      
-                    <a href="https://www.larmoire-aux-coquelicots.com/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/SXSgTbd3/t-l-chargement-10.jpg" alt="L'armoire aux coquelicots">      
-                    </a>      
-                    <a href="https://www.terra-nostra-restaurant-vienne.fr/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/fVMqjMMw/logo-menu.png" alt="Terra Nostra">      
+            <div class="wheel-container">        
+                <div class="arrow"></div>        
+                <div class="wheel" id="wheel"></div>        
+                <div class="center-circle" id="center-btn">🐰</div>        
+            </div>        
+                    
+            <button class="btn" id="btn-tourner">🎡 TOURNER LA ROUE</button>        
+        </div>        
+                
+        <div class="egg-container" id="egg-container">        
+            <div class="easter-egg-big" id="easter-egg">🥚</div>        
+            <div class="egg-message">👆 Cliquez sur l'œuf !</div>        
+        </div>        
+                
+        <div class="result" id="result">        
+            <div class="result-icon" id="result-icon"></div>        
+            <div class="result-title" id="result-title"></div>        
+            <div id="lot-details" style="display: none;">        
+                <div class="result-commerce" id="result-commerce"></div>        
+                <div class="result-lot" id="result-lot"></div>        
+                <div class="result-description" id="result-description"></div>        
+                <div class="result-valeur" id="result-valeur"></div>  
+                <div class="result-code" id="result-code"></div>  
+                <div class="result-info">        
+                    📍 Rendez-vous chez le commerçant pour récupérer votre lot !        
+                </div>        
+                <a id="btn-commerce" href="#" target="_blank" class="btn-commerce" style="display:none;">        
+                    🌐 Visiter le site du commerçant        
+                </a>  
+                
+
+                <button class="btn-telecharger" id="btn-telecharger" onclick="telechargerBon()">  
+                    📥 Télécharger mon bon gagnant  
+                </button>  
+            </div>        
+            <div class="result-message" id="result-message"></div>        
+        </div>        
+                
+        <!-- ===== CAROUSEL ===== -->        
+        <div class="partenaires">        
+            <div class="partenaires-title">🏪 Nos Commerçants Partenaires</div>        
+            <div class="carousel">        
+                <div class="carousel-track">        
+                    <!-- SÉRIE 1 -->        
+                    <a href="https://www.facebook.com/laruebosonvienne/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/bp5JvDR/304929789-536890498240072-5856750964226344598-n.png" alt="La Rue Boson">        
+                    </a>        
+                    <a href="https://vrtueux.fr" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/C5236CJF/Logo-VRtueux.png" alt="VRtueux">        
+                    </a>        
+                    <a href="https://www.instagram.com/scorpubvienne/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/9m8Dg0fs/434580264-985865803087686-793051233274541739-n.jpg" alt="Scorpub">        
+                    </a>        
+                    <a href="https://www.instagram.com/lartisanale_boutique_createurs" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/1JmfXhqQ/607897525-17976942743954109-4176086413852177532-n.jpg" alt="L'Artisanale">        
+                    </a>        
+                    <a href="https://www.instagram.com/praline.patisserie.vienne/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/39ZHHhRr/560541750-17871617859443196-4631725160350304662-n.jpg" alt="Praline">        
+                    </a>        
+                    <a href="https://www.studio-sandy.fr/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/RkSLRf0j/Whats-App-Image-2026-03-24-at-16-34-55-2.jpg" alt="Studio Sandy">        
+                    </a>        
+                    <a href="https://www.larmoire-aux-coquelicots.com/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/SXSgTbd3/t-l-chargement-10.jpg" alt="L'armoire aux coquelicots">        
+                    </a>        
+                    <a href="https://www.terra-nostra-restaurant-vienne.fr/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/fVMqjMMw/logo-menu.png" alt="Terra Nostra">        
                     </a>  
-                     <a href="https://www.linstantbytam.com/" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/yFPpKs7J/Whats-App-Image-2026-03-24-at-16-34-55.jpg" alt="L'instant By Tam">      
+                    <a href="https://www.linstantbytam.com/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/yFPpKs7J/Whats-App-Image-2026-03-24-at-16-34-55.jpg" alt="L'instant By Tam">        
                     </a>  
-                    <a href="https://www.boutique-lescoupines.com/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=2546767081653530944" target="_blank" class="partner-logo">      
-                        <img src="https://i.ibb.co/k2Ykvwkv/Whats-App-Image-2026-03-24-at-16-34-55-1.jpg" alt="Les Coupines">      
+                    <a href="https://www.boutique-lescoupines.com/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/k2Ykvwkv/Whats-App-Image-2026-03-24-at-16-34-55-1.jpg" alt="Les Coupines">        
                     </a>  
-                </div>      
-            </div>      
-        </div>      
-        <!-- ===== FIN CAROUSEL ===== -->      
-              
-        <div class="credits">      
-            <div class="credits-title">💡 Jeu développé par :</div>      
-            <div class="credits-content">      
-                <img src="https://i.ibb.co/C5236CJF/Logo-VRtueux.png" alt="VRtueux" class="credits-logo">      
-                <a href="https://vrtueux.fr" target="_blank" class="credits-link">VRtueux</a>      
-            </div>      
-            <div style="margin-top: 12px; font-size: 13px; opacity: 0.85;">      
-                Cyber Café VR - 22 rue Boson, Vienne (38)      
-            </div>      
-        </div>      
+                    <!-- SÉRIE 2 identique -->        
+                    <a href="https://www.facebook.com/laruebosonvienne/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/bp5JvDR/304929789-536890498240072-5856750964226344598-n.png" alt="La Rue Boson">        
+                    </a>        
+                    <a href="https://vrtueux.fr" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/C5236CJF/Logo-VRtueux.png" alt="VRtueux">        
+                    </a>        
+                    <a href="https://www.instagram.com/scorpubvienne/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/9m8Dg0fs/434580264-985865803087686-793051233274541739-n.jpg" alt="Scorpub">        
+                    </a>        
+                    <a href="https://www.instagram.com/lartisanale_boutique_createurs" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/1JmfXhqQ/607897525-17976942743954109-4176086413852177532-n.jpg" alt="L'Artisanale">        
+                    </a>        
+                    <a href="https://www.instagram.com/praline.patisserie.vienne/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/39ZHHhRr/560541750-17871617859443196-4631725160350304662-n.jpg" alt="Praline">        
+                    </a>        
+                    <a href="https://www.studio-sandy.fr/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/RkSLRf0j/Whats-App-Image-2026-03-24-at-16-34-55-2.jpg" alt="Studio Sandy">        
+                    </a>        
+                    <a href="https://www.larmoire-aux-coquelicots.com/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/SXSgTbd3/t-l-chargement-10.jpg" alt="L'armoire aux coquelicots">        
+                    </a>        
+                    <a href="https://www.terra-nostra-restaurant-vienne.fr/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/fVMqjMMw/logo-menu.png" alt="Terra Nostra">        
+                    </a>  
+                    <a href="https://www.linstantbytam.com/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/yFPpKs7J/Whats-App-Image-2026-03-24-at-16-34-55.jpg" alt="L'instant By Tam">        
+                    </a>  
+                    <a href="https://www.boutique-lescoupines.com/" target="_blank" class="partner-logo">        
+                        <img src="https://i.ibb.co/k2Ykvwkv/Whats-App-Image-2026-03-24-at-16-34-55-1.jpg" alt="Les Coupines">        
+                    </a>  
+                </div>        
+            </div>        
+        </div>        
+        <!-- ===== FIN CAROUSEL ===== -->        
+                
+        <div class="credits">        
+            <div class="credits-title">💡 Jeu développé par :</div>        
+            <div class="credits-content">        
+                <img src="https://i.ibb.co/C5236CJF/Logo-VRtueux.png" alt="VRtueux" class="credits-logo">        
+                <a href="https://vrtueux.fr" target="_blank" class="credits-link">VRtueux</a>        
+            </div>        
+            <div style="margin-top: 12px; font-size: 13px; opacity: 0.85;">        
+                Cyber Café VR - 22 rue Boson, Vienne (38)        
+            </div>        
+        </div>        
     </div>
 
-<script>      
-    const SEGMENTS = [      
-        { nom: '🐰', couleur: '#FF8C42' },      
-        { nom: '🥚', couleur: '#A4D65E' },      
-        { nom: '🐣', couleur: '#00BCD4' },      
-        { nom: '🌸', couleur: '#E91E63' },      
-        { nom: '🐰', couleur: '#FF8C42' },      
-        { nom: '🥚', couleur: '#A4D65E' }      
+<script>        
+    const SEGMENTS = [        
+        { nom: '🐰', couleur: '#FF8C42' },        
+        { nom: '🥚', couleur: '#A4D65E' },        
+        { nom: '🐣', couleur: '#00BCD4' },        
+        { nom: '🌸', couleur: '#E91E63' },        
+        { nom: '🐰', couleur: '#FF8C42' },        
+        { nom: '🥚', couleur: '#A4D65E' }        
     ];
 
-    const PROBABILITE_GAIN = 0.25;      
-    const MESSAGES_PERDU = [      
-        '🎯 Vous êtes passé tout près !',      
-        '🍀 Retentez demain !',      
-        '💫 La chance tournera demain !',      
-        '🌟 Presque ! Revenez demain !'      
+    const PROBABILITE_GAIN = 0.25;        
+    const MESSAGES_PERDU = [        
+        '🎯 Vous êtes passé tout près !',        
+        '🍀 Retentez demain !',        
+        '💫 La chance tournera demain !',        
+        '🌟 Presque ! Revenez demain !'        
     ];
 
-    let resultatEnAttente = null;      
-    let jeuEnCours = false;      
+    let resultatEnAttente = null;        
+    let jeuEnCours = false;        
     let lotsData = null;
 
-    function getDateStr() {      
-        const d = new Date();      
-        return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;      
+    function getDateStr() {        
+        const d = new Date();        
+        return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;        
     }
 
-    function getJourSemaine() {      
-        return ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'][new Date().getDay()];      
+    function getJourSemaine() {        
+        return ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'][new Date().getDay()];        
     }
 
     function estApres18h() { return new Date().getHours() >= 18; }
 
-    function sauvegarderGagnant(lot) {      
-        localStorage.setItem('boson_gagnant', JSON.stringify({ lot: lot, date: getDateStr() }));      
+    // ✅ Génère un code unique basé sur date + commerce  
+    function genererCode(commerce, date) {  
+        const base = (commerce + date).replace(/[^a-zA-Z0-9]/g, '').toUpperCase();  
+        let hash = 0;  
+        for (let i = 0; i < base.length; i++) {  
+            hash = ((hash << 5) - hash) + base.charCodeAt(i);  
+            hash |= 0;  
+        }  
+        const code = 'PAQUES-' + Math.abs(hash).toString(36).toUpperCase().slice(0, 6);  
+        return code;  
     }
 
-    function recupererGagnant() {      
-        const data = localStorage.getItem('boson_gagnant');      
-        if (!data) return null;      
-        const gagnant = JSON.parse(data);      
-        if (gagnant.date === getDateStr()) return gagnant.lot;      
-        localStorage.removeItem('boson_gagnant');      
-        return null;      
+    function sauvegarderGagnant(lot) {  
+        // ✅ Sauvegarde PERMANENTE (pas de date limite) + code unique  
+        const code = genererCode(lot.commerce, getDateStr());  
+        const data = { lot: lot, date: getDateStr(), code: code };  
+        localStorage.setItem('boson_gagnant', JSON.stringify(data));  
+        localStorage.setItem('boson_gagnant_permanent', JSON.stringify(data));  
+    }
+
+    function recupererGagnant() {  
+        // ✅ Vérifie d'abord le gain permanent (toutes dates)  
+        const permanent = localStorage.getItem('boson_gagnant_permanent');  
+        if (permanent) {  
+            try {  
+                return JSON.parse(permanent);  
+            } catch(e) {}  
+        }  
+        // Fallback sur l'ancien format  
+        const data = localStorage.getItem('boson_gagnant');  
+        if (!data) return null;  
+        try {  
+            const g = JSON.parse(data);  
+            if (g.lot) return g;  
+        } catch(e) {}  
+        return null;  
+    }
+
+    function aDejaGagne() {  
+        return !!localStorage.getItem('boson_gagnant_permanent');  
     }
 
     function aJoueAujourdhui() { return localStorage.getItem('boson_date') === getDateStr(); }  
     function marquerJoue() { localStorage.setItem('boson_date', getDateStr()); }
 
-    function resetBoutons() {      
-        jeuEnCours = false;      
-        document.getElementById('btn-tourner').disabled = false;      
-        document.getElementById('center-btn').style.pointerEvents = 'auto';      
+    function resetBoutons() {        
+        jeuEnCours = false;        
+        document.getElementById('btn-tourner').disabled = false;        
+        document.getElementById('center-btn').style.pointerEvents = 'auto';        
     }
 
-    async function chargerLots() {      
-        try {      
-            const response = await fetch('lots.json');      
-            if (!response.ok) throw new Error('HTTP ' + response.status);      
-            lotsData = await response.json();      
-        } catch (error) {      
-            console.warn('Fallback lots:', error);      
-            lotsData = {      
-                config: {      
-                    dateDebut: '04/04/2026',      
-                    dateFin: '19/04/2026',      
-                    modeTest: 'OUI',      
-                    joursOuverts: ['Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],      
-                    heureFinGagnant: '18:00',      
-                    participationParJour: true      
-                },      
-                lots: [      
-                    { id:'lot1', commerce:'VRtueux', nomLot:'Pack découverte', description:'1h de session VR, valable 6 mois', valeur:'49€', urlCommerce:'https://vrtueux.fr', dateAttribution: getDateStr(), statut:'Disponible', gagne:false },      
-                    { id:'lot2', commerce:'Praline Pâtisserie', nomLot:"Bon d'achat", description:'Valable 6 mois sur la gamme', valeur:'20€', urlCommerce:'', dateAttribution: getDateStr(), statut:'Disponible', gagne:false }      
-                ]      
-            };      
-        }      
+    async function chargerLots() {        
+        try {        
+            const response = await fetch('lots.json');        
+            if (!response.ok) throw new Error('HTTP ' + response.status);        
+            lotsData = await response.json();        
+        } catch (error) {        
+            console.warn('Fallback lots:', error);        
+            lotsData = {        
+                config: {        
+                    dateDebut: '04/04/2026',        
+                    dateFin: '19/04/2026',        
+                    modeTest: 'OUI',        
+                    joursOuverts: ['Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],        
+                    heureFinGagnant: '18:00',        
+                    participationParJour: true        
+                },        
+                lots: [        
+                    { id:'lot1', commerce:'VRtueux', nomLot:'Pack découverte', description:'1h de session VR, valable 6 mois', valeur:'49€', urlCommerce:'https://vrtueux.fr', dateAttribution: getDateStr(), statut:'Disponible', gagne:false },        
+                    { id:'lot2', commerce:'Praline Pâtisserie', nomLot:"Bon d'achat", description:'Valable 6 mois sur la gamme', valeur:'20€', urlCommerce:'', dateAttribution: getDateStr(), statut:'Disponible', gagne:false }        
+                ]        
+            };        
+        }        
     }
 
-    window.addEventListener('load', async function() {      
+    window.addEventListener('load', async function() {        
         await chargerLots();
 
-        const gagnant = recupererGagnant();      
-        if (gagnant) {      
-            afficherLotSauvegarde(gagnant);      
-            return;      
+        // ✅ Si déjà gagné (même un autre jour) → affiche le lot, bloque la roue  
+        const gagnantData = recupererGagnant();  
+        if (gagnantData) {  
+            afficherLotSauvegarde(gagnantData.lot, gagnantData.code);  
+            return;  
         }
 
-        creerRoue();
-
-        document.getElementById('btn-tourner').addEventListener('click', tournerRoue);      
-        document.getElementById('center-btn').addEventListener('click', tournerRoue);      
-        document.getElementById('easter-egg').addEventListener('click', casserOeuf);
-
+        creerRoue();        
+        document.getElementById('btn-tourner').addEventListener('click', tournerRoue);        
+        document.getElementById('center-btn').addEventListener('click', tournerRoue);        
+        document.getElementById('easter-egg').addEventListener('click', casserOeuf);  
         creerOeufsPaques();
 
-        if (estApres18h()) {      
-            const badge = document.getElementById('badge');      
-            badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';      
-            badge.classList.add('derniere-chance');      
-        }      
+        if (estApres18h()) {        
+            const badge = document.getElementById('badge');        
+            badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';        
+            badge.classList.add('derniere-chance');        
+        }        
     });
 
-    function afficherLotSauvegarde(lot) {      
-        document.getElementById('initial-view').style.display = 'none';      
-        const result = document.getElementById('result');      
-        result.className = 'result show win';      
-        document.getElementById('result-icon').textContent = '🎉';      
-        document.getElementById('result-title').textContent = 'VOUS AVEZ GAGNÉ !';      
-        document.getElementById('result-commerce').textContent = '🏪 ' + lot.commerce;      
-        document.getElementById('result-lot').textContent = '🎁 ' + lot.nomLot;      
+    function afficherLotSauvegarde(lot, code) {  
+        document.getElementById('initial-view').style.display = 'none';        
+        const result = document.getElementById('result');        
+        result.className = 'result show win';        
+        document.getElementById('result-icon').textContent = '🎉';        
+        document.getElementById('result-title').textContent = 'VOUS AVEZ GAGNÉ !';        
+        document.getElementById('result-commerce').textContent = '🏪 ' + lot.commerce;        
+        document.getElementById('result-lot').textContent = '🎁 ' + lot.nomLot;        
         document.getElementById('result-description').textContent = lot.description;  
         document.getElementById('result-valeur').textContent = lot.valeur ? '💰 Valeur : ' + lot.valeur : '';  
+        // Code unique  
+        const codeAffiche = code || genererCode(lot.commerce, getDateStr());  
+        document.getElementById('result-code').textContent = '🎟️ Code : ' + codeAffiche;  
+        // Bouton commerce  
         const btnCommerce = document.getElementById('btn-commerce');  
         if (lot.urlCommerce) {  
             btnCommerce.href = lot.urlCommerce;  
@@ -563,156 +635,149 @@
         } else {  
             btnCommerce.style.display = 'none';  
         }  
-        document.getElementById('lot-details').style.display = 'block';      
-        creerConfetti();      
+        document.getElementById('lot-details').style.display = 'block';        
+        creerConfetti();        
     }
 
-    function creerRoue() {      
-        const wheel = document.getElementById('wheel');      
-        wheel.innerHTML = '';      
-        const angleParSegment = 360 / SEGMENTS.length;
-
-        SEGMENTS.forEach((segment, index) => {      
-            const segmentDiv = document.createElement('div');      
-            segmentDiv.className = 'segment';      
+    function creerRoue() {        
+        const wheel = document.getElementById('wheel');        
+        wheel.innerHTML = '';        
+        const angleParSegment = 360 / SEGMENTS.length;  
+        SEGMENTS.forEach((segment, index) => {        
+            const segmentDiv = document.createElement('div');        
+            segmentDiv.className = 'segment';        
             segmentDiv.style.background = segment.couleur;  
-            const angle = index * angleParSegment;      
+            const angle = index * angleParSegment;        
             segmentDiv.style.transform = `rotate(${angle}deg) skewY(-${90 - angleParSegment}deg)`;  
-            const content = document.createElement('span');      
-            content.textContent = segment.nom;      
-            content.style.display = 'block';      
+            const content = document.createElement('span');        
+            content.textContent = segment.nom;        
+            content.style.display = 'block';        
             content.style.transform = `skewY(${90 - angleParSegment}deg) rotate(${angleParSegment / 2}deg)`;  
-            segmentDiv.appendChild(content);      
-            wheel.appendChild(segmentDiv);      
-        });      
+            segmentDiv.appendChild(content);        
+            wheel.appendChild(segmentDiv);        
+        });        
     }
 
-    function creerOeufsPaques() {      
-        const eggs = ['🐰','🥚','🐣','🌸','🌷'];      
-        for (let i = 0; i < 10; i++) {      
-            const egg = document.createElement('div');      
-            egg.className = 'easter-egg';      
-            egg.textContent = eggs[Math.floor(Math.random() * eggs.length)];      
-            egg.style.left = Math.random() * 95 + '%';      
-            egg.style.top = Math.random() * 95 + '%';      
-            egg.style.animationDelay = Math.random() * 3 + 's';      
-            document.body.appendChild(egg);      
-        }      
+    function creerOeufsPaques() {        
+        const eggs = ['🐰','🥚','🐣','🌸','🌷'];        
+        for (let i = 0; i < 10; i++) {        
+            const egg = document.createElement('div');        
+            egg.className = 'easter-egg';        
+            egg.textContent = eggs[Math.floor(Math.random() * eggs.length)];        
+            egg.style.left = Math.random() * 95 + '%';        
+            egg.style.top = Math.random() * 95 + '%';        
+            egg.style.animationDelay = Math.random() * 3 + 's';        
+            document.body.appendChild(egg);        
+        }        
     }
 
-    function tournerRoue() {      
-        if (jeuEnCours) return;
-
-        if (estApres18h()) {      
-            const badge = document.getElementById('badge');      
-            badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';      
-            badge.classList.add('derniere-chance');      
+    function tournerRoue() {        
+        if (jeuEnCours) return;  
+        // ✅ Bloque si déjà gagné  
+        if (aDejaGagne()) {  
+            const gagnantData = recupererGagnant();  
+            if (gagnantData) afficherLotSauvegarde(gagnantData.lot, gagnantData.code);  
+            return;  
         }
 
+        if (estApres18h()) {        
+            const badge = document.getElementById('badge');        
+            badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';        
+            badge.classList.add('derniere-chance');        
+        }  
         jeuEnCours = true;  
-        const btn = document.getElementById('btn-tourner');      
-        const centerBtn = document.getElementById('center-btn');      
-        btn.disabled = true;      
-        centerBtn.style.pointerEvents = 'none';  
-        const wheel = document.getElementById('wheel');      
-        const angleTotal = (5 * 360) + Math.random() * 360;      
+        document.getElementById('btn-tourner').disabled = true;        
+        document.getElementById('center-btn').style.pointerEvents = 'none';  
+        const wheel = document.getElementById('wheel');        
+        const angleTotal = (5 * 360) + Math.random() * 360;        
         wheel.style.transform = `rotate(${angleTotal}deg)`;  
-        setTimeout(jouer, 5000);      
+        setTimeout(jouer, 5000);        
     }
 
-    function jouer() {      
-        if (!lotsData || !lotsData.lots) {      
-            afficherResultat({ success: false, message: '😢 Erreur chargement des lots.' });      
-            resetBoutons();      
-            return;      
-        }
-
-        if (aJoueAujourdhui()) {      
-            afficherResultat({ success: false, message: "Déjà participé aujourd'hui ! Revenez demain 🌅" });      
-            resetBoutons();      
-            return;      
-        }
-
-        if (lotsData.config.modeTest !== 'OUI') {      
-            const jourSemaine = getJourSemaine();      
-            if (!lotsData.config.joursOuverts.includes(jourSemaine)) {      
-                afficherResultat({ success: false, message: "📅 Revenez un jour d'ouverture !" });      
-                resetBoutons();      
-                return;      
-            }      
-        }
-
-        const dateStr = getDateStr();      
-        const lotsDisponibles = lotsData.lots.filter(lot => lot.statut === 'Disponible' && !lot.gagne);
-
-        if (lotsDisponibles.length === 0) {      
-            marquerJoue();      
-            afficherResultat({ success: false, message: '🎁 Plus de lots disponibles !' });      
-            resetBoutons();      
-            return;      
-        }
-
-        let lotsDuJour = lotsDisponibles.filter(lot => lot.dateAttribution === dateStr);      
+    function jouer() {        
+        if (!lotsData || !lotsData.lots) {        
+            afficherResultat({ success: false, message: '😢 Erreur chargement des lots.' });        
+            resetBoutons(); return;        
+        }  
+        if (aJoueAujourdhui()) {        
+            afficherResultat({ success: false, message: "Déjà participé aujourd'hui ! Revenez demain 🌅" });        
+            resetBoutons(); return;        
+        }  
+        if (lotsData.config.modeTest !== 'OUI') {        
+            const jourSemaine = getJourSemaine();        
+            if (!lotsData.config.joursOuverts.includes(jourSemaine)) {        
+                afficherResultat({ success: false, message: "📅 Revenez un jour d'ouverture !" });        
+                resetBoutons(); return;        
+            }        
+        }  
+        const dateStr = getDateStr();        
+        const lotsDisponibles = lotsData.lots.filter(lot => lot.statut === 'Disponible' && !lot.gagne);  
+        if (lotsDisponibles.length === 0) {        
+            marquerJoue();        
+            afficherResultat({ success: false, message: '🎁 Plus de lots disponibles !' });        
+            resetBoutons(); return;        
+        }  
+        let lotsDuJour = lotsDisponibles.filter(lot => lot.dateAttribution === dateStr);        
         if (lotsDuJour.length === 0) lotsDuJour = lotsDisponibles;
 
-        let gagner = false;
-
-        if (!estApres18h()) {      
-            gagner = Math.random() < PROBABILITE_GAIN;      
-        } else {      
-            const lotPasDonneAujourdhui = !localStorage.getItem('lot_donne_' + dateStr);      
-            if (lotPasDonneAujourdhui) {      
-                gagner = true;      
-                localStorage.setItem('lot_donne_' + dateStr, 'true');      
-            } else {      
-                gagner = Math.random() < PROBABILITE_GAIN;      
-            }      
+        let gagner = false;  
+        if (!estApres18h()) {        
+            gagner = Math.random() < PROBABILITE_GAIN;        
+        } else {        
+            const lotPasDonneAujourdhui = !localStorage.getItem('lot_donne_' + dateStr);        
+            if (lotPasDonneAujourdhui) {        
+                gagner = true;        
+                localStorage.setItem('lot_donne_' + dateStr, 'true');        
+            } else {        
+                gagner = Math.random() < PROBABILITE_GAIN;        
+            }        
         }
 
-        if (gagner) {      
-            const lot = lotsDuJour[Math.floor(Math.random() * lotsDuJour.length)];      
-            lot.gagne = true;      
-            marquerJoue();      
+        if (gagner) {        
+            const lot = lotsDuJour[Math.floor(Math.random() * lotsDuJour.length)];        
+            lot.gagne = true;        
+            marquerJoue();        
             sauvegarderGagnant(lot);  
-            document.getElementById('initial-view').style.display = 'none';      
+            document.getElementById('initial-view').style.display = 'none';        
             document.getElementById('egg-container').classList.add('show');  
-            resultatEnAttente = {      
-                success: true,      
-                winner: true,      
-                commerce: lot.commerce,      
-                nomLot: lot.nomLot,      
+            const code = genererCode(lot.commerce, getDateStr());  
+            resultatEnAttente = {        
+                success: true, winner: true,        
+                commerce: lot.commerce,        
+                nomLot: lot.nomLot,        
                 description: lot.description,  
                 valeur: lot.valeur,  
-                urlCommerce: lot.urlCommerce  
-            };      
-        } else {      
-            marquerJoue();      
-            afficherResultat({ success: false, message: MESSAGES_PERDU[Math.floor(Math.random() * MESSAGES_PERDU.length)] });      
-            resetBoutons();      
-        }      
+                urlCommerce: lot.urlCommerce,  
+                code: code  
+            };        
+        } else {        
+            marquerJoue();        
+            afficherResultat({ success: false, message: MESSAGES_PERDU[Math.floor(Math.random() * MESSAGES_PERDU.length)] });        
+            resetBoutons();        
+        }        
     }
 
-    function casserOeuf() {      
-        const egg = document.getElementById('easter-egg');      
-        const eggContainer = document.getElementById('egg-container');      
-        egg.classList.add('egg-crack');      
-        setTimeout(() => {      
-            eggContainer.style.display = 'none';      
-            afficherResultat(resultatEnAttente);      
-        }, 800);      
+    function casserOeuf() {        
+        const egg = document.getElementById('easter-egg');        
+        const eggContainer = document.getElementById('egg-container');        
+        egg.classList.add('egg-crack');        
+        setTimeout(() => {        
+            eggContainer.style.display = 'none';        
+            afficherResultat(resultatEnAttente);        
+        }, 800);        
     }
 
-    function afficherResultat(data) {      
-        const result = document.getElementById('result');
-
-        if (data && data.success && data.winner) {      
-            result.className = 'result show win';      
-            document.getElementById('result-icon').textContent = '🎉';      
-            document.getElementById('result-title').textContent = 'FÉLICITATIONS !';      
-            document.getElementById('result-commerce').textContent = '🏪 ' + data.commerce;      
-            document.getElementById('result-lot').textContent = '🎁 ' + data.nomLot;      
+    function afficherResultat(data) {        
+        const result = document.getElementById('result');  
+        if (data && data.success && data.winner) {        
+            result.className = 'result show win';        
+            document.getElementById('result-icon').textContent = '🎉';        
+            document.getElementById('result-title').textContent = 'FÉLICITATIONS !';        
+            document.getElementById('result-commerce').textContent = '🏪 ' + data.commerce;        
+            document.getElementById('result-lot').textContent = '🎁 ' + data.nomLot;        
             document.getElementById('result-description').textContent = data.description;  
             document.getElementById('result-valeur').textContent = data.valeur ? '💰 Valeur : ' + data.valeur : '';  
+            document.getElementById('result-code').textContent = '🎟️ Code : ' + (data.code || '');  
             const btnCommerce = document.getElementById('btn-commerce');  
             if (data.urlCommerce) {  
                 btnCommerce.href = data.urlCommerce;  
@@ -720,32 +785,95 @@
             } else {  
                 btnCommerce.style.display = 'none';  
             }  
-            document.getElementById('lot-details').style.display = 'block';      
-            creerConfetti();      
-        } else {      
-            result.className = 'result show lose';      
-            document.getElementById('result-icon').textContent = '😢';      
-            document.getElementById('result-title').textContent = 'PAS DE CHANCE !';      
-            document.getElementById('result-message').textContent = data.message;      
-            document.getElementById('lot-details').style.display = 'none';      
-        }      
+            document.getElementById('lot-details').style.display = 'block';        
+            creerConfetti();        
+        } else {        
+            result.className = 'result show lose';        
+            document.getElementById('result-icon').textContent = '😢';        
+            document.getElementById('result-title').textContent = 'PAS DE CHANCE !';        
+            document.getElementById('result-message').textContent = data.message;        
+            document.getElementById('lot-details').style.display = 'none';        
+        }        
     }
 
-    function creerConfetti() {      
-        const colors = ['#FF8C42','#A4D65E','#00BCD4','#E91E63','#FFD700','#9C27B0'];      
-        for (let i = 0; i < 80; i++) {      
-            setTimeout(() => {      
-                const c = document.createElement('div');      
-                c.className = 'confetti';      
-                c.style.left = Math.random() * 100 + '%';      
-                c.style.top = '-20px';      
-                c.style.background = colors[Math.floor(Math.random() * colors.length)];      
-                c.style.animationDelay = Math.random() * 0.5 + 's';      
-                document.body.appendChild(c);      
-                setTimeout(() => c.remove(), 4500);      
-            }, i * 30);      
-        }      
-    }      
-</script>       
-</body>      
+    // ✅ TÉLÉCHARGER BON GAGNANT  
+    function telechargerBon() {  
+        const gagnantData = recupererGagnant();  
+        if (!gagnantData) return;  
+        const lot = gagnantData.lot;  
+        const code = gagnantData.code || genererCode(lot.commerce, gagnantData.date);
+
+        const contenu = `  
+<!DOCTYPE html>  
+<html lang="fr">  
+<head>  
+<meta charset="UTF-8">  
+<title>Bon Gagnant - Jeu Pâques 2026</title>  
+<style>  
+  body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }  
+  .bon { background: white; border: 4px solid #FF8C42; border-radius: 20px; padding: 40px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.15); }  
+  .bon-header { background: linear-gradient(135deg, #FF8C42, #A4D65E); color: white; padding: 15px; border-radius: 12px; margin-bottom: 25px; }  
+  .bon-header h1 { font-size: 22px; margin: 0; }  
+  .bon-header p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; }  
+  .emoji { font-size: 60px; margin: 15px 0; }  
+  .commerce { font-size: 20px; font-weight: bold; color: #FF8C42; background: #fff3e0; padding: 10px 20px; border-radius: 10px; margin: 15px 0; }  
+  .lot { font-size: 18px; font-weight: bold; margin: 10px 0; }  
+  .description { font-size: 14px; color: #666; margin: 10px 0; line-height: 1.5; }  
+  .valeur { font-size: 16px; font-weight: bold; color: #4CAF50; margin: 10px 0; }  
+  .code { background: #fff3e0; border: 2px dashed #FF8C42; border-radius: 10px; padding: 12px; font-size: 18px; font-weight: bold; color: #FF8C42; letter-spacing: 3px; font-family: monospace; margin: 20px 0; }  
+  .date { font-size: 13px; color: #999; margin: 10px 0; }  
+  .footer { margin-top: 25px; padding-top: 15px; border-top: 2px dashed #ddd; font-size: 12px; color: #aaa; }  
+  .info { background: #e8f5e9; border-radius: 10px; padding: 12px; font-size: 13px; color: #2e7d32; margin: 15px 0; }  
+</style>  
+</head>  
+<body>  
+<div class="bon">  
+  <div class="bon-header">  
+    <h1>🐰 Jeu Concours Pâques 2026</h1>  
+    <p>La Rue Boson s'anime - Vienne (38)</p>  
+  </div>  
+  <div class="emoji">🎉</div>  
+  <h2 style="color:#FF8C42; margin:10px 0;">FÉLICITATIONS !</h2>  
+  <div class="commerce">🏪 ${lot.commerce}</div>  
+  <div class="lot">🎁 ${lot.nomLot}</div>  
+  <div class="description">${lot.description}</div>  
+  ${lot.valeur ? '<div class="valeur">💰 Valeur : ' + lot.valeur + '</div>' : ''}  
+  <div class="code">🎟️ Code : ${code}</div>  
+  <div class="date">Gagné le : ${gagnantData.date}</div>  
+  <div class="info">📍 Présentez ce bon au commerçant pour récupérer votre lot.  
+Valable jusqu'au 19 avril 2026.</div>  
+  <div class="footer">Développé par VRtueux — Cyber Café VR, 22 rue Boson, Vienne (38)  
+vrtueux.fr</div>  
+</div>  
+</body>  
+</html>`;
+
+        const blob = new Blob([contenu], { type: 'text/html;charset=utf-8' });  
+        const url = URL.createObjectURL(blob);  
+        const a = document.createElement('a');  
+        a.href = url;  
+        a.download = 'bon-gagnant-paques-2026.html';  
+        document.body.appendChild(a);  
+        a.click();  
+        document.body.removeChild(a);  
+        URL.revokeObjectURL(url);  
+    }
+
+    function creerConfetti() {        
+        const colors = ['#FF8C42','#A4D65E','#00BCD4','#E91E63','#FFD700','#9C27B0'];        
+        for (let i = 0; i < 80; i++) {        
+            setTimeout(() => {        
+                const c = document.createElement('div');        
+                c.className = 'confetti';        
+                c.style.left = Math.random() * 100 + '%';        
+                c.style.top = '-20px';        
+                c.style.background = colors[Math.floor(Math.random() * colors.length)];        
+                c.style.animationDelay = Math.random() * 0.5 + 's';        
+                document.body.appendChild(c);        
+                setTimeout(() => c.remove(), 4500);        
+            }, i * 30);        
+        }        
+    }        
+</script>         
+</body>        
 </html>  
