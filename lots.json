@@ -3,7 +3,7 @@
     "dateDebut": "04/04/2026",  
     "dateFin": "19/04/2026",  
     "modeTest": "OUI",  
-    "joursOuverts": ["Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"],  
+    "joursOuverts": ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"],  
     "heureFinGagnant": "18:00",  
     "participationParJour": true  
   },  
@@ -26,7 +26,7 @@
       "description": "Valable 6 mois sur l'ensemble de la gamme",  
       "valeur": "20€",  
       "urlCommerce": "https://www.instagram.com/praline.patisserie.vienne/",  
-      "dateAttribution": "06/04/2026",  
+      "dateAttribution": "05/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
     },  
@@ -37,7 +37,7 @@
       "description": "Atelier vitrail tiffany, durée 4h chez Vitrail Ste Colombe",  
       "valeur": "60€",  
       "urlCommerce": "https://www.instagram.com/lartisanale_boutique_createurs",  
-      "dateAttribution": "08/04/2026",  
+      "dateAttribution": "06/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
     },  
@@ -48,7 +48,7 @@
       "description": "Santé !",  
       "valeur": "",  
       "urlCommerce": "https://www.instagram.com/scorpubvienne/",  
-      "dateAttribution": "09/04/2026",  
+      "dateAttribution": "07/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
     },  
@@ -59,7 +59,7 @@
       "description": "1 pose de vernis semi permanent sur ongles naturels",  
       "valeur": "40€",  
       "urlCommerce": "https://www.linstantbytam.com/",  
-      "dateAttribution": "11/04/2026",  
+      "dateAttribution": "08/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
     },  
@@ -70,7 +70,7 @@
       "description": "Valable 6 mois sur l'ensemble du magasin",  
       "valeur": "",  
       "urlCommerce": "https://www.instagram.com/lartisanale_boutique_createurs",  
-      "dateAttribution": "13/04/2026",  
+      "dateAttribution": "09/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
     },  
@@ -81,7 +81,7 @@
       "description": "Valable 3 mois",  
       "valeur": "60€",  
       "urlCommerce": "https://www.studio-sandy.fr/",  
-      "dateAttribution": "15/04/2026",  
+      "dateAttribution": "10/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
     },  
@@ -91,8 +91,8 @@
       "nomLot": "1 serviette ronde",  
       "description": "1 serviette de plage ronde à choisir dans une sélection proposée, microfibre boulochée, 1,5m de diamètre",  
       "valeur": "38€",  
-      "urlCommerce": "https://www.boutique-lescoupines.com/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=2546767081653530944",  
-      "dateAttribution": "16/04/2026",  
+      "urlCommerce": "https://www.boutique-lescoupines.com/",  
+      "dateAttribution": "11/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
     },  
@@ -103,7 +103,7 @@
       "description": "Valable 3 mois",  
       "valeur": "50€",  
       "urlCommerce": "https://www.larmoire-aux-coquelicots.com/",  
-      "dateAttribution": "18/04/2026",  
+      "dateAttribution": "13/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
     },  
@@ -114,6 +114,28 @@
       "description": "Rouge aux arômes de fruits noirs avec une touche de réglisse et d'épices. Tanins soyeux, belle fraîcheur. 14% vol. / 75cl.",  
       "valeur": "19€",  
       "urlCommerce": "https://www.terra-nostra-restaurant-vienne.fr/",  
+      "dateAttribution": "15/04/2026",  
+      "statut": "Disponible",  
+      "gagne": false  
+    },  
+    {  
+      "id": "lot11",  
+      "commerce": "Emilie Courtage et Conseils – Réseau YMANCI",  
+      "nomLot": "50€ offerts sur reprise d'assurance emprunteur",  
+      "description": "50€ offerts pour la reprise de votre assurance emprunteur + une brioche pour 4 personnes chez Praline Pâtisserie offerte, en cas de souscription. Mandataire : Emilie ACHARD.",  
+      "valeur": "50€ + brioche",  
+      "urlCommerce": "https://ymanci.fr/agences/courtier-vienne/",  
+      "dateAttribution": "17/04/2026",  
+      "statut": "Disponible",  
+      "gagne": false  
+    },  
+    {  
+      "id": "lot12",  
+      "commerce": "Emilie Courtage et Conseils – Réseau YMANCI",  
+      "nomLot": "10% de réduction sur honoraires de courtage immobilier",  
+      "description": "10% de réduction sur les honoraires de courtage de prêt immobilier + un pack découverte chez VRtueux offert. Mandataire : Emilie ACHARD.",  
+      "valeur": "Variable + pack VRtueux",  
+      "urlCommerce": "https://ymanci.fr/agences/courtier-vienne/",  
       "dateAttribution": "19/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
