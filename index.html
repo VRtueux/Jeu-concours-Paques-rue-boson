@@ -200,6 +200,7 @@
         .result-valeur { font-size: 15px; font-weight: bold; margin: 8px 0; opacity: 0.95; }          
         .result-info { background: rgba(255,255,255,0.25); padding: 18px; border-radius: 15px; margin-top: 20px; font-size: 15px; }
 
+        /* ✅ CODE UNIQUE */    
         .result-code {    
             background: white;    
             color: #FF8C42;    
@@ -233,6 +234,7 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);          
         }
 
+        /* ✅ BOUTON TÉLÉCHARGER BON */    
         .btn-telecharger {    
             display: inline-block;    
             margin-top: 12px;    
@@ -352,7 +354,8 @@
                   
         <div id="initial-view">          
             <p class="intro-text">          
-                <strong>🎁 Gagnez des lots chez vos commerçants préférés !</strong>  
+                <strong>🎁 Gagnez des lots chez vos commerçants préférés !</strong>
+
           
                 Du 4 au 19 avril 2026          
             </p>          
@@ -387,6 +390,8 @@
                 <a id="btn-commerce" href="#" target="_blank" class="btn-commerce" style="display:none;">          
                     🌐 Visiter le site du commerçant          
                 </a>    
+                
+
                 <button class="btn-telecharger" id="btn-telecharger" onclick="telechargerBon()">    
                     📥 Télécharger mon bon gagnant    
                 </button>    
@@ -430,7 +435,7 @@
                     <a href="https://www.boutique-lescoupines.com/" target="_blank" class="partner-logo">          
                         <img src="https://i.ibb.co/k2Ykvwkv/Whats-App-Image-2026-03-24-at-16-34-55-1.jpg" alt="Les Coupines">          
                     </a>  
-                    <!-- ✅ YMANCI ajouté SÉRIE 1 -->  
+                    <!-- ✅ YMANCI - SÉRIE 1 -->  
                     <a href="https://ymanci.fr/agences/courtier-vienne/" target="_blank" class="partner-logo">  
                         <img src="https://i.ibb.co/7d1Hr6wr/Ymanci-Logo-Credit-clair-et-precis-Exe-Bleu-vecto.jpg" alt="YMANCI">  
                     </a>  
@@ -465,7 +470,7 @@
                     <a href="https://www.boutique-lescoupines.com/" target="_blank" class="partner-logo">          
                         <img src="https://i.ibb.co/k2Ykvwkv/Whats-App-Image-2026-03-24-at-16-34-55-1.jpg" alt="Les Coupines">          
                     </a>  
-                    <!-- ✅ YMANCI ajouté SÉRIE 2 -->  
+                    <!-- ✅ YMANCI - SÉRIE 2 -->  
                     <a href="https://ymanci.fr/agences/courtier-vienne/" target="_blank" class="partner-logo">  
                         <img src="https://i.ibb.co/7d1Hr6wr/Ymanci-Logo-Credit-clair-et-precis-Exe-Bleu-vecto.jpg" alt="YMANCI">  
                     </a>  
@@ -519,6 +524,7 @@
 
     function estApres18h() { return new Date().getHours() >= 18; }
 
+    // ✅ Génère un code unique basé sur date + commerce    
     function genererCode(commerce, date) {    
         const base = (commerce + date).replace(/[^a-zA-Z0-9]/g, '').toUpperCase();    
         let hash = 0;    
@@ -526,10 +532,12 @@
             hash = ((hash << 5) - hash) + base.charCodeAt(i);    
             hash |= 0;    
         }    
-        return 'PAQUES-' + Math.abs(hash).toString(36).toUpperCase().slice(0, 6);    
+        const code = 'PAQUES-' + Math.abs(hash).toString(36).toUpperCase().slice(0, 6);    
+        return code;    
     }
 
     function sauvegarderGagnant(lot) {    
+        // ✅ Sauvegarde PERMANENTE (pas de date limite) + code unique    
         const code = genererCode(lot.commerce, getDateStr());    
         const data = { lot: lot, date: getDateStr(), code: code };    
         localStorage.setItem('boson_gagnant', JSON.stringify(data));    
@@ -537,15 +545,27 @@
     }
 
     function recupererGagnant() {    
+        // ✅ Vérifie d'abord le gain permanent (toutes dates)    
         const permanent = localStorage.getItem('boson_gagnant_permanent');    
-        if (permanent) { try { return JSON.parse(permanent); } catch(e) {} }    
+        if (permanent) {    
+            try {    
+                return JSON.parse(permanent);    
+            } catch(e) {}    
+        }    
+        // Fallback sur l'ancien format    
         const data = localStorage.getItem('boson_gagnant');    
         if (!data) return null;    
-        try { const g = JSON.parse(data); if (g.lot) return g; } catch(e) {}    
+        try {    
+            const g = JSON.parse(data);    
+            if (g.lot) return g;    
+        } catch(e) {}    
         return null;    
     }
 
-    function aDejaGagne() { return !!localStorage.getItem('boson_gagnant_permanent'); }  
+    function aDejaGagne() {    
+        return !!localStorage.getItem('boson_gagnant_permanent');    
+    }
+
     function aJoueAujourdhui() { return localStorage.getItem('boson_date') === getDateStr(); }    
     function marquerJoue() { localStorage.setItem('boson_date', getDateStr()); }
 
@@ -567,7 +587,7 @@
                     dateDebut: '04/04/2026',          
                     dateFin: '19/04/2026',          
                     modeTest: 'OUI',          
-                    joursOuverts: ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],          
+                    joursOuverts: ['Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],          
                     heureFinGagnant: '18:00',          
                     participationParJour: true          
                 },          
@@ -582,6 +602,7 @@
     window.addEventListener('load', async function() {          
         await chargerLots();
 
+        // ✅ Si déjà gagné (même un autre jour) → affiche le lot, bloque la roue    
         const gagnantData = recupererGagnant();    
         if (gagnantData) {    
             afficherLotSauvegarde(gagnantData.lot, gagnantData.code);    
@@ -611,8 +632,10 @@
         document.getElementById('result-lot').textContent = '🎁 ' + lot.nomLot;          
         document.getElementById('result-description').textContent = lot.description;    
         document.getElementById('result-valeur').textContent = lot.valeur ? '💰 Valeur : ' + lot.valeur : '';    
+        // Code unique    
         const codeAffiche = code || genererCode(lot.commerce, getDateStr());    
         document.getElementById('result-code').textContent = '🎟️ Code : ' + codeAffiche;    
+        // Bouton commerce    
         const btnCommerce = document.getElementById('btn-commerce');    
         if (lot.urlCommerce) {    
             btnCommerce.href = lot.urlCommerce;    
@@ -658,11 +681,13 @@
 
     function tournerRoue() {          
         if (jeuEnCours) return;    
+        // ✅ Bloque si déjà gagné    
         if (aDejaGagne()) {    
             const gagnantData = recupererGagnant();    
             if (gagnantData) afficherLotSauvegarde(gagnantData.lot, gagnantData.code);    
             return;    
-        }  
+        }
+
         if (estApres18h()) {          
             const badge = document.getElementById('badge');          
             badge.textContent = '🔥 DERNIÈRE CHANCE DU JOUR !';          
@@ -774,4 +799,89 @@
             result.className = 'result show lose';          
             document.getElementById('result-icon').textContent = '😢';          
             document.getElementById('result-title').textContent = 'PAS DE CHANCE !';          
-            document.getElementById('result-message').textContent = dat
+            document.getElementById('result-message').textContent = data.message;          
+            document.getElementById('lot-details').style.display = 'none';          
+        }          
+    }
+
+    // ✅ TÉLÉCHARGER BON GAGNANT    
+    function telechargerBon() {    
+        const gagnantData = recupererGagnant();    
+        if (!gagnantData) return;    
+        const lot = gagnantData.lot;    
+        const code = gagnantData.code || genererCode(lot.commerce, gagnantData.date);
+
+        const contenu = `    
+<!DOCTYPE html>    
+<html lang="fr">    
+<head>    
+<meta charset="UTF-8">    
+<title>Bon Gagnant - Jeu Pâques 2026</title>    
+<style>    
+  body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }    
+  .bon { background: white; border: 4px solid #FF8C42; border-radius: 20px; padding: 40px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.15); }    
+  .bon-header { background: linear-gradient(135deg, #FF8C42, #A4D65E); color: white; padding: 15px; border-radius: 12px; margin-bottom: 25px; }    
+  .bon-header h1 { font-size: 22px; margin: 0; }    
+  .bon-header p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; }    
+  .emoji { font-size: 60px; margin: 15px 0; }    
+  .commerce { font-size: 20px; font-weight: bold; color: #FF8C42; background: #fff3e0; padding: 10px 20px; border-radius: 10px; margin: 15px 0; }    
+  .lot { font-size: 18px; font-weight: bold; margin: 10px 0; }    
+  .description { font-size: 14px; color: #666; margin: 10px 0; line-height: 1.5; }    
+  .valeur { font-size: 16px; font-weight: bold; color: #4CAF50; margin: 10px 0; }    
+  .code { background: #fff3e0; border: 2px dashed #FF8C42; border-radius: 10px; padding: 12px; font-size: 18px; font-weight: bold; color: #FF8C42; letter-spacing: 3px; font-family: monospace; margin: 20px 0; }    
+  .date { font-size: 13px; color: #999; margin: 10px 0; }    
+  .footer { margin-top: 25px; padding-top: 15px; border-top: 2px dashed #ddd; font-size: 12px; color: #aaa; }    
+  .info { background: #e8f5e9; border-radius: 10px; padding: 12px; font-size: 13px; color: #2e7d32; margin: 15px 0; }    
+</style>    
+</head>    
+<body>    
+<div class="bon">    
+  <div class="bon-header">    
+    <h1>🐰 Jeu Concours Pâques 2026</h1>    
+    <p>La Rue Boson s'anime - Vienne (38)</p>    
+  </div>    
+  <div class="emoji">🎉</div>    
+  <h2 style="color:#FF8C42; margin:10px 0;">FÉLICITATIONS !</h2>    
+  <div class="commerce">🏪 ${lot.commerce}</div>    
+  <div class="lot">🎁 ${lot.nomLot}</div>    
+  <div class="description">${lot.description}</div>    
+  ${lot.valeur ? '<div class="valeur">💰 Valeur : ' + lot.valeur + '</div>' : ''}    
+  <div class="code">🎟️ Code : ${code}</div>    
+  <div class="date">Gagné le : ${gagnantData.date}</div>    
+  <div class="info">📍 Présentez ce bon au commerçant pour récupérer votre lot.    
+Valable jusqu'au 19 avril 2026.</div>    
+  <div class="footer">Développé par VRtueux — Cyber Café VR, 22 rue Boson, Vienne (38)    
+vrtueux.fr</div>    
+</div>    
+</body>    
+</html>`;
+
+        const blob = new Blob([contenu], { type: 'text/html;charset=utf-8' });    
+        const url = URL.createObjectURL(blob);    
+        const a = document.createElement('a');    
+        a.href = url;    
+        a.download = 'bon-gagnant-paques-2026.html';    
+        document.body.appendChild(a);    
+        a.click();    
+        document.body.removeChild(a);    
+        URL.revokeObjectURL(url);    
+    }
+
+    function creerConfetti() {          
+        const colors = ['#FF8C42','#A4D65E','#00BCD4','#E91E63','#FFD700','#9C27B0'];          
+        for (let i = 0; i < 80; i++) {          
+            setTimeout(() => {          
+                const c = document.createElement('div');          
+                c.className = 'confetti';          
+                c.style.left = Math.random() * 100 + '%';          
+                c.style.top = '-20px';          
+                c.style.background = colors[Math.floor(Math.random() * colors.length)];          
+                c.style.animationDelay = Math.random() * 0.5 + 's';          
+                document.body.appendChild(c);          
+                setTimeout(() => c.remove(), 4500);          
+            }, i * 30);          
+        }          
+    }          
+</script>           
+</body>          
+</html>  
