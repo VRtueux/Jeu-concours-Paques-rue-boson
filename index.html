@@ -729,8 +729,14 @@
             afficherResultat({ success: false, message: '🎁 Plus de lots disponibles !' });          
             resetBoutons(); return;          
         }    
-        let lotsDuJour = lotsDisponibles.filter(lot => lot.dateAttribution === dateStr);          
-        if (lotsDuJour.length === 0) lotsDuJour = lotsDisponibles;
+        let lotsDuJour = lotsDisponibles.filter(lot => {  
+        const [j, m, a] = lot.dateAttribution.split('/');  
+        const dateLot = new Date(a, m - 1, j);  
+        const today = new Date();  
+        today.setHours(0, 0, 0, 0);  
+        return dateLot <= today;  
+});  
+if (lotsDuJour.length === 0) lotsDuJour = lotsDisponibles;  
 
         let gagner = false;    
         if (!estApres18h()) {          
