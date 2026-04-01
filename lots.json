@@ -139,6 +139,17 @@
       "dateAttribution": "19/04/2026",  
       "statut": "Disponible",  
       "gagne": false  
+    },  
+        {  
+      "id": "lot13",  
+      "commerce": "Ôbievva",  
+      "nomLot": "Apéritif pour 2 personnes",  
+      "description": "Un moment de convivialité autour d'un apéritif pour 2 personnes, à déguster sur place",  
+      "valeur": "",  
+      "urlCommerce": "https://www.obievva.com/",  
+      "dateAttribution": "16/04/2026",  
+      "statut": "Disponible",  
+      "gagne": false  
     }  
   ]  
 }  
