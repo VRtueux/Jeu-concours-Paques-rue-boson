@@ -2,7 +2,7 @@
   "config": {  
     "dateDebut": "04/04/2026",  
     "dateFin": "19/04/2026",  
-    "modeTest": "OUI",  
+    "modeTest": "NON",  
     "joursOuverts": ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"],  
     "heureFinGagnant": "18:00",  
     "participationParJour": true  
