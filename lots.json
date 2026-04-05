@@ -28,7 +28,7 @@
       "urlCommerce": "https://www.instagram.com/praline.patisserie.vienne/",  
       "dateAttribution": "05/04/2026",  
       "statut": "Disponible",  
-      "gagne": false  
+      "gagne": true 
     },  
     {  
       "id": "lot3",  
