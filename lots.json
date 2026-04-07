@@ -114,7 +114,8 @@
       "urlCommerce": "https://www.larmoire-aux-coquelicots.com/",
       "dateAttribution": "13/04/2026",
       "statut": "Disponible",
-      "gagne": false
+      "gagne": true,
+      "dateGain": "2026-04-07T19:58:51.555Z"
     },
     {
       "id": "lot10",
