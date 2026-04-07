@@ -542,15 +542,33 @@
         setTimeout(jouer, 5000);
     }
 
-    function jouer() {
-        if (!lotsData || !lotsData.lots) {
-            afficherResultat({ success: false, message: '😢 Erreur chargement des lots.' });
-            resetBoutons(); return;
+      async function jouer() {  
+        if (!lotsData || !lotsData.lots) {  
+            afficherResultat({ success: false, message: '😢 Erreur chargement des lots.' });  
+            resetBoutons(); return;  
         }
+
+        // ✅ Check sessionStorage  
         if (sessionStorage.getItem('boson_joue')) {  
-        afficherResultat({ success: false, message: "⏳ Une participation par session !" });  
-        resetBoutons(); return;  
-    }  
+            afficherResultat({ success: false, message: "⏳ Une participation par session !" });  
+            resetBoutons(); return;  
+        }
+
+        // ✅ Check Google Sheets  
+        try {  
+            const checkUrl = APPS_SCRIPT_URL  
+                + '?cookie_id=' + encodeURIComponent(getCookieId())  
+                + '&date=' + encodeURIComponent(getDateStr());  
+            const resp = await fetch(checkUrl);  
+            const check = await resp.json();  
+            if (check.dejaJoue) {  
+                afficherResultat({ success: false, message: "✋ Vous avez déjà participé aujourd'hui ! Revenez demain 🌅" });  
+                resetBoutons(); return;  
+            }  
+        } catch(e) {  
+            console.warn('Check Sheets échoué, on continue');  
+        }
+
         if (aJoueAujourdhui()) {
             afficherResultat({ success: false, message: "Déjà participé aujourd'hui ! Revenez demain 🌅" });
             resetBoutons(); return;
