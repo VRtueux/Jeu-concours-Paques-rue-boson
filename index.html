@@ -416,7 +416,10 @@
 
     function aDejaGagne() { return !!localStorage.getItem('boson_gagnant_permanent'); }
     function aJoueAujourdhui() { return localStorage.getItem('boson_date') === getDateStr(); }
-    function marquerJoue() { localStorage.setItem('boson_date', getDateStr()); }
+    function marquerJoue() {  
+    localStorage.setItem('boson_date', getDateStr());  
+    sessionStorage.setItem('boson_joue', '1'); 
+}  
 
     function resetBoutons() {
         jeuEnCours = false;
@@ -544,6 +547,10 @@
             afficherResultat({ success: false, message: '😢 Erreur chargement des lots.' });
             resetBoutons(); return;
         }
+        if (sessionStorage.getItem('boson_joue')) {  
+        afficherResultat({ success: false, message: "⏳ Une participation par session !" });  
+        resetBoutons(); return;  
+    }  
         if (aJoueAujourdhui()) {
             afficherResultat({ success: false, message: "Déjà participé aujourd'hui ! Revenez demain 🌅" });
             resetBoutons(); return;
