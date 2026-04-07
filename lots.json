@@ -70,7 +70,8 @@
       "urlCommerce": "https://www.linstantbytam.com/",
       "dateAttribution": "08/04/2026",
       "statut": "Disponible",
-      "gagne": false
+      "gagne": true,
+      "dateGain": "2026-04-07T22:54:00.301Z"
     },
     {
       "id": "lot6",
