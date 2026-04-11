@@ -71,7 +71,7 @@
       "urlCommerce": "https://www.instagram.com/lartisanale_boutique_createurs",
       "dateAttribution": "09/04/2026",
       "statut": "Disponible",
-      "gagne": false,
+      "gagne": true,
     },
     {
       "id": "lot6",
