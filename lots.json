@@ -17,17 +17,6 @@
   },
   "lots": [
     {
-      "id": "lot1",
-      "commerce": "VRtueux",
-      "nomLot": "Pack découverte",
-      "description": "1h de session, accès à tous les équipements et jeux, valable 6 mois",
-      "valeur": "49€",
-      "urlCommerce": "https://vrtueux.fr",
-      "dateAttribution": "04/04/2026",
-      "statut": "Disponible",
-      "gagne": true
-    },
-    {
       "id": "lot2",
       "commerce": "Praline Pâtisserie",
       "nomLot": "Bon d'achat",
