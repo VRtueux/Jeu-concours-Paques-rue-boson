@@ -1,143 +1,144 @@
-{  
-  "config": {  
-    "dateDebut": "04/04/2026",  
-    "dateFin": "19/04/2026",  
-    "modeTest": "NON",  
-    "joursOuverts": [  
-      "Lundi",  
-      "Mardi",  
-      "Mercredi",  
-      "Jeudi",  
-      "Vendredi",  
-      "Samedi",  
-      "Dimanche"  
-    ],  
-    "heureFinGagnant": "18:00",  
-    "participationParJour": true  
-  },  
-  "lots": [  
-    {  
-      "id": "lot1",  
-      "commerce": "Praline Pâtisserie",  
-      "nomLot": "Bon d'achat",  
-      "description": "Valable 6 mois sur l'ensemble de la gamme",  
-      "valeur": "20€",  
-      "urlCommerce": "https://www.instagram.com/praline.patisserie.vienne/",  
-      "dateAttribution": "05/04/2026",  
-      "statut": "Attribué",  
-      "gagne": true  
-    },  
-    {  
-      "id": "lot2",  
-      "commerce": "L'Artisanale Boutique de Créateurs",  
-      "nomLot": "Atelier découverte : temps d'un après midi",  
-      "description": "Atelier vitrail tiffany, durée 4h chez Vitrail Ste Colombe",  
-      "valeur": "60€",  
-      "urlCommerce": "https://www.instagram.com/lartisanale_boutique_createurs",  
-      "dateAttribution": "06/04/2026",  
-      "statut": "Attribué",  
-      "gagne": true,  
-      "dateGain": "2026-04-07T19:57:19.186Z"  
-    },  
-    {  
-      "id": "lot3",  
-      "commerce": "Scorpub",  
-      "nomLot": "1L de bière",  
-      "description": "Santé !",  
-      "valeur": "15€",  
-      "urlCommerce": "https://www.instagram.com/scorpubvienne/",  
-      "dateAttribution": "07/04/2026",  
-      "statut": "Attribué",  
-      "gagne": true  
-    },  
-    {  
-      "id": "lot4",  
-      "commerce": "L'instant by Tam",  
-      "nomLot": "1 pose de vernis semi permanent",  
-      "description": "1 pose de vernis semi permanent sur ongles naturels",  
-      "valeur": "40€",  
-      "urlCommerce": "https://www.linstantbytam.com/",  
-      "dateAttribution": "08/04/2026",  
-      "statut": "Attribué",  
-      "gagne": true,  
-      "dateGain": "2026-04-07T22:54:00.301Z"  
-    },  
-    {  
-      "id": "lot5",  
-      "commerce": "L'Artisanale Boutique de Créateurs",  
-      "nomLot": "Bon d'achat magasin",  
-      "description": "Valable 6 mois sur l'ensemble du magasin",  
-      "valeur": "20€",  
-      "urlCommerce": "https://www.instagram.com/lartisanale_boutique_createurs",  
-      "dateAttribution": "09/04/2026",  
-      "statut": "Attribué",  
-      "gagne": true  
-    },  
-    {  
-      "id": "lot6",  
-      "commerce": "Studio Sandy",  
-      "nomLot": "1 brush femme et 1 coupe homme",  
-      "description": "Valable 3 mois",  
-      "valeur": "60€",  
-      "urlCommerce": "https://www.studio-sandy.fr/",  
-      "dateAttribution": "14/04/2026",  
-      "statut": "Disponible",  
-      "gagne": false  
-    },  
-    {  
-      "id": "lot7",  
-      "commerce": "Les Coupines",  
-      "nomLot": "1 serviette ronde",  
-      "description": "1 serviette de plage ronde à choisir dans une sélection proposée, microfibre boulochée, 1,5m de diamètre",  
-      "valeur": "38€",  
-      "urlCommerce": "https://www.boutique-lescoupines.com/",  
-      "dateAttribution": "16/04/2026",  
-      "statut": "Disponible",  
-      "gagne": false  
-    },  
-    {  
-      "id": "lot8",  
-      "commerce": "Terra Nostra",  
-      "nomLot": "Vin : Marqués de Cáceres, Crianza 2022, Rioja",  
-      "description": "Rouge aux arômes de fruits noirs avec une touche de réglisse et d'épices. Tanins soyeux, belle fraîcheur. 14% vol. / 75cl.",  
-      "valeur": "19€",  
-      "urlCommerce": "https://www.terra-nostra-restaurant-vienne.fr/",  
-      "dateAttribution": "15/04/2026",  
-      "statut": "Disponible",  
-      "gagne": false  
-    },  
-    {  
-      "id": "lot9",  
-      "commerce": "Emilie Courtage et Conseils – Réseau YMANCI",  
-      "nomLot": "50€ offerts sur reprise d'assurance emprunteur",  
-      "description": "50€ offerts pour la reprise de votre assurance emprunteur + une brioche pour 4 personnes chez Praline Pâtisserie offerte, en cas de souscription. Mandataire : Emilie ACHARD.",  
-      "valeur": "60€",  
-      "urlCommerce": "https://ymanci.fr/agences/courtier-vienne/",  
-      "dateAttribution": "17/04/2026",  
-      "statut": "Disponible",  
-      "gagne": false  
-    },  
-    {  
-      "id": "lot10",  
-      "commerce": "Emilie Courtage et Conseils – Réseau YMANCI",  
-      "nomLot": "10% de réduction sur honoraires de courtage immobilier",  
-      "description": "10% de réduction sur les honoraires de courtage de prêt immobilier + un pack découverte chez VRtueux offert. Mandataire : Emilie ACHARD.",  
-      "valeur": "Variable + pack découverte VRtueux : 49€",  
-      "urlCommerce": "https://ymanci.fr/agences/courtier-vienne/",  
-      "dateAttribution": "19/04/2026",  
-      "statut": "Disponible",  
-      "gagne": false  
-    },  
-    {  
-      "id": "lot11",  
-      "commerce": "Ôbievva",  
-      "nomLot": "Apéritif pour 2 personnes",  
-      "description": "Un moment de convivialité autour d'un apéritif pour 2 personnes, à déguster sur place",  
-      "valeur": "",  
-      "urlCommerce": "https://www.obievva.com/",  
-      "dateAttribution": "18/04/2026",  
-      "statut": "Disponible",  
-      "gagne": false  
-    }  
-  ]  
-}  
+{
+  "config": {
+    "dateDebut": "04/04/2026",
+    "dateFin": "19/04/2026",
+    "modeTest": "NON",
+    "joursOuverts": [
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi",
+      "Dimanche"
+    ],
+    "heureFinGagnant": "18:00",
+    "participationParJour": true
+  },
+  "lots": [
+    {
+      "id": "lot1",
+      "commerce": "Praline Pâtisserie",
+      "nomLot": "Bon d'achat",
+      "description": "Valable 6 mois sur l'ensemble de la gamme",
+      "valeur": "20€",
+      "urlCommerce": "https://www.instagram.com/praline.patisserie.vienne/",
+      "dateAttribution": "05/04/2026",
+      "statut": "Attribué",
+      "gagne": true
+    },
+    {
+      "id": "lot2",
+      "commerce": "L'Artisanale Boutique de Créateurs",
+      "nomLot": "Atelier découverte : temps d'un après midi",
+      "description": "Atelier vitrail tiffany, durée 4h chez Vitrail Ste Colombe",
+      "valeur": "60€",
+      "urlCommerce": "https://www.instagram.com/lartisanale_boutique_createurs",
+      "dateAttribution": "06/04/2026",
+      "statut": "Attribué",
+      "gagne": true,
+      "dateGain": "2026-04-07T19:57:19.186Z"
+    },
+    {
+      "id": "lot3",
+      "commerce": "Scorpub",
+      "nomLot": "1L de bière",
+      "description": "Santé !",
+      "valeur": "15€",
+      "urlCommerce": "https://www.instagram.com/scorpubvienne/",
+      "dateAttribution": "07/04/2026",
+      "statut": "Attribué",
+      "gagne": true
+    },
+    {
+      "id": "lot4",
+      "commerce": "L'instant by Tam",
+      "nomLot": "1 pose de vernis semi permanent",
+      "description": "1 pose de vernis semi permanent sur ongles naturels",
+      "valeur": "40€",
+      "urlCommerce": "https://www.linstantbytam.com/",
+      "dateAttribution": "08/04/2026",
+      "statut": "Attribué",
+      "gagne": true,
+      "dateGain": "2026-04-07T22:54:00.301Z"
+    },
+    {
+      "id": "lot5",
+      "commerce": "L'Artisanale Boutique de Créateurs",
+      "nomLot": "Bon d'achat magasin",
+      "description": "Valable 6 mois sur l'ensemble du magasin",
+      "valeur": "20€",
+      "urlCommerce": "https://www.instagram.com/lartisanale_boutique_createurs",
+      "dateAttribution": "09/04/2026",
+      "statut": "Attribué",
+      "gagne": true
+    },
+    {
+      "id": "lot6",
+      "commerce": "Studio Sandy",
+      "nomLot": "1 brush femme et 1 coupe homme",
+      "description": "Valable 3 mois",
+      "valeur": "60€",
+      "urlCommerce": "https://www.studio-sandy.fr/",
+      "dateAttribution": "14/04/2026",
+      "statut": "Disponible",
+      "gagne": true,
+      "dateGain": "2026-04-14T18:29:49.858Z"
+    },
+    {
+      "id": "lot7",
+      "commerce": "Les Coupines",
+      "nomLot": "1 serviette ronde",
+      "description": "1 serviette de plage ronde à choisir dans une sélection proposée, microfibre boulochée, 1,5m de diamètre",
+      "valeur": "38€",
+      "urlCommerce": "https://www.boutique-lescoupines.com/",
+      "dateAttribution": "16/04/2026",
+      "statut": "Disponible",
+      "gagne": false
+    },
+    {
+      "id": "lot8",
+      "commerce": "Terra Nostra",
+      "nomLot": "Vin : Marqués de Cáceres, Crianza 2022, Rioja",
+      "description": "Rouge aux arômes de fruits noirs avec une touche de réglisse et d'épices. Tanins soyeux, belle fraîcheur. 14% vol. / 75cl.",
+      "valeur": "19€",
+      "urlCommerce": "https://www.terra-nostra-restaurant-vienne.fr/",
+      "dateAttribution": "15/04/2026",
+      "statut": "Disponible",
+      "gagne": false
+    },
+    {
+      "id": "lot9",
+      "commerce": "Emilie Courtage et Conseils – Réseau YMANCI",
+      "nomLot": "50€ offerts sur reprise d'assurance emprunteur",
+      "description": "50€ offerts pour la reprise de votre assurance emprunteur + une brioche pour 4 personnes chez Praline Pâtisserie offerte, en cas de souscription. Mandataire : Emilie ACHARD.",
+      "valeur": "60€",
+      "urlCommerce": "https://ymanci.fr/agences/courtier-vienne/",
+      "dateAttribution": "17/04/2026",
+      "statut": "Disponible",
+      "gagne": false
+    },
+    {
+      "id": "lot10",
+      "commerce": "Emilie Courtage et Conseils – Réseau YMANCI",
+      "nomLot": "10% de réduction sur honoraires de courtage immobilier",
+      "description": "10% de réduction sur les honoraires de courtage de prêt immobilier + un pack découverte chez VRtueux offert. Mandataire : Emilie ACHARD.",
+      "valeur": "Variable + pack découverte VRtueux : 49€",
+      "urlCommerce": "https://ymanci.fr/agences/courtier-vienne/",
+      "dateAttribution": "19/04/2026",
+      "statut": "Disponible",
+      "gagne": false
+    },
+    {
+      "id": "lot11",
+      "commerce": "Ôbievva",
+      "nomLot": "Apéritif pour 2 personnes",
+      "description": "Un moment de convivialité autour d'un apéritif pour 2 personnes, à déguster sur place",
+      "valeur": "",
+      "urlCommerce": "https://www.obievva.com/",
+      "dateAttribution": "18/04/2026",
+      "statut": "Disponible",
+      "gagne": false
+    }
+  ]
+}
