@@ -127,7 +127,8 @@
       "urlCommerce": "https://ymanci.fr/agences/courtier-vienne/",
       "dateAttribution": "19/04/2026",
       "statut": "Disponible",
-      "gagne": false
+      "gagne": true,
+      "dateGain": "2026-04-14T18:31:47.428Z"
     },
     {
       "id": "lot11",
