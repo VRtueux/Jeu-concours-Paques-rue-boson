@@ -80,7 +80,7 @@
       "description": "Valable 3 mois",
       "valeur": "60€",
       "urlCommerce": "https://www.studio-sandy.fr/",
-      "dateAttribution": "10/04/2026",
+      "dateAttribution": "14/04/2026",
       "statut": "Disponible",
       "gagne": false
     },
@@ -91,24 +91,12 @@
       "description": "1 serviette de plage ronde à choisir dans une sélection proposée, microfibre boulochée, 1,5m de diamètre",
       "valeur": "38€",
       "urlCommerce": "https://www.boutique-lescoupines.com/",
-      "dateAttribution": "11/04/2026",
+      "dateAttribution": "16/04/2026",
       "statut": "Disponible",
       "gagne": false
     },
     {
       "id": "lot8",
-      "commerce": "L'armoire aux coquelicots",
-      "nomLot": "Bon d'achat",
-      "description": "Valable 3 mois",
-      "valeur": "50€",
-      "urlCommerce": "https://www.larmoire-aux-coquelicots.com/",
-      "dateAttribution": "13/04/2026",
-      "statut": "Disponible",
-      "gagne": true,
-      "dateGain": "2026-04-07T19:58:51.555Z"
-    },
-    {
-      "id": "lot9",
       "commerce": "Terra Nostra",
       "nomLot": "Vin : Marqués de Cáceres, Crianza 2022, Rioja",
       "description": "Rouge aux arômes de fruits noirs avec une touche de réglisse et d'épices. Tanins soyeux, belle fraîcheur. 14% vol. / 75cl.",
@@ -119,7 +107,7 @@
       "gagne": false
     },
     {
-      "id": "lot10",
+      "id": "lot9",
       "commerce": "Emilie Courtage et Conseils – Réseau YMANCI",
       "nomLot": "50€ offerts sur reprise d'assurance emprunteur",
       "description": "50€ offerts pour la reprise de votre assurance emprunteur + une brioche pour 4 personnes chez Praline Pâtisserie offerte, en cas de souscription. Mandataire : Emilie ACHARD.",
@@ -130,7 +118,7 @@
       "gagne": false
     },
     {
-      "id": "lot11",
+      "id": "lot10",
       "commerce": "Emilie Courtage et Conseils – Réseau YMANCI",
       "nomLot": "10% de réduction sur honoraires de courtage immobilier",
       "description": "10% de réduction sur les honoraires de courtage de prêt immobilier + un pack découverte chez VRtueux offert. Mandataire : Emilie ACHARD.",
@@ -141,13 +129,13 @@
       "gagne": false
     },
     {
-      "id": "lot12",
+      "id": "lot11",
       "commerce": "Ôbievva",
       "nomLot": "Apéritif pour 2 personnes",
       "description": "Un moment de convivialité autour d'un apéritif pour 2 personnes, à déguster sur place",
       "valeur": "",
       "urlCommerce": "https://www.obievva.com/",
-      "dateAttribution": "16/04/2026",
+      "dateAttribution": "18/04/2026",
       "statut": "Disponible",
       "gagne": false
     }
