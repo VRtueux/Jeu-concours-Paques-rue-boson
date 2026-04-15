@@ -432,17 +432,10 @@
             const response = await fetch('lots.json');
             if (!response.ok) throw new Error('HTTP ' + response.status);
             lotsData = await response.json();
-        } catch (error) {
-            console.warn('Fallback lots:', error);
-            lotsData = {
-                config: {
-                    dateDebut: '04/04/2026', dateFin: '19/04/2026', modeTest: 'OUI',
-                    joursOuverts: ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
-                    heureFinGagnant: '18:00', participationParJour: true
-                },
-                lotsData = { config: {}, lots: [] };  
-            };
-        }
+       } catch (error) {  
+    console.warn('Fallback lots:', error);  
+    lotsData = { config: {}, lots: [] };  
+}  
     }
 
     window.addEventListener('load', async function() {
