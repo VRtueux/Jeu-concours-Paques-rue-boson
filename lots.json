@@ -81,7 +81,7 @@
       "valeur": "60€",
       "urlCommerce": "https://www.studio-sandy.fr/",
       "dateAttribution": "14/04/2026",
-      "statut": "Disponible",
+      "statut": "Attribué",
       "gagne": true,
       "dateGain": "2026-04-14T18:29:49.858Z"
     },
@@ -93,7 +93,7 @@
       "valeur": "38€",
       "urlCommerce": "https://www.boutique-lescoupines.com/",
       "dateAttribution": "16/04/2026",
-      "statut": "Disponible",
+      "statut": "Attribué",
       "gagne": true,
       "dateGain": "2026-04-14T18:47:52.546Z"
     },
@@ -105,7 +105,7 @@
       "valeur": "19€",
       "urlCommerce": "https://www.terra-nostra-restaurant-vienne.fr/",
       "dateAttribution": "15/04/2026",
-      "statut": "Disponible",
+      "statut": "Attribué",
       "gagne": true,
       "dateGain": "2026-04-14T18:49:32.254Z"
     },
@@ -128,7 +128,7 @@
       "valeur": "Variable + pack découverte VRtueux : 49€",
       "urlCommerce": "https://ymanci.fr/agences/courtier-vienne/",
       "dateAttribution": "19/04/2026",
-      "statut": "Disponible",
+      "statut": "Attribué",
       "gagne": true,
       "dateGain": "2026-04-14T18:31:47.428Z"
     },
