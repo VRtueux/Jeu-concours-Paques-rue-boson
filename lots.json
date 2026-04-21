@@ -140,8 +140,8 @@
       "valeur": "",
       "urlCommerce": "https://www.obievva.com/",
       "dateAttribution": "18/04/2026",
-      "statut": "Disponible",
-      "gagne": false
+      "statut": "Attribué",
+      "gagne": true
     }
   ]
 }
