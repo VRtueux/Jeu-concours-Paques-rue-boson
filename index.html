@@ -34,6 +34,9 @@
             background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
             animation: pulse 1.5s ease-in-out infinite;
         }
+        .badge.termine {
+            background: linear-gradient(135deg, #607D8B 0%, #455A64 100%);
+        }
         @keyframes pulse {
             0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(233,30,99,0.4); }
             50% { transform: scale(1.05); box-shadow: 0 6px 25px rgba(233,30,99,0.6); }
@@ -139,6 +142,10 @@
         .result.lose {
             background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
             color: white; box-shadow: 0 10px 40px rgba(233,30,99,0.4);
+        }
+        .result.termine {
+            background: linear-gradient(135deg, #607D8B 0%, #455A64 100%);
+            color: white; box-shadow: 0 10px 40px rgba(96,125,139,0.4);
         }
         .result-icon { font-size: 90px; margin-bottom: 20px; animation: iconPop 0.6s ease-out; }
         @keyframes iconPop {
@@ -295,7 +302,7 @@
                     <a href="https://www.linstantbytam.com/" target="_blank" class="partner-logo"><img src="https://i.ibb.co/yFPpKs7J/Whats-App-Image-2026-03-24-at-16-34-55.jpg" alt="L'instant By Tam"></a>
                     <a href="https://www.boutique-lescoupines.com/" target="_blank" class="partner-logo"><img src="https://i.ibb.co/k2Ykvwkv/Whats-App-Image-2026-03-24-at-16-34-55-1.jpg" alt="Les Coupines"></a>
                     <a href="https://ymanci.fr/agences/courtier-vienne/" target="_blank" class="partner-logo"><img src="https://i.ibb.co/7d1Hr6wr/Ymanci-Logo-Credit-clair-et-precis-Exe-Bleu-vecto.jpg" alt="YMANCI"></a>
-                    <a href="https://www.obievva.com/" target="_blank" class="partner-logo"><img src="https://i.ibb.co/NdDWzGNL/logo-O-bievva-1536x493.jpg" alt="Ôbievva"></a>
+                    <a href="https://www.obievva.com/" target="_blank" class="partner-logo"><img src="https://i.ibb.co/NdDWzGMl/logo-O-bievva-1536x493.jpg" alt="Ôbievva"></a>
                     <!-- SÉRIE 2 -->
                     <a href="https://www.facebook.com/laruebosonvienne/" target="_blank" class="partner-logo"><img src="https://i.ibb.co/bp5JvDR/304929789-536890498240072-5856750964226344598-n.png" alt="La Rue Boson"></a>
                     <a href="https://vrtueux.fr" target="_blank" class="partner-logo"><img src="https://i.ibb.co/C5236CJF/Logo-VRtueux.png" alt="VRtueux"></a>
@@ -308,7 +315,7 @@
                     <a href="https://www.linstantbytam.com/" target="_blank" class="partner-logo"><img src="https://i.ibb.co/yFPpKs7J/Whats-App-Image-2026-03-24-at-16-34-55.jpg" alt="L'instant By Tam"></a>
                     <a href="https://www.boutique-lescoupines.com/" target="_blank" class="partner-logo"><img src="https://i.ibb.co/k2Ykvwkv/Whats-App-Image-2026-03-24-at-16-34-55-1.jpg" alt="Les Coupines"></a>
                     <a href="https://ymanci.fr/agences/courtier-vienne/" target="_blank" class="partner-logo"><img src="https://i.ibb.co/7d1Hr6wr/Ymanci-Logo-Credit-clair-et-precis-Exe-Bleu-vecto.jpg" alt="YMANCI"></a>
-                    <a href="https://www.obievva.com/" target="_blank" class="partner-logo"><img src="https://i.ibb.co/NdDWzGNL/logo-O-bievva-1536x493.jpg" alt="Ôbievva"></a>
+                    <a href="https://www.obievva.com/" target="_blank" class="partner-logo"><img src="https://i.ibb.co/NdDWzGMl/logo-O-bievva-1536x493.jpg" alt="Ôbievva"></a>
                 </div>
             </div>
         </div>
@@ -388,6 +395,26 @@
 
     function estApres18h() { return new Date().getHours() >= 18; }
 
+    // ===== VÉRIFICATION PÉRIODE DU JEU =====
+    function estJeuTermine() {
+        if (!lotsData || !lotsData.config || !lotsData.config.dateFin) return false;
+        const [jF, mF, aF] = lotsData.config.dateFin.split('/');
+        const dateFin = new Date(aF, mF - 1, jF);
+        dateFin.setHours(23, 59, 59, 999);
+        return new Date() > dateFin;
+    }
+
+    function estJeuPasCommence() {
+        if (!lotsData || !lotsData.config || !lotsData.config.dateDebut) return false;
+        const [jD, mD, aD] = lotsData.config.dateDebut.split('/');
+        const dateDebut = new Date(aD, mD - 1, jD);
+        dateDebut.setHours(0, 0, 0, 0);
+        const aujourd_hui = new Date();
+        aujourd_hui.setHours(0, 0, 0, 0);
+        return aujourd_hui < dateDebut;
+    }
+    // ===== FIN VÉRIFICATION PÉRIODE =====
+
     function genererCode(commerce, date) {
         const base = (commerce + date).replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
         let hash = 0;
@@ -416,10 +443,10 @@
 
     function aDejaGagne() { return !!localStorage.getItem('boson_gagnant_permanent'); }
     function aJoueAujourdhui() { return localStorage.getItem('boson_date') === getDateStr(); }
-    function marquerJoue() {  
-    localStorage.setItem('boson_date', getDateStr());  
-    sessionStorage.setItem('boson_joue', '1'); 
-}  
+    function marquerJoue() {
+        localStorage.setItem('boson_date', getDateStr());
+        sessionStorage.setItem('boson_joue', '1');
+    }
 
     function resetBoutons() {
         jeuEnCours = false;
@@ -432,14 +459,25 @@
             const response = await fetch('lots.json');
             if (!response.ok) throw new Error('HTTP ' + response.status);
             lotsData = await response.json();
-       } catch (error) {  
-    console.warn('Fallback lots:', error);  
-    lotsData = { config: {}, lots: [] };  
-}  
+        } catch (error) {
+            console.warn('Fallback lots:', error);
+            lotsData = { config: {}, lots: [] };
+        }
     }
 
     window.addEventListener('load', async function() {
         await chargerLots();
+
+        // ✅ VÉRIFICATION PÉRIODE AU CHARGEMENT DE LA PAGE
+        if (estJeuTermine()) {
+            afficherPageTerminee();
+            return;
+        }
+
+        if (estJeuPasCommence()) {
+            afficherPagePasCommencee();
+            return;
+        }
 
         const gagnantData = recupererGagnant();
         if (gagnantData) {
@@ -459,6 +497,40 @@
             badge.classList.add('derniere-chance');
         }
     });
+
+    // ===== AFFICHAGE PAGE JEU TERMINÉ =====
+    function afficherPageTerminee() {
+        const badge = document.getElementById('badge');
+        badge.textContent = '🎪 Jeu terminé';
+        badge.classList.add('termine');
+
+        document.getElementById('initial-view').style.display = 'none';
+
+        const result = document.getElementById('result');
+        result.className = 'result show termine';
+        document.getElementById('result-icon').textContent = '🎪';
+        document.getElementById('result-title').textContent = 'JEU TERMINÉ';
+        document.getElementById('lot-details').style.display = 'none';
+        document.getElementById('result-message').innerHTML =
+            'Le jeu concours Pâques 2026 est terminé.<br><br>' +
+            '🙏 Merci à tous les participants et aux commerçants partenaires !<br><br>' +
+            '📍 Rendez-vous au <strong>22 rue Boson, Vienne</strong> pour de prochaines animations.';
+
+        creerOeufsPaques();
+    }
+
+    function afficherPagePasCommencee() {
+        document.getElementById('initial-view').style.display = 'none';
+        const result = document.getElementById('result');
+        result.className = 'result show termine';
+        document.getElementById('result-icon').textContent = '⏳';
+        document.getElementById('result-title').textContent = 'BIENTÔT !';
+        document.getElementById('lot-details').style.display = 'none';
+        document.getElementById('result-message').innerHTML =
+            'Le jeu concours n\'a pas encore commencé.<br><br>' +
+            '📅 Revenez à partir du <strong>' + (lotsData.config.dateDebut || '') + '</strong> pour tenter votre chance !';
+    }
+    // ===== FIN AFFICHAGE PAGE JEU TERMINÉ =====
 
     function afficherLotSauvegarde(lot, code) {
         document.getElementById('initial-view').style.display = 'none';
@@ -513,6 +585,13 @@
 
     function tournerRoue() {
         if (jeuEnCours) return;
+
+        // ✅ VÉRIFICATION PÉRIODE AU CLIC — avant que la roue tourne
+        if (estJeuTermine()) {
+            afficherPageTerminee();
+            return;
+        }
+
         if (aDejaGagne()) {
             const gagnantData = recupererGagnant();
             if (gagnantData) afficherLotSauvegarde(gagnantData.lot, gagnantData.code);
@@ -532,31 +611,31 @@
         setTimeout(jouer, 5000);
     }
 
-      async function jouer() {  
-        if (!lotsData || !lotsData.lots) {  
-            afficherResultat({ success: false, message: '😢 Erreur chargement des lots.' });  
-            resetBoutons(); return;  
+    async function jouer() {
+        if (!lotsData || !lotsData.lots) {
+            afficherResultat({ success: false, message: '😢 Erreur chargement des lots.' });
+            resetBoutons(); return;
         }
 
-        // ✅ Check sessionStorage  
-        if (sessionStorage.getItem('boson_joue')) {  
-            afficherResultat({ success: false, message: "⏳ Une participation par session !" });  
-            resetBoutons(); return;  
+        // ✅ Check sessionStorage
+        if (sessionStorage.getItem('boson_joue')) {
+            afficherResultat({ success: false, message: "⏳ Une participation par session !" });
+            resetBoutons(); return;
         }
 
-        // ✅ Check Google Sheets  
-        try {  
-            const checkUrl = APPS_SCRIPT_URL  
-                + '?cookie_id=' + encodeURIComponent(getCookieId())  
-                + '&date=' + encodeURIComponent(getDateStr());  
-            const resp = await fetch(checkUrl);  
-            const check = await resp.json();  
-            if (check.dejaJoue) {  
-                afficherResultat({ success: false, message: "✋ Vous avez déjà participé aujourd'hui ! Revenez demain 🌅" });  
-                resetBoutons(); return;  
-            }  
-        } catch(e) {  
-            console.warn('Check Sheets échoué, on continue');  
+        // ✅ Check Google Sheets
+        try {
+            const checkUrl = APPS_SCRIPT_URL
+                + '?cookie_id=' + encodeURIComponent(getCookieId())
+                + '&date=' + encodeURIComponent(getDateStr());
+            const resp = await fetch(checkUrl);
+            const check = await resp.json();
+            if (check.dejaJoue) {
+                afficherResultat({ success: false, message: "✋ Vous avez déjà participé aujourd'hui ! Revenez demain 🌅" });
+                resetBoutons(); return;
+            }
+        } catch(e) {
+            console.warn('Check Sheets échoué, on continue');
         }
 
         if (aJoueAujourdhui()) {
@@ -605,7 +684,7 @@
             lot.gagne = true;
             marquerJoue();
             sauvegarderGagnant(lot);
-            envoyerStats('Gagné', lot.nomLot); // ✅ BDD Sheets
+            envoyerStats('Gagné', lot.nomLot);
             document.getElementById('initial-view').style.display = 'none';
             document.getElementById('egg-container').classList.add('show');
             const code = genererCode(lot.commerce, getDateStr());
@@ -617,7 +696,7 @@
             };
         } else {
             marquerJoue();
-            envoyerStats('Perdu'); // ✅ BDD Sheets
+            envoyerStats('Perdu');
             afficherResultat({ success: false, message: MESSAGES_PERDU[Math.floor(Math.random() * MESSAGES_PERDU.length)] });
             resetBoutons();
         }
@@ -653,7 +732,7 @@
             result.className = 'result show lose';
             document.getElementById('result-icon').textContent = '😢';
             document.getElementById('result-title').textContent = 'PAS DE CHANCE !';
-            document.getElementById('result-message').textContent = data.message;
+            document.getElementById('result-message').innerHTML = data.message;
             document.getElementById('lot-details').style.display = 'none';
         }
     }
